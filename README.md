@@ -5,4 +5,6 @@ This is an excellent tool to use during **development** and **testing**. Place t
 
 It is even possible to switch to a host user, when allowed by the host account in the settings of the module.
 
-Remve the module before going live?
+Remove the module before going live?
+
+**Credits**: Original version created by ErikVB

@@ -1,0 +1,6 @@
+﻿.is_SearchLabel,.is_SearchTask,.is_SwitchLabel,.is_SwitchTask,.is_progress{float:left}
+.is_SearchLabel,.is_SwitchLabel{width:65px;vertical-align:middle}
+.is_SearchText,.is_SearchMenu{width:125px}
+.is_SearchSeperator{width:3px}
+.is_SwitchMenu{width:253px}
+.is_Clear{clear:both}
