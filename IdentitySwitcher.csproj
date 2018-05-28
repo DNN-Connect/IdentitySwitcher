@@ -88,7 +88,6 @@
   <ItemGroup>
     <None Include="App_LocalResources\Settings.ascx.resx" />
     <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx" />
-    <None Include="IdentitySwitcher.dnn" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
@@ -104,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Installation\ReleaseNotes.htm" />
-    <Content Include="Installation\version.txt" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />
     <Content Include="ViewIdentitySwitcher.ascx" />
