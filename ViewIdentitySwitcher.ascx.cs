@@ -64,17 +64,18 @@ using DotNetNuke.Security.Roles;
 
 namespace interApps.DNN.Modules.IdentitySwitcher
 {
-	
-	/// -----------------------------------------------------------------------------
-	/// <summary>
-	/// The ViewDynamicModule class displays the content
-	/// </summary>
-	/// <remarks>
-	/// </remarks>
-	/// <history>
-	/// </history>
-	/// -----------------------------------------------------------------------------
-	public partial class ViewIdentitySwitcher : DotNetNuke.Entities.Modules.PortalModuleBase
+
+    /// -----------------------------------------------------------------------------
+    /// <summary>
+    /// The ViewDynamicModule class displays the content
+    /// </summary>
+    /// <remarks>
+    /// </remarks>
+    /// <history>
+    /// </history>
+    /// -----------------------------------------------------------------------------
+    [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
+    public partial class ViewIdentitySwitcher : DotNetNuke.Entities.Modules.PortalModuleBase
 	{
 		
 #region Private Properties

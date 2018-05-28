@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
+    <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
@@ -83,10 +84,11 @@
     <None Include="App_LocalResources\Settings.ascx.resx" />
     <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx" />
     <None Include="IdentitySwitcher.dnn" />
-    <None Include="Installation\IdentitySwitcher_01.01.00_Install.zip" />
-    <None Include="Installation\interApps.IdentitySwitcher.02.00.00.Install.zip" />
-    <None Include="Installation\interApps.IdentitySwitcher.02.00.00.Source.zip" />
     <None Include="Installation\Project.targets" />
+    <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
+    <Content Include=".build\EcmaScript.NET.modified.dll" />
+    <Content Include=".build\MSBuild.Community.Tasks.dll" />
+    <Content Include=".build\Yahoo.Yui.Compressor.dll" />
     <Content Include="LICENSE" />
   </ItemGroup>
   <ItemGroup>
