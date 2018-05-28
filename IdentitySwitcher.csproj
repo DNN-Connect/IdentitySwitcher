@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -38,7 +42,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>interApps.DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
+    <DocumentationFile>bin\interApps.DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
     <NOWARN>1591,660,661</NOWARN>
   </PropertyGroup>
   <ItemGroup>
@@ -59,6 +63,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Installation\ReleaseNotes\" />
     <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
@@ -84,11 +89,17 @@
     <None Include="App_LocalResources\Settings.ascx.resx" />
     <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx" />
     <None Include="IdentitySwitcher.dnn" />
-    <None Include="Installation\Project.targets" />
+    <None Include="Installation\Project.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <SourcePackage Include=".build\MSBuild.Community.Tasks.Targets">
+      <SubType>Designer</SubType>
+    </SourcePackage>
     <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
     <Content Include=".build\EcmaScript.NET.modified.dll" />
-    <Content Include=".build\MSBuild.Community.Tasks.dll" />
+    <SourcePackage Include=".build\MSBuild.Community.Tasks.dll" />
     <Content Include=".build\Yahoo.Yui.Compressor.dll" />
+    <Content Include="Installation\License.txt" />
     <Content Include="LICENSE" />
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +114,10 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Target Name="AfterBuild">
-    <CallTarget Targets="Release" />
-    <CallTarget Targets="CopyDeployFiles" />
-  </Target>
+  <!-- <Target Name="AfterBuild"> -->
+  <!-- <CallTarget Targets="Release" /> -->
+  <!-- <CallTarget Targets="CopyDeployFiles" /> -->
+  <!-- </Target> -->
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -117,5 +128,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>

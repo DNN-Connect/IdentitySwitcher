@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>interApps.DNN.Modules.IdentitySwitcher</name>
+    </assembly>
+    <members>
+        <member name="T:interApps.DNN.Modules.IdentitySwitcher.Settings">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Settings class manages Module Settings
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.tblDesignTable">
+            <summary>
+            tblDesignTable control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.trHostSettings">
+            <summary>
+            trHostSettings control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.plIncludeHostUser">
+            <summary>
+            plIncludeHostUser control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.cbIncludeHostUser">
+            <summary>
+            cbIncludeHostUser control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.plUseAjax">
+            <summary>
+            plUseAjax control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.cbUseAjax">
+            <summary>
+            cbUseAjax control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.plSortBy">
+            <summary>
+            plSortBy control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.Settings.rbSortBy">
+            <summary>
+            rbSortBy control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="M:interApps.DNN.Modules.IdentitySwitcher.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:interApps.DNN.Modules.IdentitySwitcher.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher">
+            -----------------------------------------------------------------------------
+            <summary>
+            The ViewDynamicModule class displays the content
+            </summary>
+            <remarks>
+            </remarks>
+            <history>
+            </history>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.UpdatePanel1">
+            <summary>
+            UpdatePanel1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.lblSearch">
+            <summary>
+            lblSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.txtSearch">
+            <summary>
+            txtSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.ddlSearchType">
+            <summary>
+            ddlSearchType control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.cmdSearch">
+            <summary>
+            cmdSearch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.lblSwitchToIdentity">
+            <summary>
+            lblSwitchToIdentity control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.cboUsers">
+            <summary>
+            cboUsers control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.cmdSwitch">
+            <summary>
+            cmdSwitch control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.UpdateProgress1">
+            <summary>
+            UpdateProgress1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="P:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.IncludeHostUser">
+            <summary>
+            reads the setting for inclusion of the host user. This setting defaults to false
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher.Page_Load(System.Object,System.EventArgs)">
+            <summary>
+            Runs when the page loads. Databinds the user switcher drop down list.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="T:DNNtc.PackageProperties">
+            <summary>
+                This class is used to set information about the package
+            </summary>
+        </member>
+        <member name="M:DNNtc.PackageProperties.#ctor(System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+                Creates a attribute with the right properties to create a package. Use on View element
+            </summary>
+            <param name="name">The package name</param>
+            <param name="viewOrder">Ordinal number for sorting packages in the manifest</param>
+            <param name="friendlyName">The package friendly name</param>
+            <param name="description">The package description</param>
+            <param name="iconFile">The package iconfile name</param>
+            <param name="ownerName">Name of Owner</param>
+            <param name="ownerOrganization">Organization of owner</param>
+            <param name="ownerUrl">Url of owner</param>
+            <param name="ownerEmail">Email of owner</param>
+            <param name="azureCompatible">true or false Azure compliant</param>
+        </member>
+        <member name="M:DNNtc.PackageProperties.#ctor(System.String)">
+            <summary>
+                Creates a attribute with the right properties to create a package. Use on other elements
+            </summary>
+            <param name="name">The package name</param>
+        </member>
+        <member name="T:DNNtc.ModuleProperties">
+            <summary>
+                This class is used to set information about the module
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModuleProperties.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+                Creates a attribute with the right properties to create a module. Use on View element
+            </summary>
+            <param name="name">The module name.</param>
+            <param name="friendlyname">The module friendlyname.</param>
+            <param name="defaultCacheTime">the module default cachetime.</param>
+        </member>
+        <member name="M:DNNtc.ModuleProperties.#ctor(System.String)">
+            <summary>
+                Creates a attribute with the right properties to create a module. Use on other elements
+            </summary>
+            <param name="name">The module name.</param>
+        </member>
+        <member name="T:DNNtc.ModuleControlProperties">
+            <summary>
+                This class is used to indicate which UserControls should be in the install package
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModuleControlProperties.#ctor(System.String,System.String,DNNtc.ControlType,System.String,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a attribute with the right properties to create a control.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="title">The title.</param>
+            <param name="userControlType">type of the user control.</param>
+            <param name="helpUrl">The help URL.</param>
+            <param name="supportsPartialRendering">if set to <c>true</c> [supports partial rendering].</param>
+            <param name="supportsPopUps">if set to <c>true</c> [supports pop ups].</param>
+        </member>
+        <member name="T:DNNtc.ModulePermission">
+            <summary>
+                Module permission attribute
+            </summary>
+        </member>
+        <member name="M:DNNtc.ModulePermission.#ctor(System.String,System.String,System.String)">
+            <summary>
+                Empty Constructor for Intellisense
+            </summary>
+            <param name="Code"></param>
+            <param name="Key"></param>
+            <param name="Name"></param>
+        </member>
+        <member name="T:DNNtc.ComponentType">
+            <summary>
+                Enum for type of component used.
+            </summary>
+        </member>
+        <member name="T:DNNtc.ControlType">
+            <summary>
+                Enum for the type of controls DotNetNuke is using.
+            </summary>
+        </member>
+        <member name="T:DNNtc.ModuleDependency">
+            <summary>
+                The type of dependency for the DotNetNuke Module
+            </summary>
+        </member>
+    </members>
+</doc>
