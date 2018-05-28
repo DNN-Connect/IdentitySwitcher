@@ -1,36 +1,4 @@
 // VBConversions Note: VB project level imports
-using System.Web.UI.WebControls;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Tabs;
-using System.Text.RegularExpressions;
-using System;
-using DotNetNuke.Entities;
-using DotNetNuke.Framework;
-using DotNetNuke;
-using System.Text;
-using System.Web.UI.HtmlControls;
-using DotNetNuke.Services;
-using DotNetNuke.Common;
-using DotNetNuke.UI;
-using DotNetNuke.Data;
-using System.Collections;
-using System.Web.Profile;
-using System.Collections.Specialized;
-using Microsoft.VisualBasic;
-using System.Diagnostics;
-using DotNetNuke.Security;
-using System.Web.UI;
-using System.Web.SessionState;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using DotNetNuke.Services.Localization;
-using System.Web.Security;
-using DotNetNuke.Modules;
-using System.Web.Caching;
-using System.Web.UI.WebControls.WebParts;
-using System.Collections.Generic;
 // End of VB project level imports
 
 
@@ -48,8 +16,8 @@ using System.Collections.Generic;
 
 namespace interApps.DNN.Modules.IdentitySwitcher
 {
-	
-	public partial class Settings
+
+    public partial class Settings
 	{
 		
 		///<summary>
