@@ -10,7 +10,7 @@
                 <asp:TextBox ID="txtSearch" runat="server" CssClass="NormalTextBox is_SearchText" /><span
                     class="is_SearchSeperator"></span><asp:DropDownList ID="ddlSearchType" runat="server"
                         CssClass="NormalTextBox is_SearchMenu" />
-                <DNN:CommandButton ID="cmdSearch" runat="server" ResourceKey="cmdSearch" ImageUrl="~/images/icon_search_16px.gif"
+                <asp:ImageButton ID="cmdSearch" runat="server" ResourceKey="cmdSearch" ImageUrl="~/images/icon_search_16px.gif"
                     DisplayLink="false" CausesValidation="false"  OnClick="cmdSearch_Click"/>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <asp:Label ID="lblSwitchToIdentity" runat="server" CssClass="SubHead" resourcekey="SwitchToIdentity" /></div>
             <div class="is_SwitchTask">
                 <asp:DropDownList ID="cboUsers" runat="server" CssClass="NormalTextBox is_SwitchMenu" />
-                <DNN:CommandButton ID="cmdSwitch" runat="server" ResourceKey="cmdSwitch" ImageUrl="~/images/action_refresh.gif"
+                <asp:ImageButton ID="cmdSwitch" runat="server" ResourceKey="cmdSwitch" ImageUrl="~/images/action_refresh.gif"
                     DisplayLink="false" CausesValidation="false"  OnClick="cmdSwitch_Click"/>
             </div>
         </div>

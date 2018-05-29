@@ -1,0 +1,9 @@
+<h2>Release notes Identity Switcher 02.00.00</h2>
+<p>Special thanks goes to Vicenç Masanas for valuable additions to the code</p>
+<h3>ENHANCEMENTS</h3>
+<ul>
+        <li>Added search based on rolename + profile properties, in order to make it easier to find users</li>
+        <li>Added sorting</li>
+        <li>Changed project setup from WSP to WAP</li>
+        <li>Added automated packageing through MSBuild Tasks</li>
+    </ul>
