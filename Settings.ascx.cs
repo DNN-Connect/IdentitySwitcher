@@ -62,17 +62,18 @@ using DotNetNuke.Entities.Modules;
 
 namespace interApps.DNN.Modules.IdentitySwitcher
 {
-	
-	/// -----------------------------------------------------------------------------
-	/// <summary>
-	/// The Settings class manages Module Settings
-	/// </summary>
-	/// <remarks>
-	/// </remarks>
-	/// <history>
-	/// </history>
-	/// -----------------------------------------------------------------------------
-	public partial class Settings : DotNetNuke.Entities.Modules.ModuleSettingsBase
+
+    /// -----------------------------------------------------------------------------
+    /// <summary>
+    /// The Settings class manages Module Settings
+    /// </summary>
+    /// <remarks>
+    /// </remarks>
+    /// <history>
+    /// </history>
+    /// -----------------------------------------------------------------------------
+    [DNNtc.ModuleControlProperties("", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
+    public partial class Settings : DotNetNuke.Entities.Modules.ModuleSettingsBase
 	{
 		
 #region Base Method Implementations
