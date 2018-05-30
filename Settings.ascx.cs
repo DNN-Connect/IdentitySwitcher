@@ -60,7 +60,7 @@ using DotNetNuke.Entities.Modules;
 
 
 
-namespace interApps.DNN.Modules.IdentitySwitcher
+namespace DNN.Modules.IdentitySwitcher
 {
 
     /// -----------------------------------------------------------------------------
