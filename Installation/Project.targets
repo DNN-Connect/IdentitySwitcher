@@ -50,7 +50,7 @@
     <ModuleName>IdentitySwitcher</ModuleName>
     <FolderName>IdentitySwitcher</FolderName>
     <FriendlyName>IdentitySwitcher</FriendlyName>
-    <IconFile>DNN_Reports.png</IconFile>
+    <IconFile>IdentitySwitcher.png</IconFile>
     <ModuleDescription>The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.</ModuleDescription>
     <azureCompatible>true</azureCompatible>
     <AlsoBuildSourcesZip>false</AlsoBuildSourcesZip>

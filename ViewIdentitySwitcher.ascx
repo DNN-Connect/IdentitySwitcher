@@ -35,4 +35,5 @@
                 </asp:ImageMap></div>
         </ProgressTemplate>
     </asp:UpdateProgress>
+</div>
 

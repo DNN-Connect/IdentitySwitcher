@@ -72,7 +72,7 @@ namespace interApps.DNN.Modules.IdentitySwitcher
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
+    [DNNtc.ModuleControlProperties("Settings", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
     public partial class Settings : DotNetNuke.Entities.Modules.ModuleSettingsBase
 	{
 		
