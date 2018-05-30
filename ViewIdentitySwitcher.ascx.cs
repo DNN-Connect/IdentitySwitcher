@@ -62,7 +62,7 @@ using DotNetNuke.Security.Roles;
 //
 
 
-namespace interApps.DNN.Modules.IdentitySwitcher
+namespace DNN.Modules.IdentitySwitcher
 {
     using System.Linq;
 
