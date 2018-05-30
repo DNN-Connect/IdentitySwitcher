@@ -72,6 +72,7 @@
             </resourceFile>
           </resourceFiles>
         </component>
+        <component type="Cleanup" version="03.00.00" fileName="Installation\CleanUp\Cleanup.03.00.00.txt" />
       </components>
     </package>
   </packages>
