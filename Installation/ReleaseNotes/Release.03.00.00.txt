@@ -1,8 +1,12 @@
 <h2>Release notes Identity Switcher 03.00.00</h2>
-<p>Full details on the changes can be found in 
-great detail at <a href="https://github.com/DNN-Connect/IdentitySwitcher">https://github.com/DNN-Connect/IdentitySwitcher</a>. </p>
+<p>Full details on the changes can be found in great detail at <a href="https://github.com/DNN-Connect/IdentitySwitcher" target="_blank">https://github.com/DNN-Connect/IdentitySwitcher</a>.</p>
+<h3>ENHANCEMENTS<h3>
+<ul>
+	<li>Two modes of switching defined: select from all users, or select role/users in role</li>
+</ul>
 <h3>CHANGES</h3>
 <ul>
 	<li>Code module changed from VB to C#.</li>
-	<li>DNNtc.MSBuild structure and attrributes build in</li>
+	<li>DNNtc.MSBuild structure and attributes build in</li>
+	<li>Replace all deprecated DNN API calls by new API calls</li>
 </ul>

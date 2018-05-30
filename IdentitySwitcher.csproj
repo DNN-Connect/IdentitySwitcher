@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>
     </RootNamespace>
-    <AssemblyName>interApps.DNN.Modules.IdentitySwitcher</AssemblyName>
+    <AssemblyName>DNN.Modules.IdentitySwitcher</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>14.0</OldToolsVersion>
@@ -43,7 +43,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>bin\interApps.DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
+    <DocumentationFile>bin\DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
     <NOWARN>1591,660,661</NOWARN>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
