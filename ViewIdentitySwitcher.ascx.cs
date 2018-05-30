@@ -64,6 +64,7 @@ using DotNetNuke.Security.Roles;
 
 namespace interApps.DNN.Modules.IdentitySwitcher
 {
+    using System.Linq;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -174,98 +175,110 @@ namespace interApps.DNN.Modules.IdentitySwitcher
 			}
 			cboUsers.Items.Insert(0, new ListItem(Localization.GetString("Anonymous", LocalResourceFile), Null.NullInteger.ToString()));
 		}
-		
-		private void LoadAllUsers()
-		{
-			ArrayList users = (ArrayList) (UserController.GetUsers(PortalId));
-			BindUsers(users);
-			
-			LoadDefaultUsers();
-		}
-		
-		private void Filter(string SearchText, string SearchField)
-		{
-			ArrayList users = default(ArrayList);
-			int total = 0;
-			
-			switch (SearchField)
-			{
-				case "Email":
-					users = UserController.GetUsersByEmail(PortalId, false, SearchText + "%", -1, -1, ref total);
-					break;
-				case "Username":
-					users = UserController.GetUsersByUserName(PortalId, false, SearchText + "%", -1, -1, ref total);
-					break;
-				case "RoleName":
-					RoleController objRolecontroller = new RoleController();
-					users = objRolecontroller.GetUsersByRoleName(PortalId, SearchText);
-					break;
-					
-				default:
-					users = UserController.GetUsersByProfileProperty(PortalId, false, SearchField, SearchText + "%", 0, 1000, ref total);
-					break;
-			}
-			BindUsers(users);
-			
-			LoadDefaultUsers();
-		}
-		
-		private void BindUsers(ArrayList users)
-		{
-			cboUsers.Items.Clear();
-			
-			users.Sort(new Comparer(SortResultsBy));
-			
-			string display = "";
-			foreach (UserInfo user in users)
-			{
-				
-				if (SortResultsBy == SortBy.DisplayName)
-				{
-					display = string.Format("{0} - {1}", user.DisplayName, user.Username);
-				}
-				else
-				{
-					display = string.Format("{0} - {1}", user.Username, user.DisplayName);
-				}
-				cboUsers.Items.Add(new ListItem(display, user.UserID.ToString()));
-			}
-		}
-#endregion
-		
-#region Event Handlers
-		
-		/// <summary>
-		/// Runs when the page loads. Databinds the user switcher drop down list.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		/// <remarks></remarks>
-		private void Page_Load(System.Object sender, System.EventArgs e)
-		{
-			try
-			{
-				if (UseAjax && DotNetNuke.Framework.AJAX.IsInstalled())
-				{
-					DotNetNuke.Framework.AJAX.RegisterScriptManager();
-					
-					DotNetNuke.Framework.AJAX.CreateUpdateProgressControl(this.UpdatePanel1.ID);
-				}
-				if (!Page.IsPostBack)
-				{
-					
-					BindSearchOptions();
-					LoadDefaultUsers();
-					
-				}
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
-		
-		protected void cmdSearch_Click(object sender, EventArgs e)
+
+	    private void LoadAllUsers()
+	    {
+	        var users = UserController.GetUsers(PortalId).OfType<UserInfo>().ToList();
+	        BindUsers(users);
+
+	        LoadDefaultUsers();
+	    }
+
+	    private void Filter(string SearchText, string SearchField)
+	    {
+	        var users = default(List<UserInfo>);
+	        int total = 0;
+
+	        switch (SearchField)
+	        {
+	            case "Email":
+	                users = UserController.GetUsersByEmail(PortalId, SearchText + "%", -1, -1, ref total).OfType<UserInfo>().ToList();
+	                break;
+	            case "Username":
+	                users = UserController.GetUsersByUserName(PortalId, SearchText + "%", -1, -1, ref total).OfType<UserInfo>().ToList();
+	                break;
+	            case "RoleName":
+	                users = RoleController.Instance.GetUsersByRole(PortalId, SearchText).ToList();
+	                break;
+
+	            default:
+	                users = UserController.GetUsersByProfileProperty(PortalId, SearchField, SearchText + "%", 0, 1000, ref total).OfType<UserInfo>().ToList();
+	                break;
+	        }
+	        BindUsers(users);
+
+	        LoadDefaultUsers();
+	    }
+
+	    private void BindUsers(IEnumerable<UserInfo> users)
+	    {
+	        cboUsers.Items.Clear();
+
+	        switch (SortResultsBy)
+	        {
+	            case SortBy.DisplayName:
+	                users = users.OrderBy(arg => arg.DisplayName.ToLower());
+	                break;
+	            case SortBy.UserName:
+	                users = users.OrderBy(arg => arg.Username.ToLower());
+	                break;
+	        }
+
+	        string display = "";
+	        foreach (UserInfo user in users)
+	        {
+
+	            if (SortResultsBy == SortBy.DisplayName)
+	            {
+	                display = string.Format("{0} - {1}", user.DisplayName, user.Username);
+	            }
+	            else
+	            {
+	                display = string.Format("{0} - {1}", user.Username, user.DisplayName);
+	            }
+	            cboUsers.Items.Add(new ListItem(display, user.UserID.ToString()));
+	        }
+	    }
+
+	    #endregion
+
+	    #region Event Handlers
+
+	    /// <summary>
+	    /// Runs when the page loads. Databinds the user switcher drop down list.
+	    /// </summary>
+	    /// <param name="sender"></param>
+	    /// <param name="e"></param>
+	    /// <remarks></remarks>
+	    private void Page_Load(System.Object sender, System.EventArgs e)
+	    {
+	        try
+	        {
+	            if (UseAjax && DotNetNuke.Framework.AJAX.IsInstalled())
+	            {
+	                DotNetNuke.Framework.AJAX.RegisterScriptManager();
+
+	                new UpdateProgress
+	                    {
+	                        ID = this.UpdatePanel1.ID + "_Prog",
+	                        AssociatedUpdatePanelID = this.UpdatePanel1.ID
+	                    };
+	            }
+	            if (!Page.IsPostBack)
+	            {
+
+	                BindSearchOptions();
+	                LoadDefaultUsers();
+
+	            }
+	        }
+	        catch (Exception exc) //Module failed to load
+	        {
+	            Exceptions.ProcessModuleLoadException(this, exc);
+	        }
+	    }
+
+        protected void cmdSearch_Click(object sender, EventArgs e)
 		{
 			if (txtSearch.Text == "")
 			{
@@ -279,7 +292,7 @@ namespace interApps.DNN.Modules.IdentitySwitcher
 		
 		protected void cmdSwitch_Click(object sender, EventArgs e)
 		{
-			if (cboUsers.SelectedValue != this.UserId.ToString())
+            if (cboUsers.SelectedValue != this.UserId.ToString())
 			{
 				if (cboUsers.SelectedValue == Null.NullInteger.ToString())
 				{
@@ -287,8 +300,8 @@ namespace interApps.DNN.Modules.IdentitySwitcher
 				}
 				else
 				{
-					UserInfo MyUserInfo = UserController.GetUser(PortalId, int.Parse(cboUsers.SelectedValue), false);
-					if (!ReferenceEquals(MyUserInfo, null))
+				    UserInfo MyUserInfo = UserController.GetUserById(PortalId, int.Parse(cboUsers.SelectedValue));
+                    if (!ReferenceEquals(MyUserInfo, null))
 					{
 						//Remove user from cache
 						if (Page.User != null)

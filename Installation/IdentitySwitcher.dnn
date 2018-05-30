@@ -3,7 +3,7 @@
     <package name="IdentitySwitcher" type="Module" version="3.0.0">
       <friendlyName>IdentitySwitcher</friendlyName>
       <description>The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.</description>
-      <iconFile>DesktopModules\IdentitySwitcher\DNN_Reports.png</iconFile>
+      <iconFile>DesktopModules\IdentitySwitcher\IdentitySwitcher.png</iconFile>
       <owner>
         <name>DNNCorp</name>
         <organization>DNNCorp</organization>
@@ -32,7 +32,7 @@
                 <defaultCacheTime>-1</defaultCacheTime>
                 <moduleControls>
                   <moduleControl>
-                    <controlKey></controlKey>
+                    <controlKey>Settings</controlKey>
                     <controlSrc>DesktopModules/IdentitySwitcher/Settings.ascx</controlSrc>
                     <supportsPartialRendering>true</supportsPartialRendering>
                     <supportsPopUps>false</supportsPopUps>
@@ -72,6 +72,7 @@
             </resourceFile>
           </resourceFiles>
         </component>
+        <component type="Cleanup" version="03.00.00" fileName="Installation\CleanUp\Cleanup.03.00.00.txt" />
       </components>
     </package>
   </packages>
