@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
+<%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
 <%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="DNN" %>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
