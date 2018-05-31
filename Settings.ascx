@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" Inherits="interApps.DNN.Modules.IdentitySwitcher.Settings" Codebehind="Settings.ascx.cs" %>
+<%@ Control Language="C#" AutoEventWireup="true" Inherits="DNN.Modules.IdentitySwitcher.Settings" Codebehind="Settings.ascx.cs" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <table cellspacing="0" cellpadding="2" border="0" summary="ModuleName Settings Design Table" id="tblDesignTable" runat="server">
     <tr id="trHostSettings" runat="server">

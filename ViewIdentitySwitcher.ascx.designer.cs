@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace interApps.DNN.Modules.IdentitySwitcher {
+namespace DNN.Modules.IdentitySwitcher {
     
     
     public partial class ViewIdentitySwitcher {
