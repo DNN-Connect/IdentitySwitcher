@@ -352,6 +352,7 @@
             $(MSBuildProjectDirectory)\_*\**;
 						$(MSBuildProjectDirectory)\obj\**;
 						$(MSBuildProjectDirectory)\bin\**;
+            $(MSBuildProjectDirectory)\.git\**;
 						$(MSBuildProjectDirectory)\My Project\*.*;
 						$(MSBuildProjectDirectory)\Properties\*.*;
 						$(MSBuildProjectDirectory)\Dependencies\*.*; 
