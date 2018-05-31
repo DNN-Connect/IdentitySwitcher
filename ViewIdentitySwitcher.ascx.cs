@@ -30,6 +30,7 @@ namespace DNN.Modules.IdentitySwitcher
     using System.Linq;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using DNN.Modules.IdentitySwitcher.Components;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
@@ -64,41 +65,41 @@ namespace DNN.Modules.IdentitySwitcher
         private bool IncludeHostUser
         {
             get
+            {
+                var bRetValue = false;
+                if (this.Settings.Contains("includeHost"))
                 {
-                    var bRetValue = false;
-                    if (this.Settings.Contains("includeHost"))
-                    {
-                        bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
-                    }
-                    return bRetValue;
+                    bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
                 }
+                return bRetValue;
+            }
         }
 
         private bool UseAjax
         {
             get
+            {
+                var bRetValue = true;
+                if (this.Settings.Contains("useAjax"))
                 {
-                    var bRetValue = true;
-                    if (this.Settings.Contains("useAjax"))
-                    {
-                        bool.TryParse(Convert.ToString(this.Settings["useAjax"].ToString()), out bRetValue);
-                    }
-                    return bRetValue;
+                    bool.TryParse(Convert.ToString(this.Settings["useAjax"].ToString()), out bRetValue);
                 }
+                return bRetValue;
+            }
         }
 
         private SortBy SortResultsBy
         {
             get
+            {
+                var bRetValue = SortBy.DisplayName;
+                if (this.Settings.Contains("sortBy"))
                 {
-                    var bRetValue = SortBy.DisplayName;
-                    if (this.Settings.Contains("sortBy"))
-                    {
-                        bRetValue = (SortBy) Enum.Parse(typeof(SortBy),
-                                                        Convert.ToString(this.Settings["sortBy"].ToString()));
-                    }
-                    return bRetValue;
+                    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
+                                                    Convert.ToString(this.Settings["sortBy"].ToString()));
                 }
+                return bRetValue;
+            }
         }
 
         #endregion
@@ -241,11 +242,19 @@ namespace DNN.Modules.IdentitySwitcher
                     AJAX.RegisterScriptManager();
 
                     new UpdateProgress
-                        {
-                            ID = this.UpdatePanel1.ID + "_Prog",
-                            AssociatedUpdatePanelID = this.UpdatePanel1.ID
-                        };
+                    {
+                        ID = this.UpdatePanel1.ID + "_Prog",
+                        AssociatedUpdatePanelID = this.UpdatePanel1.ID
+                    };
                 }
+                var repository = new IdentitySwitcherModuleSettingsRepository();
+                var settings = repository.GetSettings(this.ModuleConfiguration);
+
+                if (settings.SelectingMethod == IdentitySwitcherModuleSettings.ClickMethod.OneClick)
+                {
+                   this.cmdSwitch.Visible = false;
+                }
+
                 if (!this.Page.IsPostBack)
                 {
                     this.BindSearchOptions();
@@ -267,6 +276,17 @@ namespace DNN.Modules.IdentitySwitcher
             else
             {
                 this.Filter(this.txtSearch.Text, this.ddlSearchType.SelectedValue);
+            }
+        }
+
+        protected void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var repository = new IdentitySwitcherModuleSettingsRepository();
+            var settings = repository.GetSettings(this.ModuleConfiguration);
+
+            if (settings.SelectingMethod == IdentitySwitcherModuleSettings.ClickMethod.OneClick)
+            {
+                this.cmdSwitch_Click(sender, e);
             }
         }
 

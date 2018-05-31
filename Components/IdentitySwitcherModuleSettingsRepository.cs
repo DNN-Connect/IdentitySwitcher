@@ -24,28 +24,12 @@
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
-    using System;
     using DotNetNuke.Entities.Modules.Settings;
 
-    [Serializable]
-    public class IdentitySwitcherModuleSettings
-    {
-        public enum ClickMethod
-        {
-            TwoClicks = 1,
-            OneClick
-        }
-
-        [TabModuleSetting(ParameterName = "includeHost")]
-        public bool? IncludeHost { get; set; }
-
-        [TabModuleSetting(ParameterName = "sortBy")]
-        public string SortBy { get; set; } = string.Empty;
-
-        [TabModuleSetting(ParameterName = "useAjax")]
-        public bool? UseAjax { get; set; }
-
-        [TabModuleSetting(ParameterName = "selectingMethod")]
-        public ClickMethod SelectingMethod { get; set; } = (ClickMethod)1;
-    }
+    /// <summary>
+    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving
+    ///     <see cref="IdentitySwitcherModuleSettings" />
+    /// </summary>
+    public class IdentitySwitcherModuleSettingsRepository : SettingsRepository<IdentitySwitcherModuleSettings>
+    { }
 }

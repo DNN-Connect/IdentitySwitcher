@@ -61,6 +61,9 @@ namespace DNN.Modules.IdentitySwitcher
             {
                 if (this.Page.IsPostBack == false)
                 {
+                    var repository = new IdentitySwitcherModuleSettingsRepository();
+                    var settings = repository.GetSettings(this.ModuleConfiguration);
+
                     this.rbSortBy.Items.Add(new ListItem(
                                                 Localization.GetString("SortByDisplayName", this.LocalResourceFile),
                                                 "DisplayName"));
@@ -69,8 +72,8 @@ namespace DNN.Modules.IdentitySwitcher
                                                 "UserName"));
                     this.rbSortBy.SelectedIndex = 0;
 
-                    var repository = new IdentitySwitcherModuleSettingsRepository();
-                    var settings = repository.GetSettings(this.ModuleConfiguration);
+                    this.BindEnumToListControls(typeof(IdentitySwitcherModuleSettings.ClickMethod), this.rbSelectingMethod);
+                    this.rbSelectingMethod.SelectedIndex = 0;
 
                     if (this.UserInfo.IsSuperUser)
                     {
@@ -95,6 +98,7 @@ namespace DNN.Modules.IdentitySwitcher
                     {
                         this.rbSortBy.SelectedValue = settings.SortBy;
                     }
+                    this.rbSelectingMethod.SelectedValue = settings.SelectingMethod.ToString();
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -125,8 +129,9 @@ namespace DNN.Modules.IdentitySwitcher
                 }
                 objModules.UseAjax = this.cbUseAjax.Checked;
                 objModules.SortBy = this.rbSortBy.SelectedValue;
-
-
+                objModules.SelectingMethod =
+                    (IdentitySwitcherModuleSettings.ClickMethod) Enum.Parse(typeof(IdentitySwitcherModuleSettings.ClickMethod), this.rbSelectingMethod.SelectedValue);
+                
                 repository.SaveSettings(this.ModuleConfiguration, objModules);
 
                 // refresh cache
@@ -139,5 +144,18 @@ namespace DNN.Modules.IdentitySwitcher
         }
 
         #endregion
+
+        private void BindEnumToListControls(Type enumType, ListControl listcontrol)
+        {
+            string[] names;
+            Array values;
+            int countElements;
+            names = Enum.GetNames(enumType);
+            values = Enum.GetValues(enumType);
+            for (countElements = 0; countElements <= names.Length - 1; countElements++)
+            {
+                listcontrol.Items.Add(new ListItem(names[countElements].ToString(), values.GetValue(countElements).ToString()));
+            }
+        }
     }
 }

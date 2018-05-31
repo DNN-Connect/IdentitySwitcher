@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="plIncludeHostUser.Text" xml:space="preserve">
     <value>Include Host users</value>
@@ -136,12 +136,18 @@
     <value>You can specify if you want the list sorted by name or username</value>
   </data>
   <data name="plSortBy.Text" xml:space="preserve">
-    <value>Sort by:</value>
+    <value>Sort by</value>
   </data>
   <data name="SorByUserName.Text" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="SortByDisplayName.Text" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="plSelectingMethod.Help" xml:space="preserve">
+    <value>Choose whether you want to directly select the user from the dropdown or if you want to acknowledge with the green button</value>
+  </data>
+  <data name="plSelectingMethod.Text" xml:space="preserve">
+    <value>Selecting method</value>
   </data>
 </root>
