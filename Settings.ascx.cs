@@ -62,6 +62,7 @@ using DotNetNuke.Entities.Modules;
 
 namespace DNN.Modules.IdentitySwitcher
 {
+    using DNN.Modules.IdentitySwitcher.Components;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -74,96 +75,102 @@ namespace DNN.Modules.IdentitySwitcher
     /// -----------------------------------------------------------------------------
     [DNNtc.ModuleControlProperties("Settings", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
     public partial class Settings : DotNetNuke.Entities.Modules.ModuleSettingsBase
-	{
-		
-#region Base Method Implementations
-		
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// LoadSettings loads the settings from the Database and displays them
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <history>
-		/// </history>
-		/// -----------------------------------------------------------------------------
-		public override void LoadSettings()
-		{
-			try
-			{
-				if (Page.IsPostBack == false)
-				{
-					rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByDisplayName", LocalResourceFile), "DisplayName"));
-					rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByUserName", LocalResourceFile), "UserName"));
-					rbSortBy.SelectedIndex = 0;
-					
-					
-					if (UserInfo.IsSuperUser)
-					{
-						if (TabModuleSettings.Contains("includeHost"))
-						{
-							this.cbIncludeHostUser.Checked = bool.Parse(System.Convert.ToString(TabModuleSettings["includeHost"].ToString()));
-						}
-					}
-					else
-					{
-						trHostSettings.Visible = false;
-					}
-					if (TabModuleSettings.Contains("useAjax"))
-					{
-						this.cbUseAjax.Checked = bool.Parse(System.Convert.ToString(TabModuleSettings["useAjax"].ToString()));
-					}
-					else
-					{
-						this.cbUseAjax.Checked = true;
-					}
-					
-					if (TabModuleSettings.Contains("sortBy"))
-					{
-						rbSortBy.SelectedValue = System.Convert.ToString(TabModuleSettings["sortBy"].ToString());
-					}
-				}
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
-		
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// UpdateSettings saves the modified settings to the Database
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <history>
-		/// </history>
-		/// -----------------------------------------------------------------------------
-		public override void UpdateSettings()
-		{
-			try
-			{
-				DotNetNuke.Entities.Modules.ModuleController objModules = new DotNetNuke.Entities.Modules.ModuleController();
-				if (UserInfo.IsSuperUser)
-				{
-					objModules.UpdateTabModuleSetting(TabModuleId, "includeHost", this.cbIncludeHostUser.Checked.ToString());
-				}
-				objModules.UpdateTabModuleSetting(TabModuleId, "useAjax", this.cbUseAjax.Checked.ToString());
-				objModules.UpdateTabModuleSetting(TabModuleId, "sortBy", rbSortBy.SelectedValue);
-				
-				// refresh cache
-				ModuleController.SynchronizeModule(ModuleId);
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
-		
-#endregion
-		
-	}
-	
+    {
+
+        #region Base Method Implementations
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// LoadSettings loads the settings from the Database and displays them
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public override void LoadSettings()
+        {
+            try
+            {
+                if (Page.IsPostBack == false)
+                {
+                    rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByDisplayName", LocalResourceFile), "DisplayName"));
+                    rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByUserName", LocalResourceFile), "UserName"));
+                    rbSortBy.SelectedIndex = 0;
+
+                    var repository = new IdentitySwitcherModuleSettingsRepository();
+                    var settings = repository.GetSettings(this.ModuleConfiguration);
+
+                    if (UserInfo.IsSuperUser)
+                    {
+                        if (settings.IncludeHost != null)
+                        {
+                            this.cbIncludeHostUser.Checked = (bool)settings.IncludeHost;
+                        }
+                    }
+                    else
+                    {
+                        trHostSettings.Visible = false;
+                    }
+                    if (settings.UseAjax != null)
+                    {
+                        this.cbUseAjax.Checked = (bool)settings.UseAjax;
+                    }
+                    else
+                    {
+                        this.cbUseAjax.Checked = true;
+                    }
+                    if (!string.IsNullOrEmpty(settings.SortBy))
+                    {
+                        rbSortBy.SelectedValue = settings.SortBy;
+                    }
+                }
+            }
+            catch (Exception exc) //Module failed to load
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// UpdateSettings saves the modified settings to the Database
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <history>
+        /// </history>
+        /// -----------------------------------------------------------------------------
+        public override void UpdateSettings()
+        {
+            try
+            {
+                var repository = new IdentitySwitcherModuleSettingsRepository();
+                var objModules = repository.GetSettings(this.ModuleConfiguration);
+               
+                if (UserInfo.IsSuperUser)
+                {
+                    objModules.IncludeHost = this.cbIncludeHostUser.Checked;
+                }
+                objModules.UseAjax = this.cbUseAjax.Checked;
+                objModules.SortBy = rbSortBy.SelectedValue;
+               
+
+                repository.SaveSettings(this.ModuleConfiguration, objModules);
+
+                // refresh cache
+                ModuleController.SynchronizeModule(ModuleId);
+            }
+            catch (Exception exc) //Module failed to load
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
+
+        #endregion
+
+    }
+
 }
 
 

@@ -59,7 +59,7 @@
           <assemblies>
             <assembly>
               <path>bin</path>
-              <name>interApps.DNN.Modules.IdentitySwitcher.dll</name>
+              <name>DNN.Modules.IdentitySwitcher.dll</name>
             </assembly>
           </assemblies>
         </component>
