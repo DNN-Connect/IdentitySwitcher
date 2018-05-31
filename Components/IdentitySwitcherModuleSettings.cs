@@ -22,13 +22,9 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System;
     using DotNetNuke.Entities.Modules.Settings;
 
     [Serializable]
@@ -45,7 +41,8 @@ namespace DNN.Modules.IdentitySwitcher.Components
     }
 
     /// <summary>
-    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving <see cref="IdentitySwitcherModuleSettings" />
+    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving
+    ///     <see cref="IdentitySwitcherModuleSettings" />
     /// </summary>
     public class IdentitySwitcherModuleSettingsRepository : SettingsRepository<IdentitySwitcherModuleSettings>
     { }
