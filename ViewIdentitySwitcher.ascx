@@ -22,10 +22,13 @@ AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs"
                 <asp:Label ID="lblSwitchToIdentity" runat="server" CssClass="SubHead" resourcekey="SwitchToIdentity"/>
             </div>
             <div class="is_SwitchTask">
-                <asp:DropDownList ID="cboUsers" runat="server" CssClass="NormalTextBox is_SwitchMenu"/>
+                <asp:DropDownList ID="cboUsers" runat="server" CssClass="NormalTextBox is_SwitchMenu" OnSelectedIndexChanged="cboUsers_SelectedIndexChanged" AutoPostBack="true"/>
                 <asp:ImageButton ID="cmdSwitch" runat="server" ResourceKey="cmdSwitch" ImageUrl="~/images/action_refresh.gif"
                                  DisplayLink="false" CausesValidation="false" OnClick="cmdSwitch_Click"/>
             </div>
+        </div>
+        <div class="is_SwitchRow" id="OneClickSelector" runat="server" Visible="False">
+            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="NormalTextBox is_SwitchMenu"/>
         </div>
     </ContentTemplate>
 </asp:UpdatePanel>
