@@ -26,4 +26,13 @@
             </asp:RadioButtonList>
         </td>
     </tr>
+    <tr>
+        <td class="SubHead" width="150">
+            <dnn:label id="plSelectingMethod" runat="server" controlname="rbSelectingMethod" suffix=":"/>
+        </td>
+        <td valign="bottom">
+            <asp:RadioButtonList ID="rbSelectingMethod" runat="server" CssClass="Normal" RepeatDirection="Horizontal" RepeatLayout="Flow">
+            </asp:RadioButtonList>
+        </td>
+    </tr>
 </table>
