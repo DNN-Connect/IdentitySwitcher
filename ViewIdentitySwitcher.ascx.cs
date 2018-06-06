@@ -27,6 +27,7 @@ namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web.UI;
     using System.Web.UI.WebControls;
@@ -41,6 +42,7 @@ namespace DNN.Modules.IdentitySwitcher
     using DotNetNuke.Security.Roles;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
+    using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -52,7 +54,7 @@ namespace DNN.Modules.IdentitySwitcher
     /// </history>
     /// -----------------------------------------------------------------------------
     [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
-    public partial class ViewIdentitySwitcher : PortalModuleBase
+    public partial class ViewIdentitySwitcher : IdentitySwitcherPortalModuleBase
     {
         #region Private Properties
 
@@ -226,6 +228,26 @@ namespace DNN.Modules.IdentitySwitcher
         #endregion
 
         #region Event Handlers
+
+        /// <summary>
+        /// Handles the Init event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            try
+            {
+                //Typescript
+                var jsFolder = Path.Combine(this.ModuleScriptFolder, DistributionFolder);
+                var jsPriority = IdentitySwitcherFileOrder.Js.AngularCustomApp;
+                this.RegisterScript(jsFolder, "dnn.identityswitcher.js", jsPriority++);
+            }
+            catch (Exception exception)
+            {
+                Exceptions.ProcessModuleLoadException(this, exception);
+            }
+        }
 
         /// <summary>
         ///     Runs when the page loads. Databinds the user switcher drop down list.

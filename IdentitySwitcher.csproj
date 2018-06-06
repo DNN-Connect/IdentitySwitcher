@@ -57,6 +57,10 @@
       <HintPath>packages\DotNetNuke.Web.8.0.0.809\lib\net40\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.Client.8.0.2.4\lib\net40\DotNetNuke.Web.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DotNetNuke.Web.8.0.0.809\lib\net40\DotNetNuke.WebUtility.dll</HintPath>
       <Private>False</Private>
@@ -100,8 +104,12 @@
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
     <Compile Include="Components\IdentitySwitcherController.cs" />
+    <Compile Include="Components\IdentitySwitcherFileOrder.cs" />
     <Compile Include="Components\IdentitySwitcherModuleSettings.cs" />
     <Compile Include="Components\IdentitySwitcherModuleSettingsRepository.cs" />
+    <Compile Include="Components\IdentitySwitcherPortalModuleBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Components\RouteMapper.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,7 +137,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="packages.config" />
+    <Content Include="pages\templates\IdentitySwitcherView.html" />
     <Content Include="web.config" />
+    <Content Include="tsconfig.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -148,13 +158,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Settings.ascx" />
     <Content Include="ViewIdentitySwitcher.ascx" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="TypeScript\app\app.constants.ts" />
+    <TypeScriptCompile Include="TypeScript\app\app.controller.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher.d.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identitySwitcher.controller.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
