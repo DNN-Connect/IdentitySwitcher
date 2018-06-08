@@ -12,6 +12,7 @@
     "@types/angular-resource": "^1.7.0"
   },
   "scripts": {
+    "build": "tsc -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

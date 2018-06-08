@@ -1,15 +1,21 @@
 ﻿(function () {
     "use strict";
-    angular
-        .module("dnn.identityswitcher")
-        .factory("identitySwitcherFactory", identitySwitcherFactory);
 
-    function initialiseBaseFactory(moduleInstance) {
-        return {
-            init: function (moduleInstanceValue) {
-                moduleInstance.value = moduleInstanceValue;
-                moduleInstance.servicesFramework = $.ServicesFramework(moduleInstance.value.ModuleID);
-            }
-        };
+    angular.module("dnn.identityswitcher")
+        .factory("IdentitySwitcherFactory", identitySwitcherFactory);
+
+    identitySwitcherFactory.$inject = ["$resource", "IdentitySwitcherConstants"];
+
+    function identitySwitcherFactory($resource, config) {
+        return $resource(config.restfulApiUrl + "identityswitcher",
+            { login: "@login" },
+            {
+                'getSearchItems': {
+                    method: "GET",
+                    //params: { login: "@login" },
+                    isArray: true,
+                    url: config.restfulApiUrl + "identityswitcher/getsearchitems"
+                }
+            });
     }
 })();

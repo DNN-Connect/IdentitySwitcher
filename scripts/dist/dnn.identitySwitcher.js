@@ -1,13 +1,26 @@
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
     IdentitySwitcher.appName = "dnn.identityswitcher";
-    angular.module(IdentitySwitcher.appName, []);
+    angular.module(IdentitySwitcher.appName, [
+        "ngResource"
+    ]).factory("IdentitySwitcherFactory", identitySwitcherFactory);
+    identitySwitcherFactory.$inject = ["$resource", "IdentitySwitcherConstants"];
+    function identitySwitcherFactory($resource, config) {
+        return $resource(config.restfulApiUrl + "identityswitcher", { login: "@login" }, {
+            'getSearchItems': {
+                method: "GET",
+                isArray: true,
+                url: config.restfulApiUrl + "identityswitcher/getsearchitems"
+            }
+        });
+    }
 })(IdentitySwitcher || (IdentitySwitcher = {}));
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
     var IdentitySwitcherConstants = (function () {
         function IdentitySwitcherConstants() {
             this.viewTemplatesFolder = "pages/templates/";
+            this.restfulApiUrl = "/DesktopModules/Identity%20Switcher/API/";
         }
         Object.defineProperty(IdentitySwitcherConstants, "getConstants", {
             get: function () {
@@ -39,16 +52,46 @@ var IdentitySwitcher;
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
     var IdentitySwitcherController = (function () {
-        function IdentitySwitcherController() {
-            this.bla = 2;
+        function IdentitySwitcherController(identitySwitcherService) {
+            this.identitySwitcherService = identitySwitcherService;
+            this.searchItems = [];
+            this.obtainSearchItems();
         }
-        IdentitySwitcherController.prototype.click = function () {
-            var bla = 2;
+        IdentitySwitcherController.prototype.search = function () {
+            var bla = this.selectedItem;
         };
-        IdentitySwitcherController.$inject = [];
+        IdentitySwitcherController.prototype.obtainSearchItems = function () {
+            var _this = this;
+            this.identitySwitcherService.getSearchItems()
+                .then(function (serverData) {
+                _this.searchItems = serverData;
+            }, function () {
+            });
+        };
+        IdentitySwitcherController.$inject = [
+            "IdentitySwitcherService"
+        ];
         return IdentitySwitcherController;
     }());
     angular.module(IdentitySwitcher.appName)
         .controller("IdentitySwitcherController", IdentitySwitcherController);
+})(IdentitySwitcher || (IdentitySwitcher = {}));
+var IdentitySwitcher;
+(function (IdentitySwitcher) {
+    var IdentitySwitcherService = (function () {
+        function IdentitySwitcherService(identitySwitcherFactory) {
+            this.identitySwitcherFactory = identitySwitcherFactory;
+        }
+        IdentitySwitcherService.prototype.getSearchItems = function () {
+            var deferred = this.identitySwitcherFactory.getSearchItems();
+            return deferred.$promise;
+        };
+        IdentitySwitcherService.$inject = [
+            "IdentitySwitcherFactory"
+        ];
+        return IdentitySwitcherService;
+    }());
+    angular.module(IdentitySwitcher.appName)
+        .service("IdentitySwitcherService", IdentitySwitcherService);
 })(IdentitySwitcher || (IdentitySwitcher = {}));
 //# sourceMappingURL=dnn.identityswitcher.js.map

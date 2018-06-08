@@ -249,10 +249,10 @@ namespace DNN.Modules.IdentitySwitcher
                 this.RegisterScript(jsFolder, "angular.min.js", jsPriority++);
                 this.RegisterScript(jsFolder, "angular-resource.min.js", jsPriority++);
 
-                var componentsFolder = Path.Combine(this.ModuleAngularAppFolderName, "components");
+                //var componentsFolder = Path.Combine(this.ModuleAngularAppFolderName, "components");
 
                 // Identity Switcher factory
-                this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js", jsPriority++);
+                //this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js", jsPriority++);
             }
             catch (Exception exception)
             {

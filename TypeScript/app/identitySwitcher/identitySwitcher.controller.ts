@@ -5,6 +5,7 @@
             //"$rootScope",
             //"RightsService",
             //"RightsDataService"
+            "IdentitySwitcherService"
         ];
 
         constructor(
@@ -12,7 +13,9 @@
             //private $rootScope: ng.IRootScopeService,
             //private rightsService: IRightsService,
             //private rightsDataService: IRightsDataService
+            private identitySwitcherService: any
         ) {
+            this.obtainSearchItems();
             //this.bla();
             //this.getSelectedUserRights();
         }
@@ -21,12 +24,8 @@
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
         //selectedUserRights: RrsVrisDnnSystem.IActivityType[] = [];
-        bla = 2;
-
-
-        click(): void {
-            var bla = 2;
-        }
+        searchItems: string[] = [];
+        selectedItem: string;
 
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
@@ -40,9 +39,25 @@
         //    this.$rootScope.$broadcast("userSelected", { selected: false });
         //}
 
+        search(): void {
+            var bla = this.selectedItem;
+        }
+
         /**************************************************************************/
         /* PRIVATE METHODS                                                        */
         /**************************************************************************/
+        obtainSearchItems(): void {
+            this.identitySwitcherService.getSearchItems()
+                .then((serverData) => {
+                    this.searchItems = serverData;
+                },
+                () => {
+                    //Error
+                }
+                );
+        }
+
+
         /*
         * onUserSelected()
         * @param user
@@ -60,7 +75,7 @@
         //        );
         //}
 
-       
+
     }
 
     /**************************************************************************/

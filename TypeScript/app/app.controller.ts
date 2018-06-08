@@ -11,7 +11,7 @@
         /**************************************************************************/
         constructor(
         //    //private $rootScope: ng.IRootScopeService,
-            private constants: IIdentitySwitcherConstants,
+            private constants: IIdentitySwitcherConstants
             //private initialiseBaseFactory: any
         //    //private vrisService: any
         ) {

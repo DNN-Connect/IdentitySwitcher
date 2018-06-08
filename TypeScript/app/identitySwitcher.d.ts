@@ -2,12 +2,13 @@
     interface IIdentitySwitcherConstants {
         //readonly viewFolder: string;
         readonly viewTemplatesFolder: string;
+        readonly restfulApiUrl: string;
     }
 
-    //interface IRightsService {
-    //    search(login: string): angular.IPromise<any>;
-    //    getActivities(login: string): angular.IPromise<any>;
-    //}
+    interface IIdentitySwitcherService {
+        //search(login: string): angular.IPromise<any>;
+        getSearchItems(): angular.IPromise<any>;
+    }
 
     //interface IRightsDataService {
     //    searchInput: string;
