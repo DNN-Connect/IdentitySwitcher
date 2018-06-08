@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\ReleaseNotes\" />
+    <Folder Include="jsResources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
@@ -137,7 +138,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="packages.config" />
-    <Content Include="pages\templates\IdentitySwitcherView.html" />
+    <Content Include="Scripts\app\components\identitySwitcher\identityswitcher.factory.js" />
     <Content Include="web.config" />
     <Content Include="tsconfig.json" />
     <None Include="web.Debug.config">
@@ -165,8 +166,8 @@
     <TypeScriptCompile Include="TypeScript\app\app.constants.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.controller.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.ts" />
-    <TypeScriptCompile Include="TypeScript\app\identitySwitcher.d.ts" />
-    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identitySwitcher.controller.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identityswitcher.d.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.controller.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

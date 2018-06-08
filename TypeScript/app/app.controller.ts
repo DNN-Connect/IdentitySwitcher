@@ -1,7 +1,7 @@
 ﻿module IdentitySwitcher {
     class ApplicationController {
         static $inject = [
-            "$rootScope",
+            //"$rootScope",
             "IdentitySwitcherConstants"
             //"VrisService"
         ];
@@ -10,23 +10,29 @@
         /* ctor                                                                   */
         /**************************************************************************/
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private constants: IIdentitySwitcherConstants
-            //private vrisService: any
+        //    //private $rootScope: ng.IRootScopeService,
+            private constants: IIdentitySwitcherConstants,
+            //private initialiseBaseFactory: any
+        //    //private vrisService: any
         ) {
-            this.setTemplates();
+        //    this.setTemplates();
 
-            //this.registerBroadcasts();
+        //    //this.registerBroadcasts();
 
-            //this.vrisService
-            //    .getModuleSettings()
-            //    .then((serverData) => this.onUpdateModuleSettings(serverData));
+        //    //this.vrisService
+        //    //    .getModuleSettings()
+        //    //    .then((serverData) => this.onUpdateModuleSettings(serverData));
         }
+
+        //init(moduleInstance): void {
+        //    this.initialiseBaseFactory.init(moduleInstance);
+        //}
+
 
         /**************************************************************************/
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
-        identitySwitcherView: string = "";
+        //identitySwitcherView: string = "";
         //userOverview: string = "";
         //userDetails: string = "";
         //activeTemplate: string = "";
@@ -34,7 +40,7 @@
         /**************************************************************************/
         /* PRIVATE PROPERTIES                                                     */
         /**************************************************************************/
-        private moduleSettings: any = {};
+        //private moduleSettings: any = {};
 
         /**************************************************************************/
         /* PRIVATE METHODS                                                        */
@@ -51,23 +57,23 @@
        * onUpdateModuleSettings()
        * @param serverData
        */
-        private onUpdateModuleSettings(serverData: any): void {
-            this.moduleSettings = serverData;
-            this.setTemplates();
-        }
+        //private onUpdateModuleSettings(serverData: any): void {
+        //    this.moduleSettings = serverData;
+        //    this.setTemplates();
+        //}
 
         /*
         * setTemplates()
         */
-        private setTemplates(): void {
-            const moduleFolder = this.moduleSettings.moduleFolder;
+        //private setTemplates(): void {
+        //    const moduleFolder = this.moduleSettings.moduleFolder;
 
-            this.identitySwitcherView = moduleFolder + this.constants.viewTemplatesFolder + "IdentitySwitcherView.html";
-            //this.userOverview = moduleFolder + this.constants.viewTemplatesFolder + "UserOverview.html";
-            //this.userDetails = moduleFolder + this.constants.viewTemplatesFolder + "Userdetails.html";
+        //    this.identitySwitcherView = moduleFolder + this.constants.viewTemplatesFolder + "IdentitySwitcherView.html";
+        //    //this.userOverview = moduleFolder + this.constants.viewTemplatesFolder + "UserOverview.html";
+        //    //this.userDetails = moduleFolder + this.constants.viewTemplatesFolder + "Userdetails.html";
 
-            //this.activeTemplate = this.userOverview;
-        }
+        //    //this.activeTemplate = this.userOverview;
+        //}
 
         /*
           * registerBroadcasts()

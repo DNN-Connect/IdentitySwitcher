@@ -13,6 +13,7 @@
             //private rightsService: IRightsService,
             //private rightsDataService: IRightsDataService
         ) {
+            //this.bla();
             //this.getSelectedUserRights();
         }
 
@@ -20,6 +21,12 @@
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
         //selectedUserRights: RrsVrisDnnSystem.IActivityType[] = [];
+        bla = 2;
+
+
+        click(): void {
+            var bla = 2;
+        }
 
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
@@ -52,6 +59,8 @@
         //            }
         //        );
         //}
+
+       
     }
 
     /**************************************************************************/

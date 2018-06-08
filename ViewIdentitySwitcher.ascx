@@ -42,6 +42,8 @@ AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs"
         </ProgressTemplate>
     </asp:UpdateProgress>
 </div>
-<div dnn-app="dnn.identitySwitcher" dnn-moduleid="<% =this.ModuleId %>" ng-controller="ApplicationController as vm">
-    <div ng-include="vm.identitySwitcherView.html"></div>
+<div ng-app="dnn.identityswitcher" ng-controller="ApplicationController as main">
+    <div ng-controller="IdentitySwitcherController as vm">
+        <button type="button" ng-click="vm.click()"></button>
+    </div>
 </div>

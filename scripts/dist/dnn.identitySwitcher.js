@@ -25,23 +25,10 @@ var IdentitySwitcher;
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
     var ApplicationController = (function () {
-        function ApplicationController($rootScope, constants) {
-            this.$rootScope = $rootScope;
+        function ApplicationController(constants) {
             this.constants = constants;
-            this.identitySwitcherView = "";
-            this.moduleSettings = {};
-            this.setTemplates();
         }
-        ApplicationController.prototype.onUpdateModuleSettings = function (serverData) {
-            this.moduleSettings = serverData;
-            this.setTemplates();
-        };
-        ApplicationController.prototype.setTemplates = function () {
-            var moduleFolder = this.moduleSettings.moduleFolder;
-            this.identitySwitcherView = moduleFolder + this.constants.viewTemplatesFolder + "IdentitySwitcherView.html";
-        };
         ApplicationController.$inject = [
-            "$rootScope",
             "IdentitySwitcherConstants"
         ];
         return ApplicationController;
@@ -53,11 +40,15 @@ var IdentitySwitcher;
 (function (IdentitySwitcher) {
     var IdentitySwitcherController = (function () {
         function IdentitySwitcherController() {
+            this.bla = 2;
         }
+        IdentitySwitcherController.prototype.click = function () {
+            var bla = 2;
+        };
         IdentitySwitcherController.$inject = [];
         return IdentitySwitcherController;
     }());
     angular.module(IdentitySwitcher.appName)
         .controller("IdentitySwitcherController", IdentitySwitcherController);
 })(IdentitySwitcher || (IdentitySwitcher = {}));
-//# sourceMappingURL=dnn.identitySwitcher.js.map
+//# sourceMappingURL=dnn.identityswitcher.js.map

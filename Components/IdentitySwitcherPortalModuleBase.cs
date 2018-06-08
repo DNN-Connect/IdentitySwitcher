@@ -5,8 +5,11 @@ using System.Web;
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System.Globalization;
     using System.IO;
+    using System.Web.UI.HtmlControls;
     using DotNetNuke.Common;
+    using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Web.Client.ClientResourceManagement;
     using global::IdentitySwitcher.DotNetNuke.Web.Client;
@@ -17,7 +20,9 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         private string _moduleFolderName;
 
-        public virtual string ScriptFolderName { get; } = "scripts";
+        public virtual string ScriptFolderName { get; } = "Scripts";
+
+        public virtual string JsResourcesFolderName { get; } = "jsResources";
 
         public virtual string ModuleAngularAppFolderName => Path.Combine(this.ModuleFolderName, this.ScriptFolderName, "app");
 
@@ -36,10 +41,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         protected virtual string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
 
-        protected void RegisterScript(string folder, string fileName, IdentitySwitcherFileOrder.Js priority)
-        {
-            //Require.NotNullOrEmpty(fileName, nameof(fileName));
+        protected virtual string ModuleJsResourcesFolder => Path.Combine(this.ModuleFolderName, this.JsResourcesFolderName);
 
+       protected void RegisterScript(string folder, string fileName, IdentitySwitcherFileOrder.Js priority)
+        {
             var scriptPath = string.IsNullOrWhiteSpace(folder) ? fileName : Path.Combine(folder, fileName);
             ClientResourceManager.RegisterScript(this.Page, scriptPath, (int)priority);
         }
