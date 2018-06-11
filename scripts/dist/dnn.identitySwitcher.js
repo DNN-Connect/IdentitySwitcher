@@ -3,7 +3,8 @@ var IdentitySwitcher;
     IdentitySwitcher.appName = "dnn.identityswitcher";
     angular.module(IdentitySwitcher.appName, [
         "ngResource"
-    ]);
+    ])
+        .value("moduleInstance", { value: null, servicesFramework: null });
 })(IdentitySwitcher || (IdentitySwitcher = {}));
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
@@ -48,7 +49,15 @@ var IdentitySwitcher;
             this.obtainSearchItems();
         }
         IdentitySwitcherController.prototype.search = function () {
+            this.identitySwitcherService.getUsers("mark", this.selectedItem, this.moduleInstance.ModuleID)
+                .then(function (serverData) {
+                var bla = 2;
+            }, function () {
+            });
             var bla = this.selectedItem;
+        };
+        IdentitySwitcherController.prototype.init = function (moduleInstance) {
+            this.moduleInstance = moduleInstance;
         };
         IdentitySwitcherController.prototype.obtainSearchItems = function () {
             var _this = this;
@@ -74,6 +83,14 @@ var IdentitySwitcher;
         }
         IdentitySwitcherService.prototype.getSearchItems = function () {
             var deferred = this.identitySwitcherFactory.getSearchItems();
+            return deferred.$promise;
+        };
+        IdentitySwitcherService.prototype.getUsers = function (searchText, selectedSearchItem, moduleId) {
+            var deferred = this.identitySwitcherFactory.getUsers({
+                searchText: searchText,
+                selectedSearchItem: selectedSearchItem,
+                moduleId: moduleId
+            });
             return deferred.$promise;
         };
         IdentitySwitcherService.$inject = [

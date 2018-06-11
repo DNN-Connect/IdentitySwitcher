@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
+    <Compile Include="Components\IdentitySwitcherClient.cs" />
     <Compile Include="Components\IdentitySwitcherController.cs" />
     <Compile Include="Components\IdentitySwitcherFileOrder.cs" />
     <Compile Include="Components\IdentitySwitcherModuleSettings.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Components\IdentitySwitcherPortalModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Components\ModuleInstanceBase.cs" />
     <Compile Include="Components\RouteMapper.cs" />
     <Compile Include="Components\UserDto.cs" />
     <Compile Include="Installation\Attributes.cs" />

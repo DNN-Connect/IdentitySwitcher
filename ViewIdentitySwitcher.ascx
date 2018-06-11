@@ -44,7 +44,7 @@
     </asp:UpdateProgress>
 </div>
 <div ng-app="dnn.identityswitcher" ng-controller="ApplicationController as main">
-    <div ng-controller="IdentitySwitcherController as vm">
+    <div ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
         <ng-form class="form-inline">
             <div class="form-group">
               <%--  <label for="exampleInputAmount">Filter:</label>--%>

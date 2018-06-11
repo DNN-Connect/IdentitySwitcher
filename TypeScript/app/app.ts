@@ -10,5 +10,6 @@ module IdentitySwitcher {
     angular.module(IdentitySwitcher.appName,
         [
             "ngResource"
-        ]);
+        ])
+        .value("moduleInstance", { value: null, servicesFramework: null });
 }

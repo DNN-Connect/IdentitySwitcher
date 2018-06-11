@@ -8,6 +8,11 @@
     interface IIdentitySwitcherService {
         //search(login: string): angular.IPromise<any>;
         getSearchItems(): angular.IPromise<any>;
+        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<any>;
+    }
+
+    export interface IModuleInstance {
+        ModuleID: string;
     }
 
     //interface IRightsDataService {

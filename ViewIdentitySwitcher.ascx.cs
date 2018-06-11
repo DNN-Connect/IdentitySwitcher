@@ -27,9 +27,11 @@ namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Web.UI;
+    using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Components;
     using DotNetNuke.Common;
@@ -107,6 +109,17 @@ namespace DNN.Modules.IdentitySwitcher
         #endregion
 
         #region Private Methods
+
+        protected virtual void InitializeModuleInstanceJson(HtmlGenericControl initControl)
+        {
+            if (initControl != null)
+            {
+                string initScript = String.Format(CultureInfo.InvariantCulture, "vm.init({0})",
+                                                  this.GetModuleInstance().ToJson());
+
+                initControl.Attributes.Add("ng-init", initScript);
+            }
+        }
 
         private ListItem AddSearchItem(string name)
         {
@@ -292,6 +305,7 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     this.BindSearchOptions();
                     this.LoadDefaultUsers();
+                    this.InitializeModuleInstanceJson(this.divBaseDiv);
                 }
             }
             catch (Exception exc) //Module failed to load

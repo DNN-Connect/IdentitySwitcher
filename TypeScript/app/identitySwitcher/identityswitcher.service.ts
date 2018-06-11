@@ -43,6 +43,15 @@
             const deferred = this.identitySwitcherFactory.getSearchItems();
             return deferred.$promise;
         }
+
+        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<any> {
+            const deferred = this.identitySwitcherFactory.getUsers({
+                searchText: searchText,
+                selectedSearchItem: selectedSearchItem,
+                moduleId: moduleId
+            });
+            return deferred.$promise;
+        }
     }
 
     /**************************************************************************/

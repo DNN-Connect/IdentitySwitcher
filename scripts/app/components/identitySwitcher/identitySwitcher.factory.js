@@ -8,14 +8,39 @@
 
     function identitySwitcherFactory($resource, config) {
         return $resource(config.restfulApiUrl + "identityswitcher",
-            { login: "@login" },
+            {},
             {
                 'getSearchItems': {
                     method: "GET",
                     //params: { login: "@login" },
                     isArray: true,
                     url: config.restfulApiUrl + "identityswitcher/getsearchitems"
+                },
+                'getUsers': {
+                    method: "GET",
+                    params: {
+                        searchtext: "@searchText",
+                        selectedsearchitem: "@selectedSearchItem",
+                        moduleid: "@moduleId"
+                    },
+                    isArray: true,
+                    url: config.restfulApiUrl + "identityswitcher/getusers"
                 }
             });
+    }
+
+    angular.module("dnn.identityswitcher")
+        //.value("moduleInstance", { value: null, servicesFramework: null })
+        .factory("InitializeBaseFactory", initializeBaseFactory);
+
+    initializeBaseFactory.$inject = ["moduleInstance"];
+
+    function initializeBaseFactory(moduleInstance) {
+        return {
+            init: function (moduleInstanceValue) {
+                moduleInstance.value = moduleInstanceValue;
+                moduleInstance.servicesFramework = $.ServicesFramework(moduleInstance.value.ModuleID);
+            }
+        };
     }
 })();

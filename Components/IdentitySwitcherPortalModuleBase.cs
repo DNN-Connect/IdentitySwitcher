@@ -22,6 +22,11 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         public virtual string ScriptFolderName { get; } = "Scripts";
 
+        protected virtual ModuleInstanceBase GetModuleInstance()
+        {
+            return IdentitySwitcherClient.GetModuleInstance<ModuleInstanceBase>(this);
+        }
+
         public virtual string JsResourcesFolderName { get; } = "jsResources";
 
         public virtual string ModuleAngularAppFolderName => Path.Combine(this.ModuleFolderName, this.ScriptFolderName, "app");

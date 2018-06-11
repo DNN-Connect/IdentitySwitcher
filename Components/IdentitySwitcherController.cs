@@ -7,6 +7,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
 {
     using System.Web.Http;
     using DotNetNuke.Common.Utilities;
+    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Profile;
     using DotNetNuke.Entities.Users;
     using DotNetNuke.Security;
@@ -17,16 +18,18 @@ namespace DNN.Modules.IdentitySwitcher.Components
     {
         private IEnumerable<UserInfo> Users {get; set; }
 
+        private int ModuleID { get; set; }
+
         private SortBy SortResultsBy
         {
             get
             {
                 var bRetValue = SortBy.DisplayName;
 
-                var moduleId = this.ActiveModule.ModuleID;
+                var moduleInfo = new ModuleController().GetModule(this.ModuleID);
 
                 var repository = new IdentitySwitcherModuleSettingsRepository();
-                var settings = repository.GetSettings(this.ActiveModule);
+                var settings = repository.GetSettings(moduleInfo);
 
                 if (settings.SortBy != null)
                 {
@@ -90,8 +93,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         [DnnAuthorize]
         [HttpGet]
-        public IHttpActionResult GetUsers(string searchText, string selectedSearchItem)
+        public IHttpActionResult GetUsers(string searchText, string selectedSearchItem, int moduleId)
         {
+            this.ModuleID = moduleId;
+
             if (searchText == null)
             {
                 this.LoadAllUsers();

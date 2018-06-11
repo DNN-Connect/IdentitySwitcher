@@ -6,6 +6,8 @@
             //"RightsService",
             //"RightsDataService"
             "IdentitySwitcherService"
+            //"moduleInstance"
+            //"InitializeBaseFactory"
         ];
 
         constructor(
@@ -14,10 +16,16 @@
             //private rightsService: IRightsService,
             //private rightsDataService: IRightsDataService
             private identitySwitcherService: any
+            //private moduleInstance: any
+            //private initializeBaseFactory: any
         ) {
+            //this.init(moduleInstance);
+            //this.moduleId = this.moduleInstance.value.ModuleID;
             this.obtainSearchItems();
             //this.bla();
             //this.getSelectedUserRights();
+
+            //this.moduleInstance = moduleInstance;
         }
 
         /**************************************************************************/
@@ -26,6 +34,7 @@
         //selectedUserRights: RrsVrisDnnSystem.IActivityType[] = [];
         searchItems: string[] = [];
         selectedItem: string;
+        moduleInstance: IModuleInstance;
 
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
@@ -40,7 +49,23 @@
         //}
 
         search(): void {
+            this.identitySwitcherService.getUsers("mark", this.selectedItem, this.moduleInstance.ModuleID)
+                .then((serverData) => {
+                        var bla = 2;
+                    },
+                    () => {
+                        //Error
+                    }
+                );
+
+
             var bla = this.selectedItem;
+            //var bla2 = moduleInstance;
+        }
+
+        init(moduleInstance): void {
+            //this.initializeBaseFactory.init(moduleInstance);
+            this.moduleInstance = moduleInstance;
         }
 
         /**************************************************************************/
