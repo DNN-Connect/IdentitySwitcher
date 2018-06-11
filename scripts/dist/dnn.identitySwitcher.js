@@ -3,17 +3,7 @@ var IdentitySwitcher;
     IdentitySwitcher.appName = "dnn.identityswitcher";
     angular.module(IdentitySwitcher.appName, [
         "ngResource"
-    ]).factory("IdentitySwitcherFactory", identitySwitcherFactory);
-    identitySwitcherFactory.$inject = ["$resource", "IdentitySwitcherConstants"];
-    function identitySwitcherFactory($resource, config) {
-        return $resource(config.restfulApiUrl + "identityswitcher", { login: "@login" }, {
-            'getSearchItems': {
-                method: "GET",
-                isArray: true,
-                url: config.restfulApiUrl + "identityswitcher/getsearchitems"
-            }
-        });
-    }
+    ]);
 })(IdentitySwitcher || (IdentitySwitcher = {}));
 var IdentitySwitcher;
 (function (IdentitySwitcher) {
