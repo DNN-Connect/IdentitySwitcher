@@ -143,101 +143,101 @@ namespace DNN.Modules.IdentitySwitcher
             return li;
         }
 
-        private void BindSearchOptions()
-        {
-            this.ddlSearchType.Items.Add(this.AddSearchItem("RoleName"));
-            this.ddlSearchType.Items.Add(this.AddSearchItem("Email"));
-            this.ddlSearchType.Items.Add(this.AddSearchItem("Username"));
-            var profileProperties = ProfileController.GetPropertyDefinitionsByPortal(this.PortalId, false);
+        //private void BindSearchOptions()
+        //{
+        //    this.ddlSearchType.Items.Add(this.AddSearchItem("RoleName"));
+        //    this.ddlSearchType.Items.Add(this.AddSearchItem("Email"));
+        //    this.ddlSearchType.Items.Add(this.AddSearchItem("Username"));
+        //    var profileProperties = ProfileController.GetPropertyDefinitionsByPortal(this.PortalId, false);
 
-            foreach (ProfilePropertyDefinition definition in profileProperties)
-            {
-                this.ddlSearchType.Items.Add(this.AddSearchItem(definition.PropertyName));
-            }
-        }
+        //    foreach (ProfilePropertyDefinition definition in profileProperties)
+        //    {
+        //        this.ddlSearchType.Items.Add(this.AddSearchItem(definition.PropertyName));
+        //    }
+        //}
 
-        private void LoadDefaultUsers()
-        {
-            if (this.IncludeHostUser)
-            {
-                var arHostUsers = UserController.GetUsers(Null.NullInteger);
-                foreach (UserInfo hostUser in arHostUsers)
-                {
-                    this.cboUsers.Items.Insert(0, new ListItem(hostUser.Username, hostUser.UserID.ToString()));
-                }
-            }
-            this.cboUsers.Items.Insert(
-                0,
-                new ListItem(Localization.GetString("Anonymous", this.LocalResourceFile),
-                             Null.NullInteger.ToString()));
-        }
+        //private void LoadDefaultUsers()
+        //{
+        //    if (this.IncludeHostUser)
+        //    {
+        //        var arHostUsers = UserController.GetUsers(Null.NullInteger);
+        //        foreach (UserInfo hostUser in arHostUsers)
+        //        {
+        //            this.cboUsers.Items.Insert(0, new ListItem(hostUser.Username, hostUser.UserID.ToString()));
+        //        }
+        //    }
+        //    this.cboUsers.Items.Insert(
+        //        0,
+        //        new ListItem(Localization.GetString("Anonymous", this.LocalResourceFile),
+        //                     Null.NullInteger.ToString()));
+        //}
 
-        private void LoadAllUsers()
-        {
-            var users = UserController.GetUsers(this.PortalId).OfType<UserInfo>().ToList();
-            this.BindUsers(users);
+        //private void LoadAllUsers()
+        //{
+        //    var users = UserController.GetUsers(this.PortalId).OfType<UserInfo>().ToList();
+        //    this.BindUsers(users);
 
-            this.LoadDefaultUsers();
-        }
+        //    this.LoadDefaultUsers();
+        //}
 
-        private void Filter(string SearchText, string SearchField)
-        {
-            var users = default(List<UserInfo>);
-            var total = 0;
+        //private void Filter(string SearchText, string SearchField)
+        //{
+        //    var users = default(List<UserInfo>);
+        //    var total = 0;
 
-            switch (SearchField)
-            {
-                case "Email":
-                    users = UserController.GetUsersByEmail(this.PortalId, SearchText + "%", -1, -1, ref total)
-                                          .OfType<UserInfo>().ToList();
-                    break;
-                case "Username":
-                    users = UserController.GetUsersByUserName(this.PortalId, SearchText + "%", -1, -1, ref total)
-                                          .OfType<UserInfo>().ToList();
-                    break;
-                case "RoleName":
-                    users = RoleController.Instance.GetUsersByRole(this.PortalId, SearchText).ToList();
-                    break;
+        //    switch (SearchField)
+        //    {
+        //        case "Email":
+        //            users = UserController.GetUsersByEmail(this.PortalId, SearchText + "%", -1, -1, ref total)
+        //                                  .OfType<UserInfo>().ToList();
+        //            break;
+        //        case "Username":
+        //            users = UserController.GetUsersByUserName(this.PortalId, SearchText + "%", -1, -1, ref total)
+        //                                  .OfType<UserInfo>().ToList();
+        //            break;
+        //        case "RoleName":
+        //            users = RoleController.Instance.GetUsersByRole(this.PortalId, SearchText).ToList();
+        //            break;
 
-                default:
-                    users = UserController
-                        .GetUsersByProfileProperty(this.PortalId, SearchField, SearchText + "%", 0, 1000, ref total)
-                        .OfType<UserInfo>().ToList();
-                    break;
-            }
-            this.BindUsers(users);
+        //        default:
+        //            users = UserController
+        //                .GetUsersByProfileProperty(this.PortalId, SearchField, SearchText + "%", 0, 1000, ref total)
+        //                .OfType<UserInfo>().ToList();
+        //            break;
+        //    }
+        //    this.BindUsers(users);
 
-            this.LoadDefaultUsers();
-        }
+        //    this.LoadDefaultUsers();
+        //}
 
-        private void BindUsers(IEnumerable<UserInfo> users)
-        {
-            this.cboUsers.Items.Clear();
+        //private void BindUsers(IEnumerable<UserInfo> users)
+        //{
+        //    this.cboUsers.Items.Clear();
 
-            switch (this.SortResultsBy)
-            {
-                case SortBy.DisplayName:
-                    users = users.OrderBy(arg => arg.DisplayName.ToLower());
-                    break;
-                case SortBy.UserName:
-                    users = users.OrderBy(arg => arg.Username.ToLower());
-                    break;
-            }
+        //    switch (this.SortResultsBy)
+        //    {
+        //        case SortBy.DisplayName:
+        //            users = users.OrderBy(arg => arg.DisplayName.ToLower());
+        //            break;
+        //        case SortBy.UserName:
+        //            users = users.OrderBy(arg => arg.Username.ToLower());
+        //            break;
+        //    }
 
-            var display = "";
-            foreach (var user in users)
-            {
-                if (this.SortResultsBy == SortBy.DisplayName)
-                {
-                    display = string.Format("{0} - {1}", user.DisplayName, user.Username);
-                }
-                else
-                {
-                    display = string.Format("{0} - {1}", user.Username, user.DisplayName);
-                }
-                this.cboUsers.Items.Add(new ListItem(display, user.UserID.ToString()));
-            }
-        }
+        //    var display = "";
+        //    foreach (var user in users)
+        //    {
+        //        if (this.SortResultsBy == SortBy.DisplayName)
+        //        {
+        //            display = string.Format("{0} - {1}", user.DisplayName, user.Username);
+        //        }
+        //        else
+        //        {
+        //            display = string.Format("{0} - {1}", user.Username, user.DisplayName);
+        //        }
+        //        this.cboUsers.Items.Add(new ListItem(display, user.UserID.ToString()));
+        //    }
+        //}
 
         #endregion
 
@@ -284,28 +284,28 @@ namespace DNN.Modules.IdentitySwitcher
         {
             try
             {
-                if (this.UseAjax && AJAX.IsInstalled())
-                {
-                    AJAX.RegisterScriptManager();
+                //if (this.UseAjax && AJAX.IsInstalled())
+                //{
+                //    AJAX.RegisterScriptManager();
 
-                    new UpdateProgress
-                    {
-                        ID = this.UpdatePanel1.ID + "_Prog",
-                        AssociatedUpdatePanelID = this.UpdatePanel1.ID
-                    };
-                }
-                var repository = new IdentitySwitcherModuleSettingsRepository();
-                var settings = repository.GetSettings(this.ModuleConfiguration);
+                //    new UpdateProgress
+                //    {
+                //        ID = this.UpdatePanel1.ID + "_Prog",
+                //        AssociatedUpdatePanelID = this.UpdatePanel1.ID
+                //    };
+                //}
+                //var repository = new IdentitySwitcherModuleSettingsRepository();
+                //var settings = repository.GetSettings(this.ModuleConfiguration);
 
-                if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
-                {
-                   this.cmdSwitch.Visible = false;
-                }
+                //if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
+                //{
+                //   this.cmdSwitch.Visible = false;
+                //}
 
                 if (!this.Page.IsPostBack)
                 {
-                    this.BindSearchOptions();
-                    this.LoadDefaultUsers();
+                    //this.BindSearchOptions();
+                    //this.LoadDefaultUsers();
                     this.InitializeModuleInstanceJson(this.divBaseDiv);
                 }
             }
@@ -315,62 +315,62 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
-        protected void cmdSearch_Click(object sender, EventArgs e)
-        {
-            if (this.txtSearch.Text == "")
-            {
-                this.LoadAllUsers();
-            }
-            else
-            {
-                this.Filter(this.txtSearch.Text, this.ddlSearchType.SelectedValue);
-            }
-        }
+        //protected void cmdSearch_Click(object sender, EventArgs e)
+        //{
+        //    if (this.txtSearch.Text == "")
+        //    {
+        //        this.LoadAllUsers();
+        //    }
+        //    else
+        //    {
+        //        this.Filter(this.txtSearch.Text, this.ddlSearchType.SelectedValue);
+        //    }
+        //}
 
-        protected void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var repository = new IdentitySwitcherModuleSettingsRepository();
-            var settings = repository.GetSettings(this.ModuleConfiguration);
+        //protected void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    var repository = new IdentitySwitcherModuleSettingsRepository();
+        //    var settings = repository.GetSettings(this.ModuleConfiguration);
 
-            if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
-            {
-                this.cmdSwitch_Click(sender, e);
-            }
-        }
+        //    if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
+        //    {
+        //        this.cmdSwitch_Click(sender, e);
+        //    }
+        //}
 
-        protected void cmdSwitch_Click(object sender, EventArgs e)
-        {
-            if (this.cboUsers.SelectedValue != this.UserId.ToString())
-            {
-                if (this.cboUsers.SelectedValue == Null.NullInteger.ToString())
-                {
-                    this.Response.Redirect(Globals.NavigateURL("LogOff"));
-                }
-                else
-                {
-                    var MyUserInfo = UserController.GetUserById(this.PortalId, int.Parse(this.cboUsers.SelectedValue));
-                    if (!ReferenceEquals(MyUserInfo, null))
-                    {
-                        //Remove user from cache
-                        if (this.Page.User != null)
-                        {
-                            DataCache.ClearUserCache(this.PortalSettings.PortalId, this.Context.User.Identity.Name);
-                        }
+        //protected void cmdSwitch_Click(object sender, EventArgs e)
+        //{
+        //    if (this.cboUsers.SelectedValue != this.UserId.ToString())
+        //    {
+        //        if (this.cboUsers.SelectedValue == Null.NullInteger.ToString())
+        //        {
+        //            this.Response.Redirect(Globals.NavigateURL("LogOff"));
+        //        }
+        //        else
+        //        {
+        //            var MyUserInfo = UserController.GetUserById(this.PortalId, int.Parse(this.cboUsers.SelectedValue));
+        //            if (!ReferenceEquals(MyUserInfo, null))
+        //            {
+        //                //Remove user from cache
+        //                if (this.Page.User != null)
+        //                {
+        //                    DataCache.ClearUserCache(this.PortalSettings.PortalId, this.Context.User.Identity.Name);
+        //                }
 
-                        // sign current user out
-                        var objPortalSecurity = new PortalSecurity();
-                        objPortalSecurity.SignOut();
+        //                // sign current user out
+        //                var objPortalSecurity = new PortalSecurity();
+        //                objPortalSecurity.SignOut();
 
-                        // sign new user in
-                        UserController.UserLogin(this.PortalId, MyUserInfo, this.PortalSettings.PortalName,
-                                                 this.Request.UserHostAddress, false);
+        //                // sign new user in
+        //                UserController.UserLogin(this.PortalId, MyUserInfo, this.PortalSettings.PortalName,
+        //                                         this.Request.UserHostAddress, false);
 
-                        // redirect to current url
-                        this.Response.Redirect(this.Request.RawUrl, true);
-                    }
-                }
-            }
-        }
+        //                // redirect to current url
+        //                this.Response.Redirect(this.Request.RawUrl, true);
+        //            }
+        //        }
+        //    }
+        //}
 
         #endregion
     }

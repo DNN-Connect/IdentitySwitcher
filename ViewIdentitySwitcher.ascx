@@ -1,6 +1,6 @@
 <%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
         <div class="is_SearchRow">
             <div class="is_SearchLabel">
@@ -42,7 +42,7 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-</div>
+</div>--%>
 <div ng-app="dnn.identityswitcher" ng-controller="ApplicationController as main">
     <div ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
         <ng-form class="form-inline">
