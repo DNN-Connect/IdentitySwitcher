@@ -68,13 +68,15 @@
                 <p class="form-control-static">Switch to:</p>
             </div>
             <div class="form-group">
-                <select class="form-control" ng-model="vm.selectedUser">
+              <%--  <select class="form-control" ng-model="vm.selectedUser">
                     <option value="" disabled selected>Choose User</option>
-                    <option ng-repeat="user in vm.foundUsers" value="{{user.id}}">{{user.userAndDisplayName}}</option>
+                    <option ng-repeat="user in vm.foundUsers" value="user">{{user.userAndDisplayName}}</option>
+                </select>--%>
+                <select class="form-control" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers">
                 </select>
             </div>
             <div class="form-group">
-                <span type="button" class="btn btn default" ng-click="vm.search()">
+                <span type="button" class="btn btn default" ng-click="vm.switchUser()">
                     <i class="glyphicon glyphicon-refresh"></i>
                 </span>
             </div>

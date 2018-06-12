@@ -62,27 +62,29 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         [DnnAuthorize]
         [HttpGet]
-        public IHttpActionResult SwitchUser()
+        public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserUserName)
         {
-            var User = 2;
-            var IdentityName = "host";
-            var SelectedValue = "2";
-            var UserHostAddress = "127.0.0.1";
+            //var User = 2;
+            //var IdentityName = "host";
+            //var SelectedValue = "2";
+            //var UserHostAddress = "127.0.0.1";
 
-            var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, int.Parse(SelectedValue));
+            var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
-            if (User != null)
+            if (selectedUserId != null)
             {
-                DataCache.ClearUserCache(this.PortalSettings.PortalId, IdentityName);
+                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserUserName);
             }
 
             // sign current user out
             var objPortalSecurity = new PortalSecurity();
             objPortalSecurity.SignOut();
 
+            //HttpContext.Current.Request.UserHostAddress
+
             // sign new user in
             UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
-                                     UserHostAddress, false);
+                                     HttpContext.Current.Request.UserHostAddress, false);
 
             return this.Ok();
         }
@@ -106,7 +108,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         [DnnAuthorize]
         [HttpGet]
-        public IHttpActionResult GetUsers(string searchText, string selectedSearchItem, int moduleId)
+        public IHttpActionResult GetUsers(int moduleId, string searchText = null, string selectedSearchItem = null)
         {
             this.ModuleID = moduleId;
 
@@ -121,10 +123,11 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
             var result = this.Users.Select(userInfo => new UserDto
                                                            {
+                                                               Id = userInfo.UserID,
+                                                               UserName = userInfo.Username,
                                                                UserAndDisplayName = userInfo.DisplayName != null ? $"{userInfo.DisplayName} - {userInfo.Username}"
                                                                                         : userInfo.Username,
-                                                               Id = userInfo.UserID
-                                                           })
+            })
                              .ToList();
   
             return this.Ok(result);

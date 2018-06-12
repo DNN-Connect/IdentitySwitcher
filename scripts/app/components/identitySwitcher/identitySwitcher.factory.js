@@ -25,6 +25,15 @@
                     },
                     isArray: true,
                     url: config.restfulApiUrl + "identityswitcher/getusers"
+                },
+                'switchUser': {
+                    method: "GET",
+                    params: {
+                        selectedUserId: "@searchText",
+                        selectedUserUserName: "@selectedUserUserName"
+                    },
+                    isArray: true,
+                    url: config.restfulApiUrl + "identityswitcher/switchuser"
                 }
             });
     }

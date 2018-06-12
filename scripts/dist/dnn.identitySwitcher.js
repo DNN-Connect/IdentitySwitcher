@@ -56,7 +56,14 @@ var IdentitySwitcher;
                 _this.foundUsers = serverData;
             }, function () {
             });
-            var bla = this.selectedItem;
+        };
+        IdentitySwitcherController.prototype.switchUser = function () {
+            this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
+                .then(function () {
+                location.reload();
+            }, function () {
+            });
+            ;
         };
         IdentitySwitcherController.prototype.init = function (moduleInstance) {
             this.moduleInstance = moduleInstance;
@@ -92,6 +99,13 @@ var IdentitySwitcher;
                 searchText: searchText,
                 selectedSearchItem: selectedSearchItem,
                 moduleId: moduleId
+            });
+            return deferred.$promise;
+        };
+        IdentitySwitcherService.prototype.switchUser = function (selectedUserId, selectedUserUserName) {
+            var deferred = this.identitySwitcherFactory.switchUser({
+                selectedUserId: selectedUserId,
+                selectedUserUserName: selectedUserUserName
             });
             return deferred.$promise;
         };

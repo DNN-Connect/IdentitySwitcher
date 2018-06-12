@@ -60,10 +60,17 @@
                         //Error
                     }
                 );
+        }
 
-
-            var bla = this.selectedItem;
-            //var bla2 = moduleInstance;
+        switchUser(): void {
+            this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
+                .then(() => {
+                        location.reload();
+                    },
+                () => {
+                    //Error
+                }
+            );;
         }
 
         init(moduleInstance): void {

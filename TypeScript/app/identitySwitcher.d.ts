@@ -13,6 +13,7 @@
 
     interface IUser {
         id: number;
+        userName: string;
         userAndDisplayName: string;
     }
 

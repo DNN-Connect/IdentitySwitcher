@@ -52,6 +52,14 @@
             });
             return deferred.$promise;
         }
+
+        switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any> {
+            const deferred = this.identitySwitcherFactory.switchUser({
+                selectedUserId: selectedUserId,
+                selectedUserUserName: selectedUserUserName
+            });
+            return deferred.$promise;
+        }
     }
 
     /**************************************************************************/

@@ -19,10 +19,19 @@ namespace DNN.Modules.IdentitySwitcher.Components
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the name of the user.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The name of the user.
+        /// </value>
+        [JsonProperty("userName")]
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display name of the user and.
+        /// </summary>
+        /// <value>
+        /// The display name of the user and.
         /// </value>
         [JsonProperty("userAndDisplayName")]
         public string UserAndDisplayName { get; set; }
