@@ -19,6 +19,7 @@
 
     export interface IModuleInstance {
         ModuleID: string;
+        SwitchDirectly: boolean;
     }
 
     //interface IRightsDataService {

@@ -34,6 +34,7 @@ namespace DNN.Modules.IdentitySwitcher
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Components;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
@@ -296,7 +297,7 @@ namespace DNN.Modules.IdentitySwitcher
                 var repository = new IdentitySwitcherModuleSettingsRepository();
                 var settings = repository.GetSettings(this.ModuleConfiguration);
 
-                if (settings.SelectingMethod == IdentitySwitcherModuleSettings.ClickMethod.OneClick)
+                if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
                 {
                    this.cmdSwitch.Visible = false;
                 }
@@ -331,7 +332,7 @@ namespace DNN.Modules.IdentitySwitcher
             var repository = new IdentitySwitcherModuleSettingsRepository();
             var settings = repository.GetSettings(this.ModuleConfiguration);
 
-            if (settings.SelectingMethod == IdentitySwitcherModuleSettings.ClickMethod.OneClick)
+            if (settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick)
             {
                 this.cmdSwitch_Click(sender, e);
             }

@@ -25,16 +25,17 @@
 namespace DNN.Modules.IdentitySwitcher.Components
 {
     using System;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Entities.Modules.Settings;
 
     [Serializable]
     public class IdentitySwitcherModuleSettings
     {
-        public enum ClickMethod
-        {
-            TwoClicks = 1,
-            OneClick
-        }
+        //public enum ClickMethod
+        //{
+        //    TwoClicks = 1,
+        //    OneClick
+        //}
 
         [TabModuleSetting(ParameterName = "includeHost")]
         public bool? IncludeHost { get; set; }
@@ -47,6 +48,9 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         //TODO: change name to something more intuitive.
         [TabModuleSetting(ParameterName = "selectingMethod")]
-        public ClickMethod SelectingMethod { get; set; } = (ClickMethod)1;
+        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;
+
+        //[TabModuleSetting(ParameterName = "switchDirectly")]
+        //public bool SwitchDirectly { get; set; }
     }
 }

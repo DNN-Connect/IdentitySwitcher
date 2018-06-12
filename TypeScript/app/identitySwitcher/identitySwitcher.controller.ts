@@ -62,6 +62,12 @@
                 );
         }
 
+        userSelected(): void {
+            if (this.moduleInstance.SwitchDirectly) {
+                this.switchUser();
+            }
+        }
+
         switchUser(): void {
             this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
                 .then(() => {
@@ -69,6 +75,8 @@
                     },
                 () => {
                     //Error
+                    location.reload();
+                   
                 }
             );;
         }

@@ -6,6 +6,7 @@ using System.Web;
 namespace DNN.Modules.IdentitySwitcher.Components
 {
     using System.Web.Http;
+    using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Profile;
@@ -68,24 +69,30 @@ namespace DNN.Modules.IdentitySwitcher.Components
             //var IdentityName = "host";
             //var SelectedValue = "2";
             //var UserHostAddress = "127.0.0.1";
-
-            var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
-
-            if (selectedUserId != null)
+            if (selectedUserId == -1)
             {
-                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserUserName);
+                HttpContext.Current.Response.Redirect(Globals.NavigateURL("LogOff"));
+                //this.Response.Redirect(Globals.NavigateURL("LogOff"));
             }
+            else
+            {
+                var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
-            // sign current user out
-            var objPortalSecurity = new PortalSecurity();
-            objPortalSecurity.SignOut();
+                if (selectedUserId != null)
+                {
+                    DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserUserName);
+                }
 
-            //HttpContext.Current.Request.UserHostAddress
+                // sign current user out
+                var objPortalSecurity = new PortalSecurity();
+                objPortalSecurity.SignOut();
 
-            // sign new user in
-            UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
-                                     HttpContext.Current.Request.UserHostAddress, false);
+                //HttpContext.Current.Request.UserHostAddress
 
+                // sign new user in
+                UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
+                                         HttpContext.Current.Request.UserHostAddress, false);
+            }
             return this.Ok();
         }
 
@@ -169,10 +176,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
             switch (settings.SortBy)
             {
                 case SortBy.DisplayName:
-                    this.Users.OrderBy(arg => arg.DisplayName.ToLower());
+                    this.Users = this.Users.OrderBy(arg => arg.DisplayName.ToLower()).ToList();
                     break;
                 case SortBy.UserName:
-                    this.Users.OrderBy(arg => arg.Username.ToLower());
+                    this.Users = this.Users.OrderBy(arg => arg.Username.ToLower()).ToList();
                     break;
             }
 

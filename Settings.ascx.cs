@@ -28,6 +28,7 @@ namespace DNN.Modules.IdentitySwitcher
     using System;
     using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Components;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
@@ -72,7 +73,7 @@ namespace DNN.Modules.IdentitySwitcher
                                                 "UserName"));
                     this.rbSortBy.SelectedIndex = 0;
 
-                    this.BindEnumToListControls(typeof(IdentitySwitcherModuleSettings.ClickMethod), this.rbSelectingMethod);
+                    this.BindEnumToListControls(typeof(UserSwitchingSpeed), this.rbSelectingMethod);
                     this.rbSelectingMethod.SelectedIndex = 0;
 
                     if (this.UserInfo.IsSuperUser)
@@ -98,7 +99,7 @@ namespace DNN.Modules.IdentitySwitcher
                     //{
                         this.rbSortBy.SelectedValue = settings.SortBy.ToString();
                     //}
-                    this.rbSelectingMethod.SelectedValue = settings.SelectingMethod.ToString();
+                    this.rbSelectingMethod.SelectedValue = settings.UserSwitchingSpeed.ToString();
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -129,8 +130,8 @@ namespace DNN.Modules.IdentitySwitcher
                 }
                 objModules.UseAjax = this.cbUseAjax.Checked;
                 objModules.SortBy = (SortBy)Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
-                objModules.SelectingMethod =
-                    (IdentitySwitcherModuleSettings.ClickMethod) Enum.Parse(typeof(IdentitySwitcherModuleSettings.ClickMethod), this.rbSelectingMethod.SelectedValue);
+                objModules.UserSwitchingSpeed =
+                    (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);
                 
                 repository.SaveSettings(this.ModuleConfiguration, objModules);
 

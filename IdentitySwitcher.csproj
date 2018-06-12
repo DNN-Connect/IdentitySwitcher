@@ -112,6 +112,7 @@
     <Compile Include="Components\IdentitySwitcherPortalModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Components\Model\UserSwitchingSpeed.cs" />
     <Compile Include="Components\ModuleInstanceBase.cs" />
     <Compile Include="Components\RouteMapper.cs" />
     <Compile Include="Components\UserDto.cs" />
