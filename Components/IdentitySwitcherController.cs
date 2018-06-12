@@ -16,35 +16,48 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
     public class IdentitySwitcherController: DnnApiController
     {
-        private IEnumerable<UserInfo> Users {get; set; }
+        private List<UserInfo> Users {get; set; }
 
         private int ModuleID { get; set; }
 
-        private SortBy SortResultsBy
-        {
-            get
-            {
-                var bRetValue = SortBy.DisplayName;
+        //private bool IncludeHostUser
+        //{
+        //    get
+        //        {
+        //            var bRetValue = false;
+        //            if (this.Settings.Contains("includeHost"))
+        //            {
+        //                bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
+        //            }
+        //            return bRetValue;
+        //        }
+        //}
 
-                var moduleInfo = new ModuleController().GetModule(this.ModuleID);
+        //private SortBy SortResultsBy
+        //{
+        //    get
+        //    {
+        //        var bRetValue = SortBy.DisplayName;
 
-                var repository = new IdentitySwitcherModuleSettingsRepository();
-                var settings = repository.GetSettings(moduleInfo);
+        //        var moduleInfo = new ModuleController().GetModule(this.ModuleID);
 
-                if (settings.SortBy != null)
-                {
-                    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
-                                                   Convert.ToString(settings.SortBy));
-                }
+        //        var repository = new IdentitySwitcherModuleSettingsRepository();
+        //        var settings = repository.GetSettings(moduleInfo);
 
-                //if (this.Settings.Contains("sortBy"))
-                //{
-                //    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
-                //                                   Convert.ToString(this.Settings["sortBy"].ToString()));
-                //}
-                return bRetValue;
-            }
-        }
+        //        if (settings.SortBy != null)
+        //        {
+        //            bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
+        //                                           Convert.ToString(settings.SortBy));
+        //        }
+
+        //        //if (this.Settings.Contains("sortBy"))
+        //        //{
+        //        //    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
+        //        //                                   Convert.ToString(this.Settings["sortBy"].ToString()));
+        //        //}
+        //        return bRetValue;
+        //    }
+        //}
 
 
         [DnnAuthorize]
@@ -106,20 +119,14 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 this.Filter(searchText, selectedSearchItem);
             }
 
-            var result = new List<UserDto>();
-
-            foreach (UserInfo userInfo in this.Users)
-            {
-                var dto = new UserDto
-                              {
-                                  Name = userInfo.Username,
-                                  Id = userInfo.UserID
-                              };
-                result.Add(dto);
-            }
-
-
-            //return this.Ok(result);
+            var result = this.Users.Select(userInfo => new UserDto
+                                                           {
+                                                               UserAndDisplayName = userInfo.DisplayName != null ? $"{userInfo.DisplayName} - {userInfo.Username}"
+                                                                                        : userInfo.Username,
+                                                               Id = userInfo.UserID
+                                                           })
+                             .ToList();
+  
             return this.Ok(result);
         }
 
@@ -127,17 +134,42 @@ namespace DNN.Modules.IdentitySwitcher.Components
         {
             this.Users = UserController.GetUsers(this.PortalSettings.PortalId).OfType<UserInfo>().ToList();
             this.SortUsers();
+
+            this.LoadDefaultUsers();
+        }
+
+        private void LoadDefaultUsers()
+        {
+            var moduleInfo = new ModuleController().GetModule(this.ModuleID);
+            var repository = new IdentitySwitcherModuleSettingsRepository();
+            var settings = repository.GetSettings(moduleInfo);
+
+            if (settings.IncludeHost != null && (bool)settings.IncludeHost)
+            {
+                var arHostUsers = UserController.GetUsers(Null.NullInteger);
+
+                foreach (UserInfo hostUser in arHostUsers)
+                {
+                    this.Users.Insert(0, new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
+                }
+            }
+
+            this.Users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null} );
         }
 
         private void SortUsers()
         {
-            switch (this.SortResultsBy)
+            var moduleInfo = new ModuleController().GetModule(this.ModuleID);
+            var repository = new IdentitySwitcherModuleSettingsRepository();
+            var settings = repository.GetSettings(moduleInfo);
+
+            switch (settings.SortBy)
             {
                 case SortBy.DisplayName:
-                    this.Users = this.Users.OrderBy(arg => arg.DisplayName.ToLower());
+                    this.Users.OrderBy(arg => arg.DisplayName.ToLower());
                     break;
                 case SortBy.UserName:
-                    this.Users = this.Users.OrderBy(arg => arg.Username.ToLower());
+                    this.Users.OrderBy(arg => arg.Username.ToLower());
                     break;
             }
 
@@ -183,7 +215,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             this.SortUsers();
 
-            //this.LoadDefaultUsers();
+            this.LoadDefaultUsers();
         }
     }
 }

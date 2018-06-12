@@ -40,11 +40,12 @@ namespace DNN.Modules.IdentitySwitcher.Components
         public bool? IncludeHost { get; set; }
 
         [TabModuleSetting(ParameterName = "sortBy")]
-        public string SortBy { get; set; } = string.Empty;
+        public SortBy SortBy { get; set; } = SortBy.UserName;
 
         [TabModuleSetting(ParameterName = "useAjax")]
         public bool? UseAjax { get; set; }
 
+        //TODO: change name to something more intuitive.
         [TabModuleSetting(ParameterName = "selectingMethod")]
         public ClickMethod SelectingMethod { get; set; } = (ClickMethod)1;
     }

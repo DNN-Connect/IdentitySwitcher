@@ -46,12 +46,14 @@ var IdentitySwitcher;
         function IdentitySwitcherController(identitySwitcherService) {
             this.identitySwitcherService = identitySwitcherService;
             this.searchItems = [];
+            this.foundUsers = [];
             this.obtainSearchItems();
         }
         IdentitySwitcherController.prototype.search = function () {
-            this.identitySwitcherService.getUsers("mark", this.selectedItem, this.moduleInstance.ModuleID)
+            var _this = this;
+            this.identitySwitcherService.getUsers(this.selectedSearchText, this.selectedItem, this.moduleInstance.ModuleID)
                 .then(function (serverData) {
-                var bla = 2;
+                _this.foundUsers = serverData;
             }, function () {
             });
             var bla = this.selectedItem;

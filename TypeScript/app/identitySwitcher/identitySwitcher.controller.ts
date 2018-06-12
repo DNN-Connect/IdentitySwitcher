@@ -33,8 +33,11 @@
         /**************************************************************************/
         //selectedUserRights: RrsVrisDnnSystem.IActivityType[] = [];
         searchItems: string[] = [];
+        selectedSearchText: string;
         selectedItem: string;
         moduleInstance: IModuleInstance;
+        foundUsers: IUser[] = [];
+        selectedUser: IUser;
 
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
@@ -49,9 +52,9 @@
         //}
 
         search(): void {
-            this.identitySwitcherService.getUsers("mark", this.selectedItem, this.moduleInstance.ModuleID)
+            this.identitySwitcherService.getUsers(this.selectedSearchText, this.selectedItem, this.moduleInstance.ModuleID)
                 .then((serverData) => {
-                        var bla = 2;
+                        this.foundUsers = serverData;
                     },
                     () => {
                         //Error

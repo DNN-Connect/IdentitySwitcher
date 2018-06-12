@@ -11,6 +11,11 @@
         getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<any>;
     }
 
+    interface IUser {
+        id: number;
+        userAndDisplayName: string;
+    }
+
     export interface IModuleInstance {
         ModuleID: string;
     }

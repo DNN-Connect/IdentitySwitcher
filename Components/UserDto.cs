@@ -24,7 +24,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// <value>
         /// The name.
         /// </value>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("userAndDisplayName")]
+        public string UserAndDisplayName { get; set; }
     }
 }

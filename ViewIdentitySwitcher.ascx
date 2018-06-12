@@ -47,19 +47,37 @@
     <div ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
         <ng-form class="form-inline">
             <div class="form-group">
-              <%--  <label for="exampleInputAmount">Filter:</label>--%>
-                <div class="input-group">
-                    <div class="input-group-addon">Filter:</div>
-                    <%--<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> --%>
-                    <select class="form-control" ng-model="vm.selectedItem">
-                        <option value="" disabled selected>Choose type</option>
-                        <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
-                    </select>
-                </div>
+                <p class="form-control-static">Filter:</p>
             </div>
-            <span type="button" class="btn btn default" ng-click="vm.search()">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchText" ng-model="vm.selectedSearchText">
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.selectedItem">
+                    <option value="" disabled selected>Choose type</option>
+                    <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span type="button" class="btn btn default" ng-click="vm.search()">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group">
+                <p class="form-control-static">Switch to:</p>
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.selectedUser">
+                    <option value="" disabled selected>Choose User</option>
+                    <option ng-repeat="user in vm.foundUsers" value="{{user.id}}">{{user.userAndDisplayName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span type="button" class="btn btn default" ng-click="vm.search()">
+                    <i class="glyphicon glyphicon-refresh"></i>
+                </span>
+            </div>
         </ng-form>
     </div>
 </div>
