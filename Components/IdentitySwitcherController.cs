@@ -6,6 +6,7 @@ using System.Web;
 namespace DNN.Modules.IdentitySwitcher.Components
 {
     using System.Web.Http;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;

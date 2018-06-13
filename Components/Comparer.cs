@@ -26,13 +26,8 @@
 namespace DNN.Modules.IdentitySwitcher
 {
     using System.Collections;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Entities.Users;
-
-    public enum SortBy
-    {
-        DisplayName,
-        UserName
-    }
 
     public class Comparer : IComparer
     {
