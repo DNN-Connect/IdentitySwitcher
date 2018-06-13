@@ -87,14 +87,14 @@ namespace DNN.Modules.IdentitySwitcher
                     {
                         this.trHostSettings.Visible = false;
                     }
-                    if (settings.UseAjax != null)
-                    {
-                        this.cbUseAjax.Checked = (bool) settings.UseAjax;
-                    }
-                    else
-                    {
-                        this.cbUseAjax.Checked = true;
-                    }
+                    //if (settings.UseAjax != null)
+                    //{
+                    //    this.cbUseAjax.Checked = (bool) settings.UseAjax;
+                    //}
+                    //else
+                    //{
+                    //    this.cbUseAjax.Checked = true;
+                    //}
                     //if (!string.IsNullOrEmpty(settings.SortBy))
                     //{
                         this.rbSortBy.SelectedValue = settings.SortBy.ToString();
@@ -128,7 +128,7 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     objModules.IncludeHost = this.cbIncludeHostUser.Checked;
                 }
-                objModules.UseAjax = this.cbUseAjax.Checked;
+                //objModules.UseAjax = this.cbUseAjax.Checked;
                 objModules.SortBy = (SortBy)Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
                 objModules.UserSwitchingSpeed =
                     (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);

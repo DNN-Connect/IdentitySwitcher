@@ -80,18 +80,18 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
-        private bool UseAjax
-        {
-            get
-            {
-                var bRetValue = true;
-                if (this.Settings.Contains("useAjax"))
-                {
-                    bool.TryParse(Convert.ToString(this.Settings["useAjax"].ToString()), out bRetValue);
-                }
-                return bRetValue;
-            }
-        }
+        //private bool UseAjax
+        //{
+        //    get
+        //    {
+        //        var bRetValue = true;
+        //        if (this.Settings.Contains("useAjax"))
+        //        {
+        //            bool.TryParse(Convert.ToString(this.Settings["useAjax"].ToString()), out bRetValue);
+        //        }
+        //        return bRetValue;
+        //    }
+        //}
 
         private SortBy SortResultsBy
         {
