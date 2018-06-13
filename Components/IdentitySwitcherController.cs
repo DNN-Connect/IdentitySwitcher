@@ -22,58 +22,13 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
         private int ModuleID { get; set; }
 
-        //private bool IncludeHostUser
-        //{
-        //    get
-        //        {
-        //            var bRetValue = false;
-        //            if (this.Settings.Contains("includeHost"))
-        //            {
-        //                bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
-        //            }
-        //            return bRetValue;
-        //        }
-        //}
-
-        //private SortBy SortResultsBy
-        //{
-        //    get
-        //    {
-        //        var bRetValue = SortBy.DisplayName;
-
-        //        var moduleInfo = new ModuleController().GetModule(this.ModuleID);
-
-        //        var repository = new IdentitySwitcherModuleSettingsRepository();
-        //        var settings = repository.GetSettings(moduleInfo);
-
-        //        if (settings.SortBy != null)
-        //        {
-        //            bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
-        //                                           Convert.ToString(settings.SortBy));
-        //        }
-
-        //        //if (this.Settings.Contains("sortBy"))
-        //        //{
-        //        //    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
-        //        //                                   Convert.ToString(this.Settings["sortBy"].ToString()));
-        //        //}
-        //        return bRetValue;
-        //    }
-        //}
-
-
         [DnnAuthorize]
         [HttpGet]
         public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserUserName)
         {
-            //var User = 2;
-            //var IdentityName = "host";
-            //var SelectedValue = "2";
-            //var UserHostAddress = "127.0.0.1";
             if (selectedUserId == -1)
             {
                 HttpContext.Current.Response.Redirect(Globals.NavigateURL("LogOff"));
-                //this.Response.Redirect(Globals.NavigateURL("LogOff"));
             }
             else
             {
@@ -87,8 +42,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 // sign current user out
                 var objPortalSecurity = new PortalSecurity();
                 objPortalSecurity.SignOut();
-
-                //HttpContext.Current.Request.UserHostAddress
 
                 // sign new user in
                 UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
@@ -183,25 +136,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
                     this.Users = this.Users.OrderBy(arg => arg.Username.ToLower()).ToList();
                     break;
             }
-
-            //var display = "";
-            //foreach (var user in users)
-            //{
-            //    if (this.SortResultsBy == SortBy.DisplayName)
-            //    {
-            //        display = string.Format("{0} - {1}", user.DisplayName, user.Username);
-            //    }
-            //    else
-            //    {
-            //        display = string.Format("{0} - {1}", user.Username, user.DisplayName);
-            //    }
-            //    //this.cboUsers.Items.Add(new ListItem(display, user.UserID.ToString()));
-            //}
         }
 
         private void Filter(string searchText, string selectedSearchItem)
         {
-            //var users = default(List<UserInfo>);
             var total = 0;
 
             switch (selectedSearchItem)

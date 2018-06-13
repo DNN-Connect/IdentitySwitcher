@@ -9,14 +9,6 @@
             <asp:CheckBox ID="cbIncludeHostUser" runat="server"/>
         </td>
     </tr>
-   <%-- <tr>
-        <td class="SubHead" width="150">
-            <dnn:label id="plUseAjax" runat="server" controlname="cbUseAjax" suffix=":"/>
-        </td>
-        <td valign="bottom">
-            <asp:CheckBox ID="cbUseAjax" runat="server"/>
-        </td>
-    </tr>--%>
     <tr>
         <td class="SubHead" width="150">
             <dnn:label id="plSortBy" runat="server" controlname="rbSortBy" suffix=":"/>
