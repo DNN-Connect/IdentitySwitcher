@@ -10,7 +10,7 @@
 
 /*** Drop old Ajax setting ***/
 
-DELETE		TMS.*
+DELETE		TMS
 FROM		{databaseOwner}[{objectQualifier}ModuleDefinitions] MD
 INNER JOIN	{databaseOwner}[{objectQualifier}Modules] M
 		ON	M.ModuleDefID = MD.ModuleDefID
