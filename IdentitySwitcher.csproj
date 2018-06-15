@@ -141,6 +141,8 @@
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="jsResources\angular-resource.min.js" />
+    <Content Include="jsResources\angular.min.js" />
     <Content Include="node_modules\angular-resource\angular-resource.js" />
     <Content Include="node_modules\angular-resource\angular-resource.min.js" />
     <Content Include="node_modules\angular-resource\index.js" />
