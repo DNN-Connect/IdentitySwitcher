@@ -26,10 +26,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
 {
     using DotNetNuke.Entities.Modules.Settings;
 
-    /// <summary>
-    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving
-    ///     <see cref="IdentitySwitcherModuleSettings" />
-    /// </summary>
     public class IdentitySwitcherModuleSettingsRepository : SettingsRepository<IdentitySwitcherModuleSettings>
     { }
 }

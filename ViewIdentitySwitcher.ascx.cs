@@ -37,14 +37,12 @@ namespace DNN.Modules.IdentitySwitcher
     using DotNetNuke.Services.Localization;
     using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
-    /// -----------------------------------------------------------------------------
     /// <summary>
-    ///     The ViewDynamicModule class displays the content
+    /// The ViewDynamicModule class displays the content
     /// </summary>
-    /// <remarks>
-    /// </remarks>
-    /// <history>
-    /// </history>
+    /// <seealso cref="DNN.Modules.IdentitySwitcher.Components.IdentitySwitcherPortalModuleBase" />
+    /// -----------------------------------------------------------------------------
+    /// <history></history>
     /// -----------------------------------------------------------------------------
     [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
     public partial class ViewIdentitySwitcher : IdentitySwitcherPortalModuleBase
@@ -52,11 +50,11 @@ namespace DNN.Modules.IdentitySwitcher
         #region Private Properties
 
         /// <summary>
-        ///     reads the setting for inclusion of the host user. This setting defaults to false
+        /// reads the setting for inclusion of the host user. This setting defaults to false
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <value>
+        ///   <c>true</c> if [include host user]; otherwise, <c>false</c>.
+        /// </value>
         private bool IncludeHostUser
         {
             get
@@ -70,6 +68,12 @@ namespace DNN.Modules.IdentitySwitcher
                 }
         }
 
+        /// <summary>
+        /// Gets the sort results by.
+        /// </summary>
+        /// <value>
+        /// The sort results by.
+        /// </value>
         private SortBy SortResultsBy
         {
             get
@@ -88,6 +92,10 @@ namespace DNN.Modules.IdentitySwitcher
 
         #region Private Methods
 
+        /// <summary>
+        /// Initializes the module instance json.
+        /// </summary>
+        /// <param name="initControl">The initialize control.</param>
         protected virtual void InitializeModuleInstanceJson(HtmlGenericControl initControl)
         {
             if (initControl != null)
@@ -99,6 +107,11 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
+        /// <summary>
+        /// Adds the search item.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         private ListItem AddSearchItem(string name)
         {
             var propertyName = Null.NullString;
@@ -125,7 +138,7 @@ namespace DNN.Modules.IdentitySwitcher
         #region Event Handlers
 
         /// <summary>
-        ///     Handles the Init event of the Page control.
+        /// Handles the Init event of the Page control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
@@ -157,11 +170,10 @@ namespace DNN.Modules.IdentitySwitcher
         }
 
         /// <summary>
-        ///     Runs when the page loads. Databinds the user switcher drop down list.
+        /// Runs when the page loads. Databinds the user switcher drop down list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <remarks></remarks>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Page_Load(object sender, EventArgs e)
         {
             try
