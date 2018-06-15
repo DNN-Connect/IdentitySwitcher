@@ -49,7 +49,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         ///     The sort by.
         /// </value>
         [TabModuleSetting(ParameterName = "sortBy")]
-        public SortBy SortBy { get; set; } = SortBy.UserName;
+        public SortBy SortBy { get; set; } = SortBy.DisplayName;
 
         /// <summary>
         ///     Gets or sets the user switching speed.

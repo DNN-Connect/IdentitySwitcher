@@ -77,13 +77,8 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     var repository = new IdentitySwitcherModuleSettingsRepository();
                     var settings = repository.GetSettings(this.ModuleConfiguration);
-
-                    this.rbSortBy.Items.Add(new ListItem(
-                                                Localization.GetString("SortByDisplayName", this.LocalResourceFile),
-                                                "DisplayName"));
-                    this.rbSortBy.Items.Add(new ListItem(
-                                                Localization.GetString("SortByUserName", this.LocalResourceFile),
-                                                "UserName"));
+                   
+                    this.BindEnumToListControls(typeof(SortBy), this.rbSortBy);
                     this.rbSortBy.SelectedIndex = 0;
 
                     this.BindEnumToListControls(typeof(UserSwitchingSpeed), this.rbSelectingMethod);

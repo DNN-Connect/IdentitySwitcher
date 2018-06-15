@@ -50,15 +50,18 @@
         */
         switchUser(): void {
             this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
-                .then(() => {
+                .then((serverData) => {
+                        location.reload();
+                    },
+                    (serverData) => {
                         location.reload();
                     }
                 );
-        }
+    }
 
-        /*
-        * init()
-        */
+    /*
+    * init()
+    */
         init(moduleInstance): void {
             this.moduleInstance = moduleInstance;
         }
