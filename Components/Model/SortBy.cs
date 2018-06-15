@@ -25,16 +25,16 @@
 namespace DNN.Modules.IdentitySwitcher.Components.Model
 {
     /// <summary>
-    /// 
     /// </summary>
     public enum SortBy
     {
         /// <summary>
-        /// The display name
+        ///     The display name
         /// </summary>
         DisplayName,
+
         /// <summary>
-        /// The user name
+        ///     The user name
         /// </summary>
         UserName
     }

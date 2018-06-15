@@ -25,12 +25,11 @@
 namespace DNN.Modules.IdentitySwitcher.Components
 {
     /// <summary>
-    /// 
     /// </summary>
     public class IdentitySwitcherClient
     {
         /// <summary>
-        /// Gets the module instance.
+        ///     Gets the module instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="moduleControl">The module control.</param>

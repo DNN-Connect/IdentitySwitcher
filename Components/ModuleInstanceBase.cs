@@ -28,25 +28,24 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DotNetNuke.Entities.Modules;
 
     /// <summary>
-    /// 
     /// </summary>
     public class ModuleInstanceBase
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets the module identifier.
+        ///     Gets or sets the module identifier.
         /// </summary>
         /// <value>
-        /// The module identifier.
+        ///     The module identifier.
         /// </value>
         public int ModuleID { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether [switch directly].
+        ///     Gets a value indicating whether [switch directly].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [switch directly]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [switch directly]; otherwise, <c>false</c>.
         /// </value>
         public bool SwitchDirectly
         {

@@ -25,16 +25,16 @@
 namespace DNN.Modules.IdentitySwitcher.Components.Model
 {
     /// <summary>
-    /// 
     /// </summary>
     public enum UserSwitchingSpeed
     {
         /// <summary>
-        /// The using two clicks
+        ///     The using two clicks
         /// </summary>
         UsingTwoClicks = 1,
+
         /// <summary>
-        /// The using one click
+        ///     The using one click
         /// </summary>
         UsingOneClick
     }

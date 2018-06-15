@@ -27,13 +27,12 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DotNetNuke.Web.Api;
 
     /// <summary>
-    /// 
     /// </summary>
     /// <seealso cref="DotNetNuke.Web.Api.IServiceRouteMapper" />
     public class RouteMapper : IServiceRouteMapper
     {
         /// <summary>
-        /// Registers the routes.
+        ///     Registers the routes.
         /// </summary>
         /// <param name="mapRouteManager">The map route manager.</param>
         public void RegisterRoutes(IMapRoute mapRouteManager)

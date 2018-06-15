@@ -1,7 +1,8 @@
 {
   "name": "dnn.identityswitcher",
   "version": "1.0.0",
-  "description": "The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.",
+  "description":
+    "The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.",
   "dependencies": {
     "typescript": "^2.9.1",
     "angular": "^1.7.0",

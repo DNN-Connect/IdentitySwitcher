@@ -29,63 +29,60 @@ namespace IdentitySwitcher.DotNetNuke.Web.Client
     using global::DotNetNuke.Web.Client;
 
     /// <summary>
-    /// 
     /// </summary>
     public class IdentitySwitcherFileOrder
     {
         /// <summary>
-        /// 
         /// </summary>
         public enum Css
         {
             /// <summary>
-            /// The angular UI
+            ///     The angular UI
             /// </summary>
             AngularUI = FileOrder.Css.DefaultPriority + 10,
 
             /// <summary>
-            /// The UI
+            ///     The UI
             /// </summary>
             UI = AngularUI + 10
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public enum Js
         {
             /// <summary>
-            /// The angular
+            ///     The angular
             /// </summary>
             Angular = FileOrder.Js.DefaultPriority + 10,
 
             /// <summary>
-            /// The angular UI
+            ///     The angular UI
             /// </summary>
             AngularUI = Angular + 50,
 
             /// <summary>
-            /// The angular add on
+            ///     The angular add on
             /// </summary>
             AngularAddOn = AngularUI + 50,
 
             /// <summary>
-            /// The angular DNN
+            ///     The angular DNN
             /// </summary>
             AngularDnn = AngularAddOn + 50,
 
             /// <summary>
-            /// The libraries
+            ///     The libraries
             /// </summary>
             Libraries = AngularDnn + 50,
 
             /// <summary>
-            /// The angular application
+            ///     The angular application
             /// </summary>
             AngularApp = Libraries + 50,
 
             /// <summary>
-            /// The angular custom application
+            ///     The angular custom application
             /// </summary>
             AngularCustomApp = AngularApp + 50
         }
