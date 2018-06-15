@@ -8,8 +8,8 @@ module IdentitySwitcher {
     /* ANGULAR REGISTRATION                                                   */
     /**************************************************************************/
     angular.module(IdentitySwitcher.appName,
-        [
-            "ngResource"
-        ])
+            [
+                "ngResource"
+            ])
         .value("moduleInstance", { value: null, servicesFramework: null });
 }

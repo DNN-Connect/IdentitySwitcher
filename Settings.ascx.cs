@@ -45,6 +45,19 @@ namespace DNN.Modules.IdentitySwitcher
     [DNNtc.ModuleControlProperties("Settings", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
     public partial class Settings : ModuleSettingsBase
     {
+        private void BindEnumToListControls(Type enumType, ListControl listcontrol)
+        {
+            string[] names;
+            Array values;
+            int countElements;
+            names = Enum.GetNames(enumType);
+            values = Enum.GetValues(enumType);
+            for (countElements = 0; countElements <= names.Length - 1; countElements++)
+            {
+                listcontrol.Items.Add(new ListItem(names[countElements], values.GetValue(countElements).ToString()));
+            }
+        }
+
         #region Base Method Implementations
 
         /// -----------------------------------------------------------------------------
@@ -80,7 +93,7 @@ namespace DNN.Modules.IdentitySwitcher
                     {
                         if (settings.IncludeHost != null)
                         {
-                            this.cbIncludeHostUser.Checked = (bool)settings.IncludeHost;
+                            this.cbIncludeHostUser.Checked = (bool) settings.IncludeHost;
                         }
                     }
                     else
@@ -119,9 +132,9 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     objModules.IncludeHost = this.cbIncludeHostUser.Checked;
                 }
-                objModules.SortBy = (SortBy)Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
+                objModules.SortBy = (SortBy) Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
                 objModules.UserSwitchingSpeed =
-                    (UserSwitchingSpeed)Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);
+                    (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);
 
                 repository.SaveSettings(this.ModuleConfiguration, objModules);
 
@@ -135,18 +148,5 @@ namespace DNN.Modules.IdentitySwitcher
         }
 
         #endregion
-
-        private void BindEnumToListControls(Type enumType, ListControl listcontrol)
-        {
-            string[] names;
-            Array values;
-            int countElements;
-            names = Enum.GetNames(enumType);
-            values = Enum.GetValues(enumType);
-            for (countElements = 0; countElements <= names.Length - 1; countElements++)
-            {
-                listcontrol.Items.Add(new ListItem(names[countElements].ToString(), values.GetValue(countElements).ToString()));
-            }
-        }
     }
 }

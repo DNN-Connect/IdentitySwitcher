@@ -1,9 +1,11 @@
-﻿using DotNetNuke.Web.Client;
+﻿
 
 // ReSharper disable InconsistentNaming
 
 namespace IdentitySwitcher.DotNetNuke.Web.Client
 {
+    using global::DotNetNuke.Web.Client;
+
     /// <summary>
     /// </summary>
     public class IdentitySwitcherFileOrder

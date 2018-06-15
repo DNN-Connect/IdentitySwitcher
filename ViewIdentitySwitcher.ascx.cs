@@ -26,23 +26,13 @@
 namespace DNN.Modules.IdentitySwitcher
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
-    using System.Web.UI;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Components;
     using DNN.Modules.IdentitySwitcher.Components.Model;
-    using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
-    using DotNetNuke.Entities.Modules;
-    using DotNetNuke.Entities.Profile;
-    using DotNetNuke.Entities.Users;
-    using DotNetNuke.Framework;
-    using DotNetNuke.Security;
-    using DotNetNuke.Security.Roles;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
     using global::IdentitySwitcher.DotNetNuke.Web.Client;
@@ -70,28 +60,28 @@ namespace DNN.Modules.IdentitySwitcher
         private bool IncludeHostUser
         {
             get
-            {
-                var bRetValue = false;
-                if (this.Settings.Contains("includeHost"))
                 {
-                    bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
+                    var bRetValue = false;
+                    if (this.Settings.Contains("includeHost"))
+                    {
+                        bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
+                    }
+                    return bRetValue;
                 }
-                return bRetValue;
-            }
         }
 
         private SortBy SortResultsBy
         {
             get
-            {
-                var bRetValue = SortBy.DisplayName;
-                if (this.Settings.Contains("sortBy"))
                 {
-                    bRetValue = (SortBy)Enum.Parse(typeof(SortBy),
-                                                    Convert.ToString(this.Settings["sortBy"].ToString()));
+                    var bRetValue = SortBy.DisplayName;
+                    if (this.Settings.Contains("sortBy"))
+                    {
+                        bRetValue = (SortBy) Enum.Parse(typeof(SortBy),
+                                                        Convert.ToString(this.Settings["sortBy"].ToString()));
+                    }
+                    return bRetValue;
                 }
-                return bRetValue;
-            }
         }
 
         #endregion
@@ -102,8 +92,8 @@ namespace DNN.Modules.IdentitySwitcher
         {
             if (initControl != null)
             {
-                string initScript = String.Format(CultureInfo.InvariantCulture, "vm.init({0})",
-                                                  this.GetModuleInstance().ToJson());
+                var initScript = string.Format(CultureInfo.InvariantCulture, "vm.init({0})",
+                                               this.GetModuleInstance().ToJson());
 
                 initControl.Attributes.Add("ng-init", initScript);
             }
@@ -135,10 +125,10 @@ namespace DNN.Modules.IdentitySwitcher
         #region Event Handlers
 
         /// <summary>
-        /// Handles the Init event of the Page control.
+        ///     Handles the Init event of the Page control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void Page_Init(object sender, EventArgs e)
         {
             try
@@ -151,7 +141,8 @@ namespace DNN.Modules.IdentitySwitcher
                 var componentsFolder = Path.Combine(this.ModuleAngularAppFolderName, "components");
 
                 // Identity Switcher factory
-                this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js", jsPriority++);
+                this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js",
+                                    jsPriority++);
 
                 //Js Resources
                 jsPriority = IdentitySwitcherFileOrder.Js.Angular;

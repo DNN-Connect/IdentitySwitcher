@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DNN.Modules.IdentitySwitcher.Components
+﻿namespace DNN.Modules.IdentitySwitcher.Components
 {
     using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Entities.Modules;
@@ -11,24 +6,25 @@ namespace DNN.Modules.IdentitySwitcher.Components
     public class ModuleInstanceBase
     {
         #region Properties
+
         /// <summary>
-        /// Gets or sets the module identifier.
+        ///     Gets or sets the module identifier.
         /// </summary>
         /// <value>
-        /// The module identifier.
+        ///     The module identifier.
         /// </value>
         public int ModuleID { get; set; }
 
         public bool SwitchDirectly
         {
             get
-            {
-                var moduleInfo = new ModuleController().GetModule(this.ModuleID);
-                var repository = new IdentitySwitcherModuleSettingsRepository();
-                var settings = repository.GetSettings(moduleInfo);
+                {
+                    var moduleInfo = new ModuleController().GetModule(this.ModuleID);
+                    var repository = new IdentitySwitcherModuleSettingsRepository();
+                    var settings = repository.GetSettings(moduleInfo);
 
-                return settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick;
-            }
+                    return settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick;
+                }
         }
 
         #endregion

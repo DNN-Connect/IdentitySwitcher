@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DNN.Modules.IdentitySwitcher.Components
+﻿namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
     using System.Web.Http;
     using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Common;
@@ -16,9 +14,9 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DotNetNuke.Security.Roles;
     using DotNetNuke.Web.Api;
 
-    public class IdentitySwitcherController: DnnApiController
+    public class IdentitySwitcherController : DnnApiController
     {
-        private List<UserInfo> Users {get; set; }
+        private List<UserInfo> Users { get; set; }
 
         private int ModuleID { get; set; }
 
@@ -56,13 +54,14 @@ namespace DNN.Modules.IdentitySwitcher.Components
         {
             var result = new List<string>();
 
-            var profileProperties = ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
+            var profileProperties =
+                ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
 
             foreach (ProfilePropertyDefinition definition in profileProperties)
             {
                 result.Add(definition.PropertyName);
             }
-            result.AddRange(new List<string> { "RoleName", "Email", "Username" });
+            result.AddRange(new List<string> {"RoleName", "Email", "Username"});
 
             return this.Ok(result);
         }
@@ -86,11 +85,12 @@ namespace DNN.Modules.IdentitySwitcher.Components
                                                            {
                                                                Id = userInfo.UserID,
                                                                UserName = userInfo.Username,
-                                                               UserAndDisplayName = userInfo.DisplayName != null ? $"{userInfo.DisplayName} - {userInfo.Username}"
-                                                                                        : userInfo.Username,
-            })
+                                                               UserAndDisplayName = userInfo.DisplayName != null
+                                                                                        ? $"{userInfo.DisplayName} - {userInfo.Username}"
+                                                                                        : userInfo.Username
+                                                           })
                              .ToList();
-  
+
             return this.Ok(result);
         }
 
@@ -108,17 +108,19 @@ namespace DNN.Modules.IdentitySwitcher.Components
             var repository = new IdentitySwitcherModuleSettingsRepository();
             var settings = repository.GetSettings(moduleInfo);
 
-            if (settings.IncludeHost != null && (bool)settings.IncludeHost)
+            if (settings.IncludeHost != null && (bool) settings.IncludeHost)
             {
                 var arHostUsers = UserController.GetUsers(Null.NullInteger);
 
                 foreach (UserInfo hostUser in arHostUsers)
                 {
-                    this.Users.Insert(0, new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
+                    this.Users.Insert(
+                        0,
+                        new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
                 }
             }
 
-            this.Users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null} );
+            this.Users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
         }
 
         private void SortUsers()
@@ -145,20 +147,24 @@ namespace DNN.Modules.IdentitySwitcher.Components
             switch (selectedSearchItem)
             {
                 case "Email":
-                    this.Users = UserController.GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
-                                          .OfType<UserInfo>().ToList();
+                    this.Users = UserController
+                        .GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
+                        .OfType<UserInfo>().ToList();
                     break;
                 case "Username":
-                    this.Users = UserController.GetUsersByUserName(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
-                                          .OfType<UserInfo>().ToList();
+                    this.Users = UserController
+                        .GetUsersByUserName(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
+                        .OfType<UserInfo>().ToList();
                     break;
                 case "RoleName":
-                    this.Users = RoleController.Instance.GetUsersByRole(this.PortalSettings.PortalId, searchText).ToList();
+                    this.Users = RoleController
+                        .Instance.GetUsersByRole(this.PortalSettings.PortalId, searchText).ToList();
                     break;
 
                 default:
                     this.Users = UserController
-                        .GetUsersByProfileProperty(this.PortalSettings.PortalId, selectedSearchItem, searchText + "%", 0, 1000, ref total)
+                        .GetUsersByProfileProperty(this.PortalSettings.PortalId, selectedSearchItem, searchText + "%",
+                                                   0, 1000, ref total)
                         .OfType<UserInfo>().ToList();
                     break;
             }

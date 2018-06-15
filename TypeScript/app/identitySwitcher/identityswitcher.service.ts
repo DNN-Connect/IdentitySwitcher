@@ -4,7 +4,6 @@
             "IdentitySwitcherFactory"
         ];
 
-
         /**************************************************************************/
         /* ctor                                                                   */
         /**************************************************************************/
@@ -13,38 +12,24 @@
         ) {
         }
 
-
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
         /**************************************************************************/
         /*
-         * search()
-         * @param login
-         */
-        //search(login: string): angular.IPromise<any> {
-        //    const deferred = this.userFactory.search({ login: login });
-        //    return deferred.$promise;
-        //}
-
-        ///*
-        //* getActivities()
-        //* @param login
-        //*/
-        //getActivities(login: string): angular.IPromise<any> {
-        //    const deferred = this.activitiesFactory.getActivities({ login: login });
-        //    return deferred.$promise;
-        //}
-
-        /*
-       * getSearchItems()
-       * @param login
-       */
-        getSearchItems(): angular.IPromise<any> {
+        * getSearchItems()      
+        */
+        getSearchItems(): angular.IPromise<any[]> {
             const deferred = this.identitySwitcherFactory.getSearchItems();
             return deferred.$promise;
         }
 
-        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<any> {
+        /*
+        * getUsers()
+        * @param searchText
+        * @param selectedSearchItem
+        * @param moduleId
+        */
+        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<IUser[]> {
             const deferred = this.identitySwitcherFactory.getUsers({
                 searchText: searchText,
                 selectedSearchItem: selectedSearchItem,
@@ -53,6 +38,11 @@
             return deferred.$promise;
         }
 
+        /*
+        * switchUser()
+        * @param selectedUserId
+        * @param selectedUserName 
+        */
         switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any> {
             const deferred = this.identitySwitcherFactory.switchUser({
                 selectedUserId: selectedUserId,

@@ -1,14 +1,13 @@
 ﻿declare namespace IdentitySwitcher {
     interface IIdentitySwitcherConstants {
-        //readonly viewFolder: string;
         readonly viewTemplatesFolder: string;
         readonly restfulApiUrl: string;
     }
 
     interface IIdentitySwitcherService {
-        //search(login: string): angular.IPromise<any>;
+        switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any>;
         getSearchItems(): angular.IPromise<any>;
-        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<any>;
+        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<IUser[]>;
     }
 
     interface IUser {
@@ -18,14 +17,7 @@
     }
 
     export interface IModuleInstance {
-        ModuleID: string;
+        ModuleID: number;
         SwitchDirectly: boolean;
     }
-
-    //interface IRightsDataService {
-    //    searchInput: string;
-    //    foundUsers: RrsVrisDnnSystem.IUser[];
-    //    selectedUser: RrsVrisDnnSystem.IUser;
-    //    selectedUserRights: RrsVrisDnnSystem.IActivityType[];
-    //}
 }

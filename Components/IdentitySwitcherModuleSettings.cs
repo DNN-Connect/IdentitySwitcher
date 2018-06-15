@@ -32,29 +32,29 @@ namespace DNN.Modules.IdentitySwitcher.Components
     public class IdentitySwitcherModuleSettings
     {
         /// <summary>
-        /// Gets or sets the include host.
+        ///     Gets or sets the include host.
         /// </summary>
         /// <value>
-        /// The include host.
+        ///     The include host.
         /// </value>
         [TabModuleSetting(ParameterName = "includeHost")]
         public bool? IncludeHost { get; set; }
 
         /// <summary>
-        /// Gets or sets the sort by.
+        ///     Gets or sets the sort by.
         /// </summary>
         /// <value>
-        /// The sort by.
+        ///     The sort by.
         /// </value>
         [TabModuleSetting(ParameterName = "sortBy")]
         public SortBy SortBy { get; set; } = SortBy.UserName;
 
         //TODO: change name to something more intuitive.
         /// <summary>
-        /// Gets or sets the user switching speed.
+        ///     Gets or sets the user switching speed.
         /// </summary>
         /// <value>
-        /// The user switching speed.
+        ///     The user switching speed.
         /// </value>
         [TabModuleSetting(ParameterName = "selectingMethod")]
         public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;

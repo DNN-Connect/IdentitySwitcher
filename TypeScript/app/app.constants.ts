@@ -8,7 +8,6 @@
         /* ctor                                                                   */
         /**************************************************************************/
         constructor() {
-            //this.viewFolder = "pages/";
             this.viewTemplatesFolder = "pages/templates/";
             this.restfulApiUrl = "/DesktopModules/Identity%20Switcher/API/";
         }
@@ -16,7 +15,6 @@
         /**************************************************************************/
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
-        //readonly viewFolder: string;
         readonly viewTemplatesFolder: string;
         readonly restfulApiUrl: string;
     }
