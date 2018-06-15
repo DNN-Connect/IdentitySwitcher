@@ -9,4 +9,5 @@
 	<li>Code module changed from VB to C#.</li>
 	<li>DNNtc.MSBuild structure and attributes build in</li>
 	<li>Replace all deprecated DNN API calls by new API calls</li>
+	<li>Replaced UI with new Angular front end construction</li>
 </ul>
