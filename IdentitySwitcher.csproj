@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\ReleaseNotes\" />
-    <Folder Include="jsResources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
