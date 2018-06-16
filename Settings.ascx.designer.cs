@@ -49,24 +49,6 @@ namespace DNN.Modules.IdentitySwitcher {
         protected global::System.Web.UI.WebControls.CheckBox cbIncludeHostUser;
         
         /// <summary>
-        /// plUseAjax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl plUseAjax;
-        
-        /// <summary>
-        /// cbUseAjax control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbUseAjax;
-        
-        /// <summary>
         /// plSortBy control.
         /// </summary>
         /// <remarks>
