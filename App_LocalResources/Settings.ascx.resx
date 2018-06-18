@@ -126,12 +126,6 @@
   <data name="ControlTitle_settings.Text" xml:space="preserve">
     <value>IdentitySwitcher Settings</value>
   </data>
-  <data name="plUseAjax.Help" xml:space="preserve">
-    <value>When this option is selected, searching in the form is done with callbacks instead of postbacks</value>
-  </data>
-  <data name="plUseAjax.Text" xml:space="preserve">
-    <value>Use Ajax</value>
-  </data>
   <data name="plSortBy.Help" xml:space="preserve">
     <value>You can specify if you want the list sorted by name or username</value>
   </data>

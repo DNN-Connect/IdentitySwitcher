@@ -25,27 +25,39 @@
 namespace DNN.Modules.IdentitySwitcher.Components
 {
     using System;
+    using DNN.Modules.IdentitySwitcher.Components.Model;
     using DotNetNuke.Entities.Modules.Settings;
 
+    /// <summary>
+    /// </summary>
     [Serializable]
     public class IdentitySwitcherModuleSettings
     {
-        public enum ClickMethod
-        {
-            TwoClicks = 1,
-            OneClick
-        }
-
+        /// <summary>
+        ///     Gets or sets the include host.
+        /// </summary>
+        /// <value>
+        ///     The include host.
+        /// </value>
         [TabModuleSetting(ParameterName = "includeHost")]
         public bool? IncludeHost { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the sort by.
+        /// </summary>
+        /// <value>
+        ///     The sort by.
+        /// </value>
         [TabModuleSetting(ParameterName = "sortBy")]
-        public string SortBy { get; set; } = string.Empty;
+        public SortBy SortBy { get; set; } = SortBy.DisplayName;
 
-        [TabModuleSetting(ParameterName = "useAjax")]
-        public bool? UseAjax { get; set; }
-
-        [TabModuleSetting(ParameterName = "selectingMethod")]
-        public ClickMethod SelectingMethod { get; set; } = (ClickMethod)1;
+        /// <summary>
+        ///     Gets or sets the user switching speed.
+        /// </summary>
+        /// <value>
+        ///     The user switching speed.
+        /// </value>
+        [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
+        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;
     }
 }
