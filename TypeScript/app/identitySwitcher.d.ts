@@ -5,7 +5,7 @@
     }
 
     interface IIdentitySwitcherService {
-        switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any>;
+        switchUser(selectedUserId: number, selectedUserName: string): angular.IPromise<any>;
         getSearchItems(): angular.IPromise<any>;
         getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<IUser[]>;
     }

@@ -63,11 +63,11 @@ namespace DNN.Modules.IdentitySwitcher.Components
         ///     Switches the user.
         /// </summary>
         /// <param name="selectedUserId">The selected user identifier.</param>
-        /// <param name="selectedUserUserName">Name of the selected user user.</param>
+        /// <param name="selectedUserName">Name of the selected user user.</param>
         /// <returns></returns>
         [DnnAuthorize]
         [HttpGet]
-        public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserUserName)
+        public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserName)
         {
             if (selectedUserId == -1)
             {
@@ -75,10 +75,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             else
             {
-                var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
+                var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
 
-                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserUserName);
+                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
 
 
                 // sign current user out
@@ -86,7 +86,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 objPortalSecurity.SignOut();
 
                 // sign new user in
-                UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
+                UserController.UserLogin(this.PortalSettings.PortalId, UserInfo, this.PortalSettings.PortalName,
                                          HttpContext.Current.Request.UserHostAddress, false);
             }
             return this.Ok();

@@ -29,7 +29,7 @@
                     method: "GET",
                     params: {
                         selectedUserId: "@searchText",
-                        selectedUserUserName: "@selectedUserUserName"
+                        selectedUserName: "@selectedUserName"
                     },
                     isArray: true,
                     url: config.restfulApiUrl + "identityswitcher/switchuser"

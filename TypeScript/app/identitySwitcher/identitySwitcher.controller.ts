@@ -7,7 +7,7 @@
         constructor(
             private identitySwitcherService: IIdentitySwitcherService
         ) {
-            this.obtainSearchItems();
+            this.getSearchItems();
         }
 
         /**************************************************************************/
@@ -72,7 +72,7 @@
         /*
         * obtainSearchItems()
         */
-        private obtainSearchItems(): void {
+        private getSearchItems(): void {
             this.identitySwitcherService.getSearchItems()
                 .then((serverData) => {
                         this.searchItems = serverData;

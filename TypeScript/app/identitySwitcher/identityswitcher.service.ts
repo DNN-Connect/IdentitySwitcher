@@ -43,10 +43,10 @@
         * @param selectedUserId
         * @param selectedUserName 
         */
-        switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any> {
+        switchUser(selectedUserId: number, selectedUserName: string): angular.IPromise<any> {
             const deferred = this.identitySwitcherFactory.switchUser({
                 selectedUserId: selectedUserId,
-                selectedUserUserName: selectedUserUserName
+                selectedUserName: selectedUserName
             });
             return deferred.$promise;
         }

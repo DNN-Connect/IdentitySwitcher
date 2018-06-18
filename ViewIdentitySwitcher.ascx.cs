@@ -47,49 +47,6 @@ namespace DNN.Modules.IdentitySwitcher
     [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
     public partial class ViewIdentitySwitcher : IdentitySwitcherPortalModuleBase
     {
-        #region Private Properties
-
-        /// <summary>
-        ///     reads the setting for inclusion of the host user. This setting defaults to false
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if [include host user]; otherwise, <c>false</c>.
-        /// </value>
-        private bool IncludeHostUser
-        {
-            get
-                {
-                    var bRetValue = false;
-                    if (this.Settings.Contains("includeHost"))
-                    {
-                        bool.TryParse(Convert.ToString(this.Settings["includeHost"].ToString()), out bRetValue);
-                    }
-                    return bRetValue;
-                }
-        }
-
-        /// <summary>
-        ///     Gets the sort results by.
-        /// </summary>
-        /// <value>
-        ///     The sort results by.
-        /// </value>
-        private SortBy SortResultsBy
-        {
-            get
-                {
-                    var bRetValue = SortBy.DisplayName;
-                    if (this.Settings.Contains("sortBy"))
-                    {
-                        bRetValue = (SortBy) Enum.Parse(typeof(SortBy),
-                                                        Convert.ToString(this.Settings["sortBy"].ToString()));
-                    }
-                    return bRetValue;
-                }
-        }
-
-        #endregion
-
         #region Private Methods
 
         /// <summary>
@@ -105,32 +62,6 @@ namespace DNN.Modules.IdentitySwitcher
 
                 initControl.Attributes.Add("ng-init", initScript);
             }
-        }
-
-        /// <summary>
-        ///     Adds the search item.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns></returns>
-        private ListItem AddSearchItem(string name)
-        {
-            var propertyName = Null.NullString;
-            if (!ReferenceEquals(this.Request.QueryString["filterProperty"], null))
-            {
-                propertyName = this.Request.QueryString["filterProperty"];
-            }
-
-            var text = Localization.GetString(name, this.LocalResourceFile);
-            if (string.IsNullOrEmpty(text))
-            {
-                text = name;
-            }
-            var li = new ListItem(text, name);
-            if (name == propertyName)
-            {
-                li.Selected = true;
-            }
-            return li;
         }
 
         #endregion
