@@ -15,24 +15,42 @@
 
             return this.$http.get<string[]>(apiUrl,
                 {
+                    headers: {
+                        "ModuleId": moduleInstance.ModuleID,
+                        "TabId": moduleInstance.ServicesFramework.getTabId()
+                    }
                 });
         }
 
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, moduleID: number): angular.IHttpPromise<IUser[]> {
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]> {
             const apiUrl: string = this.config.restfulApiUrl +
-                "identityswitcher/getusers?searchtext=" + selectedSearchText + "&selectedsearchitem=" + selectedSearchItem + "&moduleid=" + moduleID;
+                "identityswitcher/getusers?searchtext=" +
+                selectedSearchText +
+                "&selectedsearchitem=" +
+                selectedSearchItem;
 
             return this.$http.get<IUser[]>(apiUrl,
                 {
+                    headers: {
+                        "ModuleId": moduleInstance.ModuleID,
+                        "TabId": moduleInstance.ServicesFramework.getTabId()
+                    }
                 });
         }
 
         switchUser(moduleInstance: IModuleInstance, selectedUserId: string, selectedUserName: string): angular.IHttpPromise<void> {
             const apiUrl: string = this.config.restfulApiUrl +
-                "identityswitcher/switchuser?selecteduserid=" + selectedUserId + "&selectedusername=" + selectedUserName;
+                "identityswitcher/switchuser?selecteduserid=" +
+                selectedUserId +
+                "&selectedusername=" +
+                selectedUserName;
 
             return this.$http.get<void>(apiUrl,
                 {
+                    headers: {
+                        "ModuleId": moduleInstance.ModuleID,
+                        "TabId": moduleInstance.ServicesFramework.getTabId()
+                    }
                 });
         }
 

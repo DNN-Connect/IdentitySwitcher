@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\ReleaseNotes\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
@@ -164,7 +165,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\app\components\identitySwitcher\identityswitcher.factory.js" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="node_modules\%40types\angular-resource\LICENSE" />

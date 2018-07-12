@@ -1,13 +1,16 @@
 ﻿module IdentitySwitcher {
+    declare var $: any;
+
     class IdentitySwitcherController {
         static $inject = [
-            "IdentitySwitcherFactory"
+            "IdentitySwitcherFactory", "moduleInstance"
         ];
 
         constructor(
-            private identitySwitcherFactory: IIdentitySwitcherFactory
+            private identitySwitcherFactory: IIdentitySwitcherFactory,
+            private moduleInstance: IModuleInstanceValue
         ) {
-            this.getSearchItems();
+            //this.getSearchItems();
         }
 
         /**************************************************************************/
@@ -16,7 +19,7 @@
         searchItems: string[] = [];
         selectedSearchText: string;
         selectedItem: string;
-        moduleInstance: IModuleInstance;
+       
         foundUsers: IUser[] = [];
         selectedUser: IUser;
 
@@ -27,10 +30,8 @@
         * search()
         */
         search(): void {
-            this.identitySwitcherFactory.getUsers(this.moduleInstance,
-                this.selectedSearchText,
-                this.selectedItem,
-                this.moduleInstance.ModuleID).then((serverData) => {
+            this.identitySwitcherFactory.getUsers(this.moduleInstance.value, this.selectedSearchText,
+                this.selectedItem).then((serverData) => {
                     this.foundUsers = serverData.data;
                 }
             );
@@ -41,7 +42,7 @@
         * userSelected()
         */
         userSelected(): void {
-            if (this.moduleInstance.SwitchDirectly) {
+            if (this.moduleInstance.value.SwitchDirectly) {
                 this.switchUser();
             }
         }
@@ -50,8 +51,7 @@
         * switchUser()
         */
         switchUser(): void {
-            this.identitySwitcherFactory.switchUser(this.moduleInstance,
-                    this.selectedUser.id,
+            this.identitySwitcherFactory.switchUser(this.moduleInstance.value, this.selectedUser.id,
                     this.selectedUser.userName)
                 .then((serverData) => {
                         // Success
@@ -67,8 +67,11 @@
         /*
         * init()
         */
-        init(moduleInstance): void {
-            this.moduleInstance = moduleInstance;
+        init(moduleInstance: IModuleInstance): void {
+            this.moduleInstance.value = moduleInstance;
+            this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
+
+            this.getSearchItems();
         }
 
         /**************************************************************************/
@@ -78,7 +81,7 @@
         * obtainSearchItems()
         */
         private getSearchItems(): void {
-            this.identitySwitcherFactory.getSearchItems(this.moduleInstance)
+            this.identitySwitcherFactory.getSearchItems(this.moduleInstance.value)
                 .then((serverData) => {
                         // Success
                         this.searchItems = serverData.data;

@@ -24,9 +24,11 @@
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System;
     using System.IO;
     using DotNetNuke.Common;
     using DotNetNuke.Entities.Modules;
+    using DotNetNuke.Framework;
     using DotNetNuke.Web.Client.ClientResourceManagement;
     using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
@@ -35,6 +37,26 @@ namespace DNN.Modules.IdentitySwitcher.Components
     /// <seealso cref="DotNetNuke.Entities.Modules.PortalModuleBase" />
     public abstract class IdentitySwitcherPortalModuleBase : PortalModuleBase
     {
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            
+            this.EnableViewState = false;
+
+            this.RegisterResources();
+        }
+        /// <summary>
+        /// Registers the resources.
+        /// </summary>
+        protected virtual void RegisterResources()
+        {
+            //int result;
+
+            ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
+
+            //return result;
+        }
+
         /// <summary>
         ///     The distribution folder
         /// </summary>

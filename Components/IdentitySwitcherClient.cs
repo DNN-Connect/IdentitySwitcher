@@ -34,10 +34,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// <typeparam name="T"></typeparam>
         /// <param name="moduleControl">The module control.</param>
         /// <returns></returns>
-        public static T GetModuleInstance<T>(IdentitySwitcherPortalModuleBase moduleControl)
-            where T : ModuleInstanceBase, new()
+        public static TModuleInstance GetModuleInstance<TModuleInstance>(IdentitySwitcherPortalModuleBase moduleControl)
+            where TModuleInstance : ModuleInstanceBase, new()
         {
-            var result = new T();
+            var result = new TModuleInstance();
 
             if (moduleControl != null)
             {

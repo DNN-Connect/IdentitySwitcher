@@ -6,7 +6,7 @@
 
     interface IIdentitySwitcherFactory {
         getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]>;
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, moduleID: number): angular.IHttpPromise<IUser[]>;
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]>;
         switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void>;
     }
 
@@ -16,7 +16,12 @@
         userAndDisplayName: string;
     }
 
+    interface IModuleInstanceValue {
+        value: IModuleInstance;
+    }
+
     export interface IModuleInstance {
+        ServicesFramework: any;
         ModuleID: number;
         SwitchDirectly: boolean;
     }
