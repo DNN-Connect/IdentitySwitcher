@@ -1,11 +1,11 @@
 ﻿module IdentitySwitcher {
     class IdentitySwitcherController {
         static $inject = [
-            "IdentitySwitcherService"
+            "IdentitySwitcherFactory"
         ];
 
         constructor(
-            private identitySwitcherService: IIdentitySwitcherService
+            private identitySwitcherFactory: IIdentitySwitcherFactory
         ) {
             this.getSearchItems();
         }
@@ -27,10 +27,11 @@
         * search()
         */
         search(): void {
-            this.identitySwitcherService.getUsers(this.selectedSearchText,
+            this.identitySwitcherFactory.getUsers(this.moduleInstance,
+                this.selectedSearchText,
                 this.selectedItem,
                 this.moduleInstance.ModuleID).then((serverData) => {
-                    this.foundUsers = serverData;
+                    this.foundUsers = serverData.data;
                 }
             );
 
@@ -49,19 +50,23 @@
         * switchUser()
         */
         switchUser(): void {
-            this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
+            this.identitySwitcherFactory.switchUser(this.moduleInstance,
+                    this.selectedUser.id,
+                    this.selectedUser.userName)
                 .then((serverData) => {
+                        // Success
                         location.reload();
                     },
                     (serverData) => {
+                        // Error
                         location.reload();
                     }
                 );
-    }
+        }
 
-    /*
-    * init()
-    */
+        /*
+        * init()
+        */
         init(moduleInstance): void {
             this.moduleInstance = moduleInstance;
         }
@@ -73,9 +78,14 @@
         * obtainSearchItems()
         */
         private getSearchItems(): void {
-            this.identitySwitcherService.getSearchItems()
+            this.identitySwitcherFactory.getSearchItems(this.moduleInstance)
                 .then((serverData) => {
-                        this.searchItems = serverData;
+                        // Success
+                        this.searchItems = serverData.data;
+                    },
+                    (serverData) => {
+                        // Error
+                        alert('Something went wrong whilst collecting the search items.')
                     }
                 );
         }

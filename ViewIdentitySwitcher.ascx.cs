@@ -82,11 +82,11 @@ namespace DNN.Modules.IdentitySwitcher
                 var jsPriority = IdentitySwitcherFileOrder.Js.AngularCustomApp;
                 this.RegisterScript(jsFolder, "dnn.identityswitcher.js", jsPriority++);
 
-                var componentsFolder = Path.Combine(this.ModuleAngularAppFolderName, "components");
+                //var componentsFolder = Path.Combine(this.ModuleAngularAppFolderName, "components");
 
                 // Identity Switcher factory
-                this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js",
-                                    jsPriority++);
+                //this.RegisterScript(Path.Combine(componentsFolder, "identitySwitcher"), "identityswitcher.factory.js",
+                //                    jsPriority++);
 
                 //Js Resources
                 jsPriority = IdentitySwitcherFileOrder.Js.Angular;

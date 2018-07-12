@@ -273,7 +273,7 @@
     <TypeScriptCompile Include="TypeScript\app\app.ts" />
     <TypeScriptCompile Include="TypeScript\app\identityswitcher.d.ts" />
     <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.controller.ts" />
-    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.service.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.factory.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
