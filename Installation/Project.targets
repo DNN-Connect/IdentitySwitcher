@@ -359,6 +359,8 @@
 						$(MSBuildProjectDirectory)\*ReSharper*\**;
             $(MSBuildProjectDirectory)\Installation\*.png;
             $(MSBuildProjectDirectory)\tmpCompressScript\**;
+            $(MSBuildProjectDirectory)\packages\**;
+            $(MSBuildProjectDirectory)\node_modules\**;
 			$(MSBuildProjectDirectory)\tmpCompressCSS\**"
       Include="$(MSBuildProjectDirectory)\**\*.ascx;
 						$(MSBuildProjectDirectory)\**\*.aspx;
