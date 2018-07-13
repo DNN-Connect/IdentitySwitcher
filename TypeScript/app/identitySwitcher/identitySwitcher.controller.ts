@@ -1,13 +1,15 @@
 ﻿module IdentitySwitcher {
+    declare var $: any;
+
     class IdentitySwitcherController {
         static $inject = [
-            "IdentitySwitcherService"
+            "IdentitySwitcherFactory", "moduleInstance"
         ];
 
         constructor(
-            private identitySwitcherService: IIdentitySwitcherService
+            private identitySwitcherFactory: IIdentitySwitcherFactory,
+            private moduleInstance: IModuleInstanceValue
         ) {
-            this.obtainSearchItems();
         }
 
         /**************************************************************************/
@@ -16,7 +18,7 @@
         searchItems: string[] = [];
         selectedSearchText: string;
         selectedItem: string;
-        moduleInstance: IModuleInstance;
+       
         foundUsers: IUser[] = [];
         selectedUser: IUser;
 
@@ -27,20 +29,18 @@
         * search()
         */
         search(): void {
-            this.identitySwitcherService.getUsers(this.selectedSearchText,
-                this.selectedItem,
-                this.moduleInstance.ModuleID).then((serverData) => {
-                    this.foundUsers = serverData;
+            this.identitySwitcherFactory.getUsers(this.moduleInstance.value, this.selectedSearchText,
+                this.selectedItem).then((serverData) => {
+                    this.foundUsers = serverData.data;
                 }
             );
-
         }
 
         /*
         * userSelected()
         */
         userSelected(): void {
-            if (this.moduleInstance.SwitchDirectly) {
+            if (this.moduleInstance.value.SwitchDirectly) {
                 this.switchUser();
             }
         }
@@ -49,33 +49,43 @@
         * switchUser()
         */
         switchUser(): void {
-            this.identitySwitcherService.switchUser(this.selectedUser.id, this.selectedUser.userName)
+            this.identitySwitcherFactory.switchUser(this.moduleInstance.value, this.selectedUser.id,
+                    this.selectedUser.userName)
                 .then((serverData) => {
-                        location.reload();
+                        // Success
+                        (location as any).reload();
                     },
                     (serverData) => {
-                        location.reload();
+                        // Error
+                        (location as any).reload();
                     }
                 );
-    }
+        }
 
-    /*
-    * init()
-    */
-        init(moduleInstance): void {
-            this.moduleInstance = moduleInstance;
+        /*
+        * init()
+        */
+        init(moduleInstance: IModuleInstance): void {
+            this.moduleInstance.value = moduleInstance;
+            this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
+
+            this.getSearchItems();
         }
 
         /**************************************************************************/
         /* PRIVATE METHODS                                                        */
         /**************************************************************************/
         /*
-        * obtainSearchItems()
+        * getSearchItems()
         */
-        private obtainSearchItems(): void {
-            this.identitySwitcherService.getSearchItems()
+        private getSearchItems(): void {
+            this.identitySwitcherFactory.getSearchItems(this.moduleInstance.value)
                 .then((serverData) => {
-                        this.searchItems = serverData;
+                        // Success
+                        this.searchItems = serverData.data;
+                    },
+                    (serverData) => {
+                        // Error
                     }
                 );
         }

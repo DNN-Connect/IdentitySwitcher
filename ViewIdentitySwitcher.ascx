@@ -1,8 +1,7 @@
 <%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
-AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
-<div ng-app="dnn.identityswitcher" ng-controller="ApplicationController as main">
-    <div ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
-        <ng-form class="form-inline">
+    AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
+<div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
+    <ng-form class="form-inline">
             <div class="form-group">
                 <p class="form-control-static">Filter:</p>
             </div>
@@ -35,5 +34,4 @@ AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs"
                 </span>
             </div>
         </ng-form>
-    </div>
 </div>
