@@ -29,9 +29,9 @@ namespace DNN.Modules.IdentitySwitcher.Components
     public class IdentitySwitcherClient
     {
         /// <summary>
-        ///     Gets the module instance.
+        /// Gets the module instance.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TModuleInstance">The type of the module instance.</typeparam>
         /// <param name="moduleControl">The module control.</param>
         /// <returns></returns>
         public static TModuleInstance GetModuleInstance<TModuleInstance>(IdentitySwitcherPortalModuleBase moduleControl)

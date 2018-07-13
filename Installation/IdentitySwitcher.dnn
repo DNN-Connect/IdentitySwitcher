@@ -18,6 +18,11 @@
         <component type="Script">
           <scripts>
             <basePath>DesktopModules\IdentitySwitcher</basePath>
+            <script type="Install">
+              <path>Installation</path>
+              <name>03.00.00.SqlDataProvider</name>
+              <version>03.00.00</version>
+            </script>
           </scripts>
         </component>
         <component type="Module">
