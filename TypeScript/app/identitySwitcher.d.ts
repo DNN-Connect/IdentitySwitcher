@@ -4,10 +4,10 @@
         readonly restfulApiUrl: string;
     }
 
-    interface IIdentitySwitcherService {
-        switchUser(selectedUserId: number, selectedUserUserName: string): angular.IPromise<any>;
-        getSearchItems(): angular.IPromise<any>;
-        getUsers(searchText: string, selectedSearchItem: string, moduleId: number): angular.IPromise<IUser[]>;
+    interface IIdentitySwitcherFactory {
+        getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]>;
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]>;
+        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void>;
     }
 
     interface IUser {
@@ -16,7 +16,12 @@
         userAndDisplayName: string;
     }
 
+    interface IModuleInstanceValue {
+        value: IModuleInstance;
+    }
+
     export interface IModuleInstance {
+        ServicesFramework: any;
         ModuleID: number;
         SwitchDirectly: boolean;
     }

@@ -24,9 +24,11 @@
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System;
     using System.IO;
     using DotNetNuke.Common;
     using DotNetNuke.Entities.Modules;
+    using DotNetNuke.Framework;
     using DotNetNuke.Web.Client.ClientResourceManagement;
     using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
@@ -35,10 +37,35 @@ namespace DNN.Modules.IdentitySwitcher.Components
     /// <seealso cref="DotNetNuke.Entities.Modules.PortalModuleBase" />
     public abstract class IdentitySwitcherPortalModuleBase : PortalModuleBase
     {
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            
+            this.EnableViewState = false;
+
+            this.RegisterResources();
+        }
         /// <summary>
-        ///     The distribution folder
+        /// Registers the resources.
         /// </summary>
-        public const string DistributionFolder = "dist";
+        protected virtual void RegisterResources()
+        {
+            //int result;
+
+            ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
+
+            //return result;
+        }
+
+        /// <summary>
+        /// The distribution folder name
+        /// </summary>
+        public const string DistributionFolderName = "dist";
+
+        /// <summary>
+        /// The resources folder name
+        /// </summary>
+        public const string ResourcesFolderName = "resources";
 
         /// <summary>
         ///     The module folder name
@@ -52,14 +79,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
         ///     The name of the script folder.
         /// </value>
         public virtual string ScriptFolderName { get; } = "Scripts";
-
-        /// <summary>
-        ///     Gets the name of the js resources folder.
-        /// </summary>
-        /// <value>
-        ///     The name of the js resources folder.
-        /// </value>
-        public virtual string JsResourcesFolderName { get; } = "jsResources";
 
         /// <summary>
         ///     Gets the name of the module angular application folder.
@@ -96,16 +115,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         ///     The module script folder.
         /// </value>
         protected virtual string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
-
-        /// <summary>
-        ///     Gets the module js resources folder.
-        /// </summary>
-        /// <value>
-        ///     The module js resources folder.
-        /// </value>
-        protected virtual string ModuleJsResourcesFolder => Path.Combine(
-            this.ModuleFolderName, this.JsResourcesFolderName);
-
+        
         /// <summary>
         ///     Gets the module instance.
         /// </summary>

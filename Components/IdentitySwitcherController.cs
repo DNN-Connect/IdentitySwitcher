@@ -44,30 +44,14 @@ namespace DNN.Modules.IdentitySwitcher.Components
     public class IdentitySwitcherController : DnnApiController
     {
         /// <summary>
-        ///     Gets or sets the users.
-        /// </summary>
-        /// <value>
-        ///     The users.
-        /// </value>
-        private List<UserInfo> Users { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the module identifier.
-        /// </summary>
-        /// <value>
-        ///     The module identifier.
-        /// </value>
-        private int ModuleID { get; set; }
-
-        /// <summary>
         ///     Switches the user.
         /// </summary>
         /// <param name="selectedUserId">The selected user identifier.</param>
-        /// <param name="selectedUserUserName">Name of the selected user user.</param>
+        /// <param name="selectedUserName">Name of the selected user user.</param>
         /// <returns></returns>
         [DnnAuthorize]
-        [HttpGet]
-        public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserUserName)
+        [HttpPost]
+        public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserName)
         {
             if (selectedUserId == -1)
             {
@@ -75,10 +59,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             else
             {
-                var MyUserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
+                var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
 
-                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserUserName);
+                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
 
 
                 // sign current user out
@@ -86,7 +70,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 objPortalSecurity.SignOut();
 
                 // sign new user in
-                UserController.UserLogin(this.PortalSettings.PortalId, MyUserInfo, this.PortalSettings.PortalName,
+                UserController.UserLogin(this.PortalSettings.PortalId, UserInfo, this.PortalSettings.PortalName,
                                          HttpContext.Current.Request.UserHostAddress, false);
             }
             return this.Ok();
@@ -115,28 +99,20 @@ namespace DNN.Modules.IdentitySwitcher.Components
         }
 
         /// <summary>
-        ///     Gets the users.
+        /// Gets the users.
         /// </summary>
-        /// <param name="moduleId">The module identifier.</param>
         /// <param name="searchText">The search text.</param>
         /// <param name="selectedSearchItem">The selected search item.</param>
         /// <returns></returns>
         [DnnAuthorize]
         [HttpGet]
-        public IHttpActionResult GetUsers(int moduleId, string searchText = null, string selectedSearchItem = null)
+        public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
         {
-            this.ModuleID = moduleId;
+            var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
+            users = this.SortUsers(users);
+            this.AddDefaultUsers(users);
 
-            if (searchText == null)
-            {
-                this.LoadAllUsers();
-            }
-            else
-            {
-                this.Filter(searchText, selectedSearchItem);
-            }
-
-            var result = this.Users.Select(userInfo => new UserDto
+            var result = users.Select(userInfo => new UserDto
                                                            {
                                                                Id = userInfo.UserID,
                                                                UserName = userInfo.Username,
@@ -152,94 +128,95 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// <summary>
         ///     Loads all users.
         /// </summary>
-        private void LoadAllUsers()
+        private List<UserInfo> GetAllUsers()
         {
-            this.Users = UserController.GetUsers(this.PortalSettings.PortalId).OfType<UserInfo>().ToList();
-            this.SortUsers();
+            var users = UserController.GetUsers(this.PortalSettings.PortalId).OfType<UserInfo>().ToList();
 
-            this.LoadDefaultUsers();
+            return users;
         }
 
         /// <summary>
         ///     Loads the default users.
         /// </summary>
-        private void LoadDefaultUsers()
+        private void AddDefaultUsers(List<UserInfo> users)
         {
-            var moduleInfo = new ModuleController().GetModule(this.ModuleID);
             var repository = new IdentitySwitcherModuleSettingsRepository();
-            var settings = repository.GetSettings(moduleInfo);
-
-            if (settings.IncludeHost != null && (bool) settings.IncludeHost)
+            var settings = repository.GetSettings(this.ActiveModule);
+           
+            if (settings.IncludeHost ?? false)
             {
-                var arHostUsers = UserController.GetUsers(Null.NullInteger);
+                var hostUsers = UserController.GetUsers(Null.NullInteger);
 
-                foreach (UserInfo hostUser in arHostUsers)
+                foreach (UserInfo hostUser in hostUsers)
                 {
-                    this.Users.Insert(
+                    users.Insert(
                         0,
                         new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
                 }
             }
 
-            this.Users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
+            users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
         }
 
         /// <summary>
         ///     Sorts the users.
         /// </summary>
-        private void SortUsers()
+        private List<UserInfo> SortUsers(List<UserInfo> users)
         {
-            var moduleInfo = new ModuleController().GetModule(this.ModuleID);
             var repository = new IdentitySwitcherModuleSettingsRepository();
-            var settings = repository.GetSettings(moduleInfo);
+            var settings = repository.GetSettings(this.ActiveModule);
 
             switch (settings.SortBy)
             {
                 case SortBy.DisplayName:
-                    this.Users = this.Users.OrderBy(arg => arg.DisplayName.ToLower()).ToList();
+                    users = users.OrderBy(arg => arg.DisplayName.ToLower()).ToList();
                     break;
                 case SortBy.UserName:
-                    this.Users = this.Users.OrderBy(arg => arg.Username.ToLower()).ToList();
+                    users = users.OrderBy(arg => arg.Username.ToLower()).ToList();
                     break;
             }
+
+            return users;
         }
 
         /// <summary>
-        ///     Filters the specified search text.
+        /// Gets the filtered users.
         /// </summary>
         /// <param name="searchText">The search text.</param>
         /// <param name="selectedSearchItem">The selected search item.</param>
-        private void Filter(string searchText, string selectedSearchItem)
+        /// <returns></returns>
+        private List<UserInfo> GetFilteredUsers(string searchText, string selectedSearchItem)
         {
             var total = 0;
+
+            var users = default(List<UserInfo>);
 
             switch (selectedSearchItem)
             {
                 case "Email":
-                    this.Users = UserController
+                   users = UserController
                         .GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
                         .OfType<UserInfo>().ToList();
                     break;
                 case "Username":
-                    this.Users = UserController
+                    users = UserController
                         .GetUsersByUserName(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
                         .OfType<UserInfo>().ToList();
                     break;
                 case "RoleName":
-                    this.Users = RoleController
+                    users = RoleController
                         .Instance.GetUsersByRole(this.PortalSettings.PortalId, searchText).ToList();
                     break;
 
                 default:
-                    this.Users = UserController
+                    users = UserController
                         .GetUsersByProfileProperty(this.PortalSettings.PortalId, selectedSearchItem, searchText + "%",
                                                    0, 1000, ref total)
                         .OfType<UserInfo>().ToList();
                     break;
             }
-            this.SortUsers();
 
-            this.LoadDefaultUsers();
+            return users;
         }
     }
 }
