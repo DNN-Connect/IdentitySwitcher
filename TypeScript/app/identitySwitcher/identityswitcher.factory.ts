@@ -45,7 +45,7 @@
                 "&selectedusername=" +
                 selectedUserName;
 
-            return this.$http.get<void>(apiUrl,
+            return this.$http.post<void>(apiUrl, null,
                 {
                     headers: {
                         "ModuleId": moduleInstance.ModuleID,

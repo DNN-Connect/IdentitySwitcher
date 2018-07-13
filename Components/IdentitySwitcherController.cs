@@ -50,7 +50,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// <param name="selectedUserName">Name of the selected user user.</param>
         /// <returns></returns>
         [DnnAuthorize]
-        [HttpGet]
+        [HttpPost]
         public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserName)
         {
             if (selectedUserId == -1)
@@ -142,13 +142,12 @@ namespace DNN.Modules.IdentitySwitcher.Components
         {
             var repository = new IdentitySwitcherModuleSettingsRepository();
             var settings = repository.GetSettings(this.ActiveModule);
-
-            //settings.IncludeHost.GetValueOrDefault(false)
+           
             if (settings.IncludeHost ?? false)
             {
-                var arHostUsers = UserController.GetUsers(Null.NullInteger);
+                var hostUsers = UserController.GetUsers(Null.NullInteger);
 
-                foreach (UserInfo hostUser in arHostUsers)
+                foreach (UserInfo hostUser in hostUsers)
                 {
                     users.Insert(
                         0,

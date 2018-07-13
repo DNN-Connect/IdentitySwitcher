@@ -76,7 +76,7 @@
         /* PRIVATE METHODS                                                        */
         /**************************************************************************/
         /*
-        * obtainSearchItems()
+        * getSearchItems()
         */
         private getSearchItems(): void {
             this.identitySwitcherFactory.getSearchItems(this.moduleInstance.value)
@@ -86,7 +86,6 @@
                     },
                     (serverData) => {
                         // Error
-                        alert('Something went wrong whilst collecting the search items.')
                     }
                 );
         }
