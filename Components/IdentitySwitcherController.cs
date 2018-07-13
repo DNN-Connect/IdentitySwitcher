@@ -44,22 +44,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
     public class IdentitySwitcherController : DnnApiController
     {
         /// <summary>
-        ///     Gets or sets the users.
-        /// </summary>
-        /// <value>
-        ///     The users.
-        /// </value>
-        //private List<UserInfo> Users { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the module identifier.
-        /// </summary>
-        /// <value>
-        ///     The module identifier.
-        /// </value>
-        //private int ModuleID { get; set; }
-
-        /// <summary>
         ///     Switches the user.
         /// </summary>
         /// <param name="selectedUserId">The selected user identifier.</param>

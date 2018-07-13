@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\ReleaseNotes\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Comparer.cs" />
@@ -142,8 +141,6 @@
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="jsResources\angular-resource.min.js" />
-    <Content Include="jsResources\angular.min.js" />
     <Content Include="node_modules\angular-resource\angular-resource.js" />
     <Content Include="node_modules\angular-resource\angular-resource.min.js" />
     <Content Include="node_modules\angular-resource\index.js" />
@@ -166,6 +163,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="package.json" />
+    <Content Include="Scripts\resources\angular-resource.min.js" />
+    <Content Include="Scripts\resources\angular.min.js" />
     <Content Include="tsconfig.json" />
     <Content Include="node_modules\%40types\angular-resource\LICENSE" />
     <Content Include="node_modules\%40types\angular-resource\package.json" />
@@ -269,7 +268,6 @@
     <TypeScriptCompile Include="node_modules\typescript\lib\typescript.d.ts" />
     <TypeScriptCompile Include="node_modules\typescript\lib\typescriptServices.d.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.constants.ts" />
-    <TypeScriptCompile Include="TypeScript\app\app.controller.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.ts" />
     <TypeScriptCompile Include="TypeScript\app\identityswitcher.d.ts" />
     <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.controller.ts" />
@@ -277,9 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

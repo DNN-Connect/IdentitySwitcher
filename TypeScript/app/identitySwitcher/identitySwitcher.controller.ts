@@ -10,7 +10,6 @@
             private identitySwitcherFactory: IIdentitySwitcherFactory,
             private moduleInstance: IModuleInstanceValue
         ) {
-            //this.getSearchItems();
         }
 
         /**************************************************************************/
@@ -35,7 +34,6 @@
                     this.foundUsers = serverData.data;
                 }
             );
-
         }
 
         /*
@@ -55,11 +53,11 @@
                     this.selectedUser.userName)
                 .then((serverData) => {
                         // Success
-                        location.reload();
+                        (location as any).reload();
                     },
                     (serverData) => {
                         // Error
-                        location.reload();
+                        (location as any).reload();
                     }
                 );
         }
