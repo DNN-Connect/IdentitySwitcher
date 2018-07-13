@@ -121,17 +121,17 @@ namespace DNN.Modules.IdentitySwitcher
             try
             {
                 var repository = new IdentitySwitcherModuleSettingsRepository();
-                var objModules = repository.GetSettings(this.ModuleConfiguration);
+                var settings = repository.GetSettings(this.ModuleConfiguration);
 
                 if (this.UserInfo.IsSuperUser)
                 {
-                    objModules.IncludeHost = this.cbIncludeHostUser.Checked;
+                    settings.IncludeHost = this.cbIncludeHostUser.Checked;
                 }
-                objModules.SortBy = (SortBy) Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
-                objModules.UserSwitchingSpeed =
+                settings.SortBy = (SortBy) Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
+                settings.UserSwitchingSpeed =
                     (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);
 
-                repository.SaveSettings(this.ModuleConfiguration, objModules);
+                repository.SaveSettings(this.ModuleConfiguration, settings);
 
                 // refresh cache
                 ModuleController.SynchronizeModule(this.ModuleId);

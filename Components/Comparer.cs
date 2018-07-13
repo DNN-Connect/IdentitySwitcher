@@ -49,27 +49,24 @@ namespace DNN.Modules.IdentitySwitcher
         }
 
         /// <summary>
-        ///     Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+        /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
         /// </summary>
         /// <param name="x">The first object to compare.</param>
         /// <param name="y">The second object to compare.</param>
         /// <returns>
-        ///     A signed integer that indicates the relative values of <paramref name="x" /> and <paramref name="y" />, as shown in
-        ///     the following table.Value Meaning Less than zero <paramref name="x" /> is less than <paramref name="y" />. Zero
-        ///     <paramref name="x" /> equals <paramref name="y" />. Greater than zero <paramref name="x" /> is greater than
-        ///     <paramref name="y" />.
+        /// A signed integer that indicates the relative values of <paramref name="x" /> and <paramref name="y" />, as shown in the following table.Value Meaning Less than zero <paramref name="x" /> is less than <paramref name="y" />. Zero <paramref name="x" /> equals <paramref name="y" />. Greater than zero <paramref name="x" /> is greater than <paramref name="y" />.
         /// </returns>
         public int Compare(object x, object y)
         {
-            var u1 = (UserInfo) x;
-            var u2 = (UserInfo) y;
+            var user1 = (UserInfo) x;
+            var user2 = (UserInfo) y;
 
             switch (this.sortedBy)
             {
                 case SortBy.DisplayName:
-                    return new CaseInsensitiveComparer().Compare(u1.DisplayName, u2.DisplayName);
+                    return new CaseInsensitiveComparer().Compare(user1.DisplayName, user2.DisplayName);
                 case SortBy.UserName:
-                    return new CaseInsensitiveComparer().Compare(u1.Username, u2.Username);
+                    return new CaseInsensitiveComparer().Compare(user1.Username, user2.Username);
             }
 
             return 0;

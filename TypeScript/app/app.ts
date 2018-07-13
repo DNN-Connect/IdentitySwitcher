@@ -2,6 +2,10 @@
 /// <reference types="angular-resource" />
 
 module IdentitySwitcher {
+    class ModuleInstanceValue implements IModuleInstanceValue {
+        value: IModuleInstance
+    }
+
     export const appName = "dnn.identityswitcher";
 
     /**************************************************************************/
@@ -11,5 +15,5 @@ module IdentitySwitcher {
             [
                 "ngResource"
             ])
-        .value("moduleInstance", { value: null, servicesFramework: null });
+        .value("moduleInstance", ModuleInstanceValue);
 }
