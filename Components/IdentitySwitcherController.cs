@@ -24,6 +24,7 @@
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
@@ -53,27 +54,39 @@ namespace DNN.Modules.IdentitySwitcher.Components
         [HttpPost]
         public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserName)
         {
-            if (selectedUserId == -1)
+            var result = default(IHttpActionResult);
+
+            try
             {
-                HttpContext.Current.Response.Redirect(Globals.NavigateURL("LogOff"));
+                if (selectedUserId == -1)
+                {
+                    HttpContext.Current.Response.Redirect(Globals.NavigateURL("LogOff"));
+                }
+                else
+                {
+                    var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
+
+
+                    DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
+
+
+                    // sign current user out
+                    var objPortalSecurity = new PortalSecurity();
+                    objPortalSecurity.SignOut();
+
+                    // sign new user in
+                    UserController.UserLogin(this.PortalSettings.PortalId, UserInfo, this.PortalSettings.PortalName,
+                        HttpContext.Current.Request.UserHostAddress, false);
+                }
+                result = this.Ok();
             }
-            else
+            catch (Exception e)
             {
-                var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
-
-
-                DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
-
-
-                // sign current user out
-                var objPortalSecurity = new PortalSecurity();
-                objPortalSecurity.SignOut();
-
-                // sign new user in
-                UserController.UserLogin(this.PortalSettings.PortalId, UserInfo, this.PortalSettings.PortalName,
-                                         HttpContext.Current.Request.UserHostAddress, false);
+                Console.WriteLine(e);
+                throw;
             }
-            return this.Ok();
+
+            return result;
         }
 
         /// <summary>
@@ -84,18 +97,30 @@ namespace DNN.Modules.IdentitySwitcher.Components
         [HttpGet]
         public IHttpActionResult GetSearchItems()
         {
-            var result = new List<string>();
+            var result = default(IHttpActionResult);
 
-            var profileProperties =
-                ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
-
-            foreach (ProfilePropertyDefinition definition in profileProperties)
+            try
             {
-                result.Add(definition.PropertyName);
-            }
-            result.AddRange(new List<string> {"RoleName", "Email", "Username"});
+                var resultData = new List<string>();
 
-            return this.Ok(result);
+                var profileProperties =
+                    ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
+
+                foreach (ProfilePropertyDefinition definition in profileProperties)
+                {
+                    resultData.Add(definition.PropertyName);
+                }
+                resultData.AddRange(new List<string> { "RoleName", "Email", "Username" });
+
+                result = this.Ok(resultData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -108,21 +133,33 @@ namespace DNN.Modules.IdentitySwitcher.Components
         [HttpGet]
         public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
         {
-            var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
-            users = this.SortUsers(users);
-            this.AddDefaultUsers(users);
+            var result = default(IHttpActionResult);
 
-            var result = users.Select(userInfo => new UserDto
-                                                           {
-                                                               Id = userInfo.UserID,
-                                                               UserName = userInfo.Username,
-                                                               UserAndDisplayName = userInfo.DisplayName != null
-                                                                                        ? $"{userInfo.DisplayName} - {userInfo.Username}"
-                                                                                        : userInfo.Username
-                                                           })
-                             .ToList();
+            try
+            {
+                var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
+                users = this.SortUsers(users);
+                this.AddDefaultUsers(users);
 
-            return this.Ok(result);
+                var resultData = users.Select(userInfo => new UserDto
+                    {
+                        Id = userInfo.UserID,
+                        UserName = userInfo.Username,
+                        UserAndDisplayName = userInfo.DisplayName != null
+                            ? $"{userInfo.DisplayName} - {userInfo.Username}"
+                            : userInfo.Username
+                    })
+                    .ToList();
+
+                result = this.Ok(resultData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return result;
         }
 
         /// <summary>
