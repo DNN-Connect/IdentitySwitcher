@@ -145,7 +145,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
            
             if (settings.IncludeHost ?? false)
             {
-                var hostUsers = UserController.GetUsers(Null.NullInteger);
+                var hostUsers = UserController.GetUsers(false, true, Null.NullInteger);
 
                 foreach (UserInfo hostUser in hostUsers)
                 {
