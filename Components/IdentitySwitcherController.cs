@@ -27,6 +27,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Web;
     using System.Web.Http;
     using DNN.Modules.IdentitySwitcher.Components.Model;
@@ -66,9 +67,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 {
                     var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
-
                     DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
-
 
                     // sign current user out
                     var objPortalSecurity = new PortalSecurity();
@@ -82,8 +81,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                result = this.InternalServerError(e);
             }
 
             return result;
@@ -116,8 +114,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                result = this.InternalServerError(e);
             }
 
             return result;
@@ -155,8 +152,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                result = this.InternalServerError(e);
             }
 
             return result;
