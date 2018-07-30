@@ -50,11 +50,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// </summary>
         protected virtual void RegisterResources()
         {
-            //int result;
-
             ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-
-            //return result;
         }
 
         /// <summary>
@@ -115,7 +111,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         ///     The module script folder.
         /// </value>
         protected virtual string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
-        
+
         /// <summary>
         ///     Gets the module instance.
         /// </summary>

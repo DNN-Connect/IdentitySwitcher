@@ -40,7 +40,7 @@
         * userSelected()
         */
         userSelected(): void {
-            if (this.moduleInstance.value.SwitchDirectly) {
+            if (this.moduleInstance.value.SwitchUserInOneClick) {
                 this.switchUser();
             }
         }

@@ -42,12 +42,12 @@ namespace DNN.Modules.IdentitySwitcher.Components
         public int ModuleID { get; set; }
 
         /// <summary>
-        ///     Gets a value indicating whether [switch directly].
+        /// Gets a value indicating whether [switch user in one click].
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [switch directly]; otherwise, <c>false</c>.
+        ///   <c>true</c> if [switch user in one click]; otherwise, <c>false</c>.
         /// </value>
-        public bool SwitchDirectly
+        public bool SwitchUserInOneClick
         {
             get
                 {

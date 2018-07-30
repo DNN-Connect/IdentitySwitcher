@@ -108,9 +108,9 @@ namespace DNN.Modules.IdentitySwitcher
                     this.InitializeModuleInstanceJson(this.divBaseDiv);
                 }
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exception) //Module failed to load
             {
-                Exceptions.ProcessModuleLoadException(this, exc);
+                Exceptions.ProcessModuleLoadException(this, exception);
             }
         }
 

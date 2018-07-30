@@ -23,6 +23,6 @@
     export interface IModuleInstance {
         ServicesFramework: any;
         ModuleID: number;
-        SwitchDirectly: boolean;
+        SwitchUserInOneClick: boolean;
     }
 }
