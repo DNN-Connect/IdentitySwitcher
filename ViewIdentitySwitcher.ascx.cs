@@ -22,20 +22,16 @@
 
 #endregion
 
-
 namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Globalization;
     using System.IO;
     using System.Web.UI.HtmlControls;
-    using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Components;
-    using DNN.Modules.IdentitySwitcher.Components.Model;
+    using DNN.Modules.IdentitySwitcher.Installation;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Services.Exceptions;
-    using DotNetNuke.Services.Localization;
-    using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
     /// <summary>
     ///     The ViewDynamicModule class displays the content
@@ -44,7 +40,7 @@ namespace DNN.Modules.IdentitySwitcher
     /// -----------------------------------------------------------------------------
     /// <history></history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
+    [ModuleControlProperties("", "IdentitySwitcher", ControlType.View, "", true, false)]
     public partial class ViewIdentitySwitcher : IdentitySwitcherPortalModuleBase
     {
         #region Private Methods

@@ -22,11 +22,9 @@
 
 #endregion
 
-// ReSharper disable InconsistentNaming
-
-namespace IdentitySwitcher.DotNetNuke.Web.Client
+namespace DNN.Modules.IdentitySwitcher.Components
 {
-    using global::DotNetNuke.Web.Client;
+    using DotNetNuke.Web.Client;
 
     /// <summary>
     /// </summary>

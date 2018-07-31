@@ -1,4 +1,4 @@
-﻿namespace DNNtc
+﻿namespace DNN.Modules.IdentitySwitcher.Installation
 {
     using System;
 

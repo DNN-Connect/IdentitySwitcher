@@ -22,42 +22,20 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
-    using System;
-    using DNN.Modules.IdentitySwitcher.Components.Model;
-    using DotNetNuke.Entities.Modules.Settings;
-
     /// <summary>
     /// </summary>
-    [Serializable]
-    public class IdentitySwitcherModuleSettings
+    public enum UserSwitchingSpeed
     {
         /// <summary>
-        ///     Gets or sets the include host.
+        ///     The using two clicks
         /// </summary>
-        /// <value>
-        ///     The include host.
-        /// </value>
-        [TabModuleSetting(ParameterName = "includeHost")]
-        public bool? IncludeHost { get; set; }
+        UsingTwoClicks = 1,
 
         /// <summary>
-        ///     Gets or sets the sort by.
+        ///     The using one click
         /// </summary>
-        /// <value>
-        ///     The sort by.
-        /// </value>
-        [TabModuleSetting(ParameterName = "sortBy")]
-        public SortBy SortBy { get; set; } = SortBy.DisplayName;
-
-        /// <summary>
-        ///     Gets or sets the user switching speed.
-        /// </summary>
-        /// <value>
-        ///     The user switching speed.
-        /// </value>
-        [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
-        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;
+        UsingOneClick
     }
 }

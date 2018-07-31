@@ -101,18 +101,18 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Components\IdentitySwitcherClient.cs" />
-    <Compile Include="Components\IdentitySwitcherController.cs" />
+    <Compile Include="Controllers\IdentitySwitcherController.cs" />
     <Compile Include="Components\IdentitySwitcherFileOrder.cs" />
-    <Compile Include="Components\IdentitySwitcherModuleSettings.cs" />
-    <Compile Include="Components\IdentitySwitcherModuleSettingsRepository.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
     <Compile Include="Components\IdentitySwitcherPortalModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Components\Model\SortBy.cs" />
-    <Compile Include="Components\Model\UserSwitchingSpeed.cs" />
+    <Compile Include="Model\SortBy.cs" />
+    <Compile Include="Model\UserSwitchingSpeed.cs" />
     <Compile Include="Components\ModuleInstanceBase.cs" />
     <Compile Include="Components\RouteMapper.cs" />
-    <Compile Include="Components\UserDto.cs" />
+    <Compile Include="Model\UserDto.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.ascx.designer.cs">

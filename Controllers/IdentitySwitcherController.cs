@@ -22,14 +22,15 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Http;
-    using DNN.Modules.IdentitySwitcher.Components.Model;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Profile;

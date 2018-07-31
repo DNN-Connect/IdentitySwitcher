@@ -24,7 +24,8 @@
 
 namespace DNN.Modules.IdentitySwitcher.Components
 {
-    using DNN.Modules.IdentitySwitcher.Components.Model;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
 
     /// <summary>

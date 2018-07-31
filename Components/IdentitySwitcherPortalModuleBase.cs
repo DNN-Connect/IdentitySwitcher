@@ -30,7 +30,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Framework;
     using DotNetNuke.Web.Client.ClientResourceManagement;
-    using global::IdentitySwitcher.DotNetNuke.Web.Client;
 
     /// <summary>
     /// </summary>
