@@ -37,7 +37,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// <param name="mapRouteManager">The map route manager.</param>
         public void RegisterRoutes(IMapRoute mapRouteManager)
         {
-            mapRouteManager.MapHttpRoute("Identity Switcher", "default", "{controller}/{action}",
+            mapRouteManager.MapHttpRoute("IdentitySwitcher", "default", "{controller}/{action}",
                                          new[] { "DNN.Modules.IdentitySwitcher.Controllers" });
         }
     }

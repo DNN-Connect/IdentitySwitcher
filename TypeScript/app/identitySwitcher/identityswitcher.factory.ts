@@ -1,8 +1,8 @@
 ﻿module IdentitySwitcher {
     class IdentitySwitcherFactory {
-        static $inject = [
-            "$q", "$http", "IdentitySwitcherConstants"
-        ];
+        //static $inject = [
+        //    "$q", "$http", "IdentitySwitcherConstants"
+        //];
 
         constructor(
             private $q: ng.IQService,
@@ -10,7 +10,7 @@
             private config: IIdentitySwitcherConstants) { }
 
         getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]> {
-            const apiUrl: string = this.config.restfulApiUrl +
+            const apiUrl: string = this.config.apiUrl +
                 "identityswitcher/getsearchitems";
 
             return this.$http.get<string[]>(apiUrl,
@@ -23,7 +23,7 @@
         }
 
         getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]> {
-            const apiUrl: string = this.config.restfulApiUrl +
+            const apiUrl: string = this.config.apiUrl +
                 "identityswitcher/getusers?searchtext=" +
                 selectedSearchText +
                 "&selectedsearchitem=" +
@@ -39,7 +39,7 @@
         }
 
         switchUser(moduleInstance: IModuleInstance, selectedUserId: string, selectedUserName: string): angular.IHttpPromise<void> {
-            const apiUrl: string = this.config.restfulApiUrl +
+            const apiUrl: string = this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
                 "&selectedusername=" +
@@ -54,15 +54,15 @@
                 });
         }
 
-        static create() {
-            const instance = ($q: ng.IQService, $http: ng.IHttpService, identitySwitcherConstants: IIdentitySwitcherConstants) =>
-                new IdentitySwitcherFactory($q, $http, identitySwitcherConstants);
+        //static create() {
+        //    const instance = ($q: ng.IQService, $http: ng.IHttpService, identitySwitcherConstants: IIdentitySwitcherConstants) =>
+        //        new IdentitySwitcherFactory($q, $http, identitySwitcherConstants);
 
-            instance.$inject = ["$q", "$http", "IdentitySwitcherConstants"];
+        //    instance.$inject = ["$q", "$http", "IdentitySwitcherConstants"];
 
-            return instance;
-        }
+        //    return instance;
+        //}
     }
     angular.module(IdentitySwitcher.appName)
-        .factory("IdentitySwitcherFactory", IdentitySwitcherFactory.create());
+        .factory("IdentitySwitcherFactory", ["$q", "$http", "IdentitySwitcherConstants", ($q, $http, identitySwitcherConstants) => new IdentitySwitcherFactory($q, $http, identitySwitcherConstants)]);
 }

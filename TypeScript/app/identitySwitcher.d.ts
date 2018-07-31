@@ -1,7 +1,6 @@
 ﻿declare namespace IdentitySwitcher {
     interface IIdentitySwitcherConstants {
-        readonly viewTemplatesFolder: string;
-        readonly restfulApiUrl: string;
+        readonly apiUrl: string;
     }
 
     interface IIdentitySwitcherFactory {
