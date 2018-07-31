@@ -1,9 +1,5 @@
 ﻿module IdentitySwitcher {
     class IdentitySwitcherFactory {
-        //static $inject = [
-        //    "$q", "$http", "IdentitySwitcherConstants"
-        //];
-
         constructor(
             private $q: ng.IQService,
             private $http: ng.IHttpService,
@@ -53,15 +49,6 @@
                     }
                 });
         }
-
-        //static create() {
-        //    const instance = ($q: ng.IQService, $http: ng.IHttpService, identitySwitcherConstants: IIdentitySwitcherConstants) =>
-        //        new IdentitySwitcherFactory($q, $http, identitySwitcherConstants);
-
-        //    instance.$inject = ["$q", "$http", "IdentitySwitcherConstants"];
-
-        //    return instance;
-        //}
     }
     angular.module(IdentitySwitcher.appName)
         .factory("IdentitySwitcherFactory", ["$q", "$http", "IdentitySwitcherConstants", ($q, $http, identitySwitcherConstants) => new IdentitySwitcherFactory($q, $http, identitySwitcherConstants)]);

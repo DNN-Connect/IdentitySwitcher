@@ -35,19 +35,44 @@ namespace DNN.Modules.IdentitySwitcher
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Web.Client.ClientResourceManagement;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="DotNetNuke.Entities.Modules.PortalModuleBase" />
     [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
     public partial class ViewIdentitySwitcher : PortalModuleBase
     {
         #region Private properties
-       
+
+        /// <summary>
+        /// The module folder name
+        /// </summary>
         private string _moduleFolderName;
 
+        /// <summary>
+        /// Gets the name of the script folder.
+        /// </summary>
+        /// <value>
+        /// The name of the script folder.
+        /// </value>
         private string ScriptFolderName { get; } = "Scripts";
 
+        /// <summary>
+        /// The distribution folder name
+        /// </summary>
         private const string DistributionFolderName = "dist";
 
+        /// <summary>
+        /// The resources folder name
+        /// </summary>
         private const string ResourcesFolderName = "resources";
 
+        /// <summary>
+        /// Gets the name of the module folder.
+        /// </summary>
+        /// <value>
+        /// The name of the module folder.
+        /// </value>
         private string ModuleFolderName
         {
             get
@@ -61,11 +86,21 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
+        /// <summary>
+        /// Gets the module script folder.
+        /// </summary>
+        /// <value>
+        /// The module script folder.
+        /// </value>
         private string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
 
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Initializes the module instance json.
+        /// </summary>
+        /// <param name="initControl">The initialize control.</param>
         private void InitializeModuleInstanceJson(HtmlGenericControl initControl)
         {
             if (initControl != null)
@@ -77,17 +112,33 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
+        /// <summary>
+        /// Registers the script.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="priority">The priority.</param>
         private void RegisterScript(string folder, string fileName, int priority)
         {
             var scriptPath = string.IsNullOrWhiteSpace(folder) ? fileName : Path.Combine(folder, fileName);
             ClientResourceManager.RegisterScript(this.Page, scriptPath, priority);
         }
 
+        /// <summary>
+        /// Gets the module instance.
+        /// </summary>
+        /// <returns></returns>
         private ModuleInstanceBase GetModuleInstance()
         {
             return this.GetModuleInstance<ModuleInstanceBase>(this);
         }
 
+        /// <summary>
+        /// Gets the module instance.
+        /// </summary>
+        /// <typeparam name="TModuleInstance">The type of the module instance.</typeparam>
+        /// <param name="moduleControl">The module control.</param>
+        /// <returns></returns>
         private TModuleInstance GetModuleInstance<TModuleInstance>(PortalModuleBase moduleControl)
             where TModuleInstance : ModuleInstanceBase, new()
         {
@@ -101,6 +152,11 @@ namespace DNN.Modules.IdentitySwitcher
             return result;
         }
 
+        /// <summary>
+        /// Handles the Init event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Page_Init(object sender, EventArgs e)
         {
             try
@@ -123,6 +179,11 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Page_Load(object sender, EventArgs e)
         {
             try
