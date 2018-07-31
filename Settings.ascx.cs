@@ -27,7 +27,6 @@ namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Web.UI.WebControls;
-    using DNN.Modules.IdentitySwitcher.Installation;
     using DNN.Modules.IdentitySwitcher.Model;
     using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
@@ -42,7 +41,7 @@ namespace DNN.Modules.IdentitySwitcher
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleControlProperties("Settings", "IdentitySwitcher Settings", ControlType.Host, "", true, false)]
+    [DNNtc.ModuleControlProperties("Settings", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
     public partial class Settings : ModuleSettingsBase
     {
         private void BindEnumToListControls(Type enumType, ListControl listcontrol)

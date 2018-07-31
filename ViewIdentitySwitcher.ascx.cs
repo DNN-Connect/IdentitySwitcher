@@ -29,14 +29,13 @@ namespace DNN.Modules.IdentitySwitcher
     using System.IO;
     using System.Web.UI.HtmlControls;
     using DNN.Modules.IdentitySwitcher.Components;
-    using DNN.Modules.IdentitySwitcher.Installation;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Web.Client.ClientResourceManagement;
 
-    [ModuleControlProperties("", "IdentitySwitcher", ControlType.View, "", true, false)]
+    [DNNtc.ModuleControlProperties("", "IdentitySwitcher", DNNtc.ControlType.View, "", true, false)]
     public partial class ViewIdentitySwitcher : PortalModuleBase
     {
         #region Private properties
