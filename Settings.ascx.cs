@@ -27,7 +27,6 @@ namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Web.UI.WebControls;
-    using DNN.Modules.IdentitySwitcher.Components;
     using DNN.Modules.IdentitySwitcher.Installation;
     using DNN.Modules.IdentitySwitcher.Model;
     using DNN.Modules.IdentitySwitcher.ModuleSettings;
@@ -100,9 +99,9 @@ namespace DNN.Modules.IdentitySwitcher
                     this.rbSelectingMethod.SelectedValue = settings.UserSwitchingSpeed.ToString();
                 }
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exception) //Module failed to load
             {
-                Exceptions.ProcessModuleLoadException(this, exc);
+                Exceptions.ProcessModuleLoadException(this, exception);
             }
         }
 
@@ -135,9 +134,9 @@ namespace DNN.Modules.IdentitySwitcher
                 // refresh cache
                 ModuleController.SynchronizeModule(this.ModuleId);
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exception) //Module failed to load
             {
-                Exceptions.ProcessModuleLoadException(this, exc);
+                Exceptions.ProcessModuleLoadException(this, exception);
             }
         }
 

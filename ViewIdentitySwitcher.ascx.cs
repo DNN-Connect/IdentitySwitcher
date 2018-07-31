@@ -30,26 +30,44 @@ namespace DNN.Modules.IdentitySwitcher
     using System.Web.UI.HtmlControls;
     using DNN.Modules.IdentitySwitcher.Components;
     using DNN.Modules.IdentitySwitcher.Installation;
+    using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
+    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
+    using DotNetNuke.Web.Client.ClientResourceManagement;
 
-    /// <summary>
-    ///     The ViewDynamicModule class displays the content
-    /// </summary>
-    /// <seealso cref="DNN.Modules.IdentitySwitcher.Components.IdentitySwitcherPortalModuleBase" />
-    /// -----------------------------------------------------------------------------
-    /// <history></history>
-    /// -----------------------------------------------------------------------------
     [ModuleControlProperties("", "IdentitySwitcher", ControlType.View, "", true, false)]
-    public partial class ViewIdentitySwitcher : IdentitySwitcherPortalModuleBase
+    public partial class ViewIdentitySwitcher : PortalModuleBase
     {
-        #region Private Methods
+        #region Private properties
+       
+        private string _moduleFolderName;
 
-        /// <summary>
-        ///     Initializes the module instance json.
-        /// </summary>
-        /// <param name="initControl">The initialize control.</param>
-        protected virtual void InitializeModuleInstanceJson(HtmlGenericControl initControl)
+        private string ScriptFolderName { get; } = "Scripts";
+
+        private const string DistributionFolderName = "dist";
+
+        private const string ResourcesFolderName = "resources";
+
+        private string ModuleFolderName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this._moduleFolderName))
+                {
+                    this._moduleFolderName =
+                        Path.Combine(Globals.DesktopModulePath, this.ModuleConfiguration.DesktopModule.FolderName);
+                }
+                return this._moduleFolderName;
+            }
+        }
+
+        private string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
+
+        #endregion
+
+        #region Private Methods
+        private void InitializeModuleInstanceJson(HtmlGenericControl initControl)
         {
             if (initControl != null)
             {
@@ -60,29 +78,45 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
-        #endregion
+        private void RegisterScript(string folder, string fileName, int priority)
+        {
+            var scriptPath = string.IsNullOrWhiteSpace(folder) ? fileName : Path.Combine(folder, fileName);
+            ClientResourceManager.RegisterScript(this.Page, scriptPath, priority);
+        }
 
-        #region Event Handlers
+        private ModuleInstanceBase GetModuleInstance()
+        {
+            return this.GetModuleInstance<ModuleInstanceBase>(this);
+        }
 
-        /// <summary>
-        ///     Handles the Init event of the Page control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        protected void Page_Init(object sender, EventArgs e)
+        private TModuleInstance GetModuleInstance<TModuleInstance>(PortalModuleBase moduleControl)
+            where TModuleInstance : ModuleInstanceBase, new()
+        {
+            var result = new TModuleInstance();
+
+            if (moduleControl != null)
+            {
+                result.ModuleID = moduleControl.ModuleId;
+            }
+
+            return result;
+        }
+
+        private void Page_Init(object sender, EventArgs e)
         {
             try
             {
-                //Typescript
-                var jsFolder = Path.Combine(this.ModuleScriptFolder, DistributionFolderName);
-                var jsPriority = IdentitySwitcherFileOrder.Js.AngularCustomApp;
-                this.RegisterScript(jsFolder, "dnn.identityswitcher.js", jsPriority++);
+                var priority = 0;
 
-                //Javescript Resources
-                jsFolder = Path.Combine(this.ModuleScriptFolder, ResourcesFolderName);
-                jsPriority = IdentitySwitcherFileOrder.Js.Angular;
-                this.RegisterScript(jsFolder, "angular.min.js", jsPriority++);
-                this.RegisterScript(jsFolder, "angular-resource.min.js", jsPriority++);
+                //Javascript Resources
+                var jsFolder = Path.Combine(this.ModuleScriptFolder, ResourcesFolderName);
+                this.RegisterScript(jsFolder, "angular.min.js", priority++);
+                this.RegisterScript(jsFolder, "angular-resource.min.js", priority++);
+
+                //Typescript
+                jsFolder = Path.Combine(this.ModuleScriptFolder, DistributionFolderName);
+                this.RegisterScript(jsFolder, "dnn.identityswitcher.js", priority++);
+
             }
             catch (Exception exception)
             {
@@ -90,11 +124,6 @@ namespace DNN.Modules.IdentitySwitcher
             }
         }
 
-        /// <summary>
-        ///     Runs when the page loads. Databinds the user switcher drop down list.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void Page_Load(object sender, EventArgs e)
         {
             try
@@ -108,8 +137,7 @@ namespace DNN.Modules.IdentitySwitcher
             {
                 Exceptions.ProcessModuleLoadException(this, exception);
             }
-        }
-
+        } 
         #endregion
     }
 }
