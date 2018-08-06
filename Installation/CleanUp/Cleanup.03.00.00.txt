@@ -1,0 +1,3 @@
+Install\Module\IdentitySwitcher_01.01.00_Install.zip
+Install\Module\interApps.IdentitySwitcher.02.00.00.Install.zip
+Install\Module\IdentitySwitcher.02.00.00.Install.zip

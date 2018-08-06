@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
+    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,9 +14,8 @@
     <ProjectGuid>{3C0CBDD8-EB93-43E6-9F23-C3D873CFC2B3}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>interApps.DNN.Modules.IdentitySwitcher</AssemblyName>
+    <RootNamespace>DNN.Modules.IdentitySwitcher</RootNamespace>
+    <AssemblyName>DNN.Modules.IdentitySwitcher</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>14.0</OldToolsVersion>
@@ -20,7 +25,7 @@
     <OptionInfer>On</OptionInfer>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,6 +36,7 @@
     <OutputPath>bin\</OutputPath>
     <DocumentationFile>bin\IdentitySwitcher.XML</DocumentationFile>
     <NOWARN>1591,660,661</NOWARN>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,31 +44,71 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>interApps.DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
+    <DocumentationFile>bin\DNN.Modules.IdentitySwitcher.xml</DocumentationFile>
     <NOWARN>1591,660,661</NOWARN>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetNuke, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Core.8.0.2.4\lib\net40\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.8.0.2.4\lib\net40\DotNetNuke.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.Client.8.0.2.4\lib\net40\DotNetNuke.Web.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.8.0.2.4\lib\net40\DotNetNuke.WebUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Core.8.0.2.4\lib\net40\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
-    <Reference Include="DotNetNuke, Version=4.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.References\DotNetNuke.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="obj\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Components\Comparer.cs" />
+    <Compile Include="Controllers\IdentitySwitcherController.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
+    <Compile Include="Model\SortBy.cs" />
+    <Compile Include="Model\UserSwitchingSpeed.cs" />
+    <Compile Include="Components\ModuleInstanceBase.cs" />
+    <Compile Include="Components\RouteMapper.cs" />
+    <Compile Include="Model\UserDto.cs" />
+    <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
@@ -81,30 +127,159 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App_LocalResources\Settings.ascx.resx" />
-    <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx" />
-    <None Include="IdentitySwitcher.dnn" />
-    <None Include="Installation\IdentitySwitcher_01.01.00_Install.zip" />
-    <None Include="Installation\interApps.IdentitySwitcher.02.00.00.Install.zip" />
-    <None Include="Installation\interApps.IdentitySwitcher.02.00.00.Source.zip" />
-    <None Include="Installation\Project.targets" />
+    <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Installation\03.00.00.SqlDataProvider" />
+    <None Include="Installation\Project.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Installation\CleanUp\Cleanup.03.00.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.02.00.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.03.00.00.txt" />
+    <Content Include="node_modules\angular-resource\angular-resource.js" />
+    <Content Include="node_modules\angular-resource\angular-resource.min.js" />
+    <Content Include="node_modules\angular-resource\index.js" />
+    <Content Include="node_modules\angular\angular-csp.css" />
+    <Content Include="node_modules\angular\angular.js" />
+    <Content Include="node_modules\angular\angular.min.js" />
+    <Content Include="node_modules\angular\index.js" />
+    <Content Include="node_modules\typescript\CopyrightNotice.txt" />
+    <Content Include="node_modules\typescript\lib\cancellationToken.js" />
+    <Content Include="node_modules\typescript\lib\tsc.js" />
+    <Content Include="node_modules\typescript\lib\tsserver.js" />
+    <Content Include="node_modules\typescript\lib\tsserverlibrary.js" />
+    <Content Include="node_modules\typescript\lib\typescript.js" />
+    <Content Include="node_modules\typescript\lib\typescriptServices.js" />
+    <Content Include="node_modules\typescript\lib\typingsInstaller.js" />
+    <Content Include="node_modules\typescript\lib\watchGuard.js" />
+    <Content Include="node_modules\typescript\LICENSE.txt" />
+    <Content Include="node_modules\typescript\ThirdPartyNoticeText.txt" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="package.json" />
+    <Content Include="Scripts\resources\angular-resource.min.js" />
+    <Content Include="Scripts\resources\angular.min.js" />
+    <Content Include="tsconfig.json" />
+    <Content Include="node_modules\%40types\angular-resource\LICENSE" />
+    <Content Include="node_modules\%40types\angular-resource\package.json" />
+    <Content Include="node_modules\%40types\angular-resource\README.md" />
+    <Content Include="node_modules\%40types\angular\LICENSE" />
+    <Content Include="node_modules\%40types\angular\package.json" />
+    <Content Include="node_modules\%40types\angular\README.md" />
+    <Content Include="node_modules\.bin\tsc" />
+    <Content Include="node_modules\.bin\tsc.cmd" />
+    <Content Include="node_modules\.bin\tsserver" />
+    <Content Include="node_modules\.bin\tsserver.cmd" />
+    <Content Include="node_modules\angular-resource\angular-resource.min.js.map" />
+    <Content Include="node_modules\angular-resource\bower.json" />
+    <Content Include="node_modules\angular-resource\LICENSE.md" />
+    <Content Include="node_modules\angular-resource\package.json" />
+    <Content Include="node_modules\angular-resource\README.md" />
+    <Content Include="node_modules\angular\angular.min.js.gzip" />
+    <Content Include="node_modules\angular\angular.min.js.map" />
+    <Content Include="node_modules\angular\bower.json" />
+    <Content Include="node_modules\angular\LICENSE.md" />
+    <Content Include="node_modules\angular\package.json" />
+    <Content Include="node_modules\angular\README.md" />
+    <Content Include="node_modules\typescript\.mailmap" />
+    <Content Include="node_modules\typescript\AUTHORS.md" />
+    <Content Include="node_modules\typescript\bin\tsc" />
+    <Content Include="node_modules\typescript\bin\tsserver" />
+    <Content Include="node_modules\typescript\lib\cs\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\de\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\es\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\fr\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\it\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\ja\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\ko\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\pl\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\pt-br\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\README.md" />
+    <Content Include="node_modules\typescript\lib\ru\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\tr\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\typesMap.json" />
+    <Content Include="node_modules\typescript\lib\zh-cn\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\lib\zh-tw\diagnosticMessages.generated.json" />
+    <Content Include="node_modules\typescript\package.json" />
+    <Content Include="node_modules\typescript\README.md" />
+    <SourcePackage Include=".build\MSBuild.Community.Tasks.Targets">
+      <SubType>Designer</SubType>
+    </SourcePackage>
+    <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
+    <Content Include=".build\EcmaScript.NET.modified.dll" />
+    <SourcePackage Include=".build\MSBuild.Community.Tasks.dll" />
+    <Content Include=".build\Yahoo.Yui.Compressor.dll" />
+    <Content Include="Installation\License.txt" />
     <Content Include="LICENSE" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Installation\ReleaseNotes.htm" />
-    <Content Include="Installation\version.txt" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />
     <Content Include="ViewIdentitySwitcher.ascx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="node_modules\%40types\angular-resource\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\angular\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\angular\jqlite.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.dom.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.dom.iterable.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.collection.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.core.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.generator.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.iterable.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.promise.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.proxy.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.reflect.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.symbol.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.symbol.wellknown.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.array.include.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.full.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.full.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.intl.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.object.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.sharedmemory.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.string.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.typedarrays.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.full.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.intl.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.promise.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.regexp.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es5.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es6.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.array.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.asynciterable.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.full.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.scripthost.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\lib.webworker.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\protocol.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\tsserverlibrary.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\typescript.d.ts" />
+    <TypeScriptCompile Include="node_modules\typescript\lib\typescriptServices.d.ts" />
+    <TypeScriptCompile Include="TypeScript\app\app.constants.ts" />
+    <TypeScriptCompile Include="TypeScript\app\app.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identityswitcher.d.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.controller.ts" />
+    <TypeScriptCompile Include="TypeScript\app\identitySwitcher\identityswitcher.factory.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Target Name="AfterBuild">
-    <CallTarget Targets="Release" />
-    <CallTarget Targets="CopyDeployFiles" />
-  </Target>
+  <!-- <Target Name="AfterBuild"> -->
+  <!-- <CallTarget Targets="Release" /> -->
+  <!-- <CallTarget Targets="CopyDeployFiles" /> -->
+  <!-- </Target> -->
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -115,5 +290,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>

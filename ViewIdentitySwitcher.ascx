@@ -1,38 +1,37 @@
-<%@ Control Language="C#" Inherits="interApps.DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
+<%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
-<%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="DNN" %>
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>
-        <div class="is_SearchRow">
-            <div class="is_SearchLabel">
-                <asp:Label ID="lblSearch" CssClass="SubHead" resourcekey="Search" runat="server" /></div>
-            <div class="is_SearchTask">
-                <asp:TextBox ID="txtSearch" runat="server" CssClass="NormalTextBox is_SearchText" /><span
-                    class="is_SearchSeperator"></span><asp:DropDownList ID="ddlSearchType" runat="server"
-                        CssClass="NormalTextBox is_SearchMenu" />
-                <DNN:CommandButton ID="cmdSearch" runat="server" ResourceKey="cmdSearch" ImageUrl="~/images/icon_search_16px.gif"
-                    DisplayLink="false" CausesValidation="false"  OnClick="cmdSearch_Click"/>
+<div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
+    <ng-form class="form-inline">
+            <div class="form-group">
+                <p class="form-control-static">Filter:</p>
             </div>
-        </div>
-        <div class="is_Clear">
-        </div>
-        <div class="is_SwitchRow">
-            <div class="is_SwitchLabel">
-                <asp:Label ID="lblSwitchToIdentity" runat="server" CssClass="SubHead" resourcekey="SwitchToIdentity" /></div>
-            <div class="is_SwitchTask">
-                <asp:DropDownList ID="cboUsers" runat="server" CssClass="NormalTextBox is_SwitchMenu" />
-                <DNN:CommandButton ID="cmdSwitch" runat="server" ResourceKey="cmdSwitch" ImageUrl="~/images/action_refresh.gif"
-                    DisplayLink="false" CausesValidation="false"  OnClick="cmdSwitch_Click"/>
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchText" ng-model="vm.selectedSearchText">
             </div>
-        </div>
-    </ContentTemplate>
-</asp:UpdatePanel>
-<div class="is_Clear">
-    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-        <ProgressTemplate>
-            <div class="is_progress">
-                <asp:ImageMap ID="imgProgress" runat="server" ImageUrl="~/images/progressbar.gif">
-                </asp:ImageMap></div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>
-
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.selectedItem">
+                    <option value="" disabled selected>Choose type</option>
+                    <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span type="button" class="btn btn default" ng-click="vm.search()">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group">
+                <p class="form-control-static">Switch to:</p>
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">
+                    <option value="" disabled selected>Choose User</option>
+                </select>
+            </div>
+            <div class="form-group" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
+                <span type="button" class="btn btn default" ng-click="vm.switchUser()">
+                    <i class="glyphicon glyphicon-refresh"></i>
+                </span>
+            </div>
+        </ng-form>
+</div>

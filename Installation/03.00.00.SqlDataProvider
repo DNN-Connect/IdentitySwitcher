@@ -1,0 +1,27 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/*** Drop old Ajax setting ***/
+
+DELETE		TMS
+FROM		{databaseOwner}[{objectQualifier}ModuleDefinitions] MD
+INNER JOIN	{databaseOwner}[{objectQualifier}Modules] M
+		ON	M.ModuleDefID = MD.ModuleDefID
+INNER JOIN	{databaseOwner}[{objectQualifier}TabModules] TM
+		ON	TM.ModuleID = M.ModuleID
+INNER JOIN	{databaseOwner}[{objectQualifier}TabModuleSettings] TMS
+		ON	TMS.TabModuleID = TM.TabModuleID
+WHERE		Md.DefinitionName = 'IdentitySwitcher'
+  AND		TMS.SettingName = 'useAjax'
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

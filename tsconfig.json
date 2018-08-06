@@ -1,0 +1,27 @@
+﻿{
+  "compilerOptions": {
+    "declaration": false,
+    "module": "System",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "outDir": "./Scripts/dist",
+    "outFile": "./Scripts/dist/dnn.identityswitcher.js",
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "Scripts"
+  ],
+  "files": [
+    "./TypeScript/app/app.ts"
+  ],
+  "include": [
+    "./TypeScript/**/*"
+  ]
+}
