@@ -15,5 +15,5 @@ module IdentitySwitcher {
             [
                 "ngResource"
             ])
-        .value("moduleInstance", ModuleInstanceValue);
+        .constant("moduleInstance", ModuleInstanceValue);
 }

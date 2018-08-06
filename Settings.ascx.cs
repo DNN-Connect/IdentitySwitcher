@@ -27,11 +27,10 @@ namespace DNN.Modules.IdentitySwitcher
 {
     using System;
     using System.Web.UI.WebControls;
-    using DNN.Modules.IdentitySwitcher.Components;
-    using DNN.Modules.IdentitySwitcher.Components.Model;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
-    using DotNetNuke.Services.Localization;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -47,11 +46,9 @@ namespace DNN.Modules.IdentitySwitcher
     {
         private void BindEnumToListControls(Type enumType, ListControl listcontrol)
         {
-            string[] names;
-            Array values;
-            int countElements;
-            names = Enum.GetNames(enumType);
-            values = Enum.GetValues(enumType);
+            var countElements = default(int);
+            var names = Enum.GetNames(enumType);
+            var values = Enum.GetValues(enumType);
             for (countElements = 0; countElements <= names.Length - 1; countElements++)
             {
                 listcontrol.Items.Add(new ListItem(names[countElements], values.GetValue(countElements).ToString()));
@@ -77,7 +74,7 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     var repository = new IdentitySwitcherModuleSettingsRepository();
                     var settings = repository.GetSettings(this.ModuleConfiguration);
-                   
+
                     this.BindEnumToListControls(typeof(SortBy), this.rbSortBy);
                     this.rbSortBy.SelectedIndex = 0;
 
@@ -101,9 +98,9 @@ namespace DNN.Modules.IdentitySwitcher
                     this.rbSelectingMethod.SelectedValue = settings.UserSwitchingSpeed.ToString();
                 }
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exception) //Module failed to load
             {
-                Exceptions.ProcessModuleLoadException(this, exc);
+                Exceptions.ProcessModuleLoadException(this, exception);
             }
         }
 
@@ -136,9 +133,9 @@ namespace DNN.Modules.IdentitySwitcher
                 // refresh cache
                 ModuleController.SynchronizeModule(this.ModuleId);
             }
-            catch (Exception exc) //Module failed to load
+            catch (Exception exception) //Module failed to load
             {
-                Exceptions.ProcessModuleLoadException(this, exc);
+                Exceptions.ProcessModuleLoadException(this, exception);
             }
         }
 

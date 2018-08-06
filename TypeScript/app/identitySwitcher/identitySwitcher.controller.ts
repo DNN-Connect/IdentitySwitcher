@@ -3,12 +3,13 @@
 
     class IdentitySwitcherController {
         static $inject = [
-            "IdentitySwitcherFactory", "moduleInstance"
+            "IdentitySwitcherFactory", "moduleInstance", "$window"
         ];
 
         constructor(
             private identitySwitcherFactory: IIdentitySwitcherFactory,
-            private moduleInstance: IModuleInstanceValue
+            private moduleInstance: IModuleInstanceValue,
+            private $window: ng.IWindowService
         ) {
         }
 
@@ -40,7 +41,7 @@
         * userSelected()
         */
         userSelected(): void {
-            if (this.moduleInstance.value.SwitchDirectly) {
+            if (this.moduleInstance.value.SwitchUserInOneClick) {
                 this.switchUser();
             }
         }
@@ -53,13 +54,14 @@
                     this.selectedUser.userName)
                 .then((serverData) => {
                         // Success
-                        (location as any).reload();
                     },
                     (serverData) => {
                         // Error
-                        (location as any).reload();
+                        alert('Something went wrong whilst switching users.');
                     }
-                );
+            ).then(() => {
+                    this.$window.location.reload();
+                });
         }
 
         /*
@@ -69,6 +71,7 @@
             this.moduleInstance.value = moduleInstance;
             this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
 
+            // This function is called here and not in the constructor because it needs the module instance.
             this.getSearchItems();
         }
 

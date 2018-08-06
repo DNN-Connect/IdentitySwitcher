@@ -1,7 +1,6 @@
 ﻿declare namespace IdentitySwitcher {
     interface IIdentitySwitcherConstants {
-        readonly viewTemplatesFolder: string;
-        readonly restfulApiUrl: string;
+        readonly apiUrl: string;
     }
 
     interface IIdentitySwitcherFactory {
@@ -23,6 +22,6 @@
     export interface IModuleInstance {
         ServicesFramework: any;
         ModuleID: number;
-        SwitchDirectly: boolean;
+        SwitchUserInOneClick: boolean;
     }
 }

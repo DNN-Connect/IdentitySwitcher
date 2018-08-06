@@ -22,7 +22,7 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components.Model
+namespace DNN.Modules.IdentitySwitcher.Model
 {
     /// <summary>
     /// </summary>

@@ -22,7 +22,7 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
     using Newtonsoft.Json;
 

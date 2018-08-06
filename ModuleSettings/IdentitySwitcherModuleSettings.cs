@@ -22,20 +22,46 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components.Model
+namespace DNN.Modules.IdentitySwitcher.ModuleSettings
 {
+    using System;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DotNetNuke.Entities.Modules.Settings;
+
     /// <summary>
     /// </summary>
-    public enum UserSwitchingSpeed
+    [Serializable]
+    public class IdentitySwitcherModuleSettings
     {
-        /// <summary>
-        ///     The using two clicks
-        /// </summary>
-        UsingTwoClicks = 1,
+        // The old version of the module used camelcase for the module settings.
+        // In order to avoid difficulties these properties are kept that way and translated with the paramtwername attribute to
+        // pascalcase.
 
         /// <summary>
-        ///     The using one click
+        ///     Gets or sets the include host.
         /// </summary>
-        UsingOneClick
+        /// <value>
+        ///     The include host.
+        /// </value>
+        [TabModuleSetting(ParameterName = "includeHost")]
+        public bool? IncludeHost { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the sort by.
+        /// </summary>
+        /// <value>
+        ///     The sort by.
+        /// </value>
+        [TabModuleSetting(ParameterName = "sortBy")]
+        public SortBy SortBy { get; set; } = SortBy.DisplayName;
+
+        /// <summary>
+        ///     Gets or sets the user switching speed.
+        /// </summary>
+        /// <value>
+        ///     The user switching speed.
+        /// </value>
+        [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
+        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;
     }
 }

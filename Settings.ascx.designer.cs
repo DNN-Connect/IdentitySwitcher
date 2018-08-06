@@ -13,22 +13,13 @@ namespace DNN.Modules.IdentitySwitcher {
     public partial class Settings {
         
         /// <summary>
-        /// tblDesignTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblDesignTable;
-        
-        /// <summary>
         /// trHostSettings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trHostSettings;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl trHostSettings;
         
         /// <summary>
         /// plIncludeHostUser control.
