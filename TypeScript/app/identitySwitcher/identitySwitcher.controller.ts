@@ -17,8 +17,8 @@
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
         searchItems: string[] = [];
-        selectedSearchText: string;
-        selectedItem: string;
+        selectedSearchText: string = "";
+        selectedItem: string = "";
        
         foundUsers: IUser[] = [];
         selectedUser: IUser;
@@ -71,8 +71,12 @@
             this.moduleInstance.value = moduleInstance;
             this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
 
-            // This function is called here and not in the constructor because it needs the module instance.
-            this.getSearchItems();
+            // This if/else is called here and not in the constructor because it needs the module instance.
+            if (this.moduleInstance.value.SwitchUserInOneClick) {
+                this.search();
+            } else {
+                this.getSearchItems();
+            }
         }
 
         /**************************************************************************/
