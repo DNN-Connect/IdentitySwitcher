@@ -28,7 +28,7 @@
                     <option value="" disabled selected>Choose User</option>
                 </select>
             </div>
-            <div class="form-group" ng-show="!vm.moduleInstance.SwitchDirectly">
+            <div class="form-group" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
                 <span type="button" class="btn btn default" ng-click="vm.switchUser()">
                     <i class="glyphicon glyphicon-refresh"></i>
                 </span>

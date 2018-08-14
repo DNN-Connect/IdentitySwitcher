@@ -22,22 +22,22 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
     using System.Web;
     using System.Web.Http;
-    using DNN.Modules.IdentitySwitcher.Components.Model;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
-    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Profile;
     using DotNetNuke.Entities.Users;
     using DotNetNuke.Security;
     using DotNetNuke.Security.Roles;
+    using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Web.Api;
 
     /// <summary>
@@ -45,6 +45,84 @@ namespace DNN.Modules.IdentitySwitcher.Components
     /// <seealso cref="DotNetNuke.Web.Api.DnnApiController" />
     public class IdentitySwitcherController : DnnApiController
     {
+        #region Implementation of IdentitySwitcherController
+        /// <summary>
+        ///     Gets the search items.
+        /// </summary>
+        /// <returns></returns>
+        [DnnAuthorize]
+        [HttpGet]
+        public IHttpActionResult GetSearchItems()
+        {
+            var result = default(IHttpActionResult);
+
+            // Obtain the properties of each user profile and return these for the user to search by.
+            try
+            {
+                var resultData = new List<string>();
+
+                var profileProperties =
+                    ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
+
+                foreach (ProfilePropertyDefinition definition in profileProperties)
+                {
+                    resultData.Add(definition.PropertyName);
+                }
+                resultData.AddRange(new List<string> { "RoleName", "Email", "Username" });
+
+                result = this.Ok(resultData);
+            }
+            catch (Exception exception)
+            {
+                Exceptions.LogException(exception);
+
+                result = this.InternalServerError(exception);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the users.
+        /// </summary>
+        /// <param name="searchText">The search text.</param>
+        /// <param name="selectedSearchItem">The selected search item.</param>
+        /// <returns></returns>
+        [DnnAuthorize]
+        [HttpGet]
+        public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
+        {
+            var result = default(IHttpActionResult);
+
+            // Get all users if no searchtext is provided or filtered users if a searchtext is provided.
+            try
+            {
+                var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
+                users = this.SortUsers(users);
+                this.AddDefaultUsers(users);
+
+                var resultData = users.Select(userInfo => new UserDto
+                {
+                    Id = userInfo.UserID,
+                    UserName = userInfo.Username,
+                    UserAndDisplayName = userInfo.DisplayName != null
+                            ? $"{userInfo.DisplayName} - {userInfo.Username}"
+                            : userInfo.Username
+                })
+                    .ToList();
+
+                result = this.Ok(resultData);
+            }
+            catch (Exception exception)
+            {
+                Exceptions.LogException(exception);
+
+                result = this.InternalServerError(exception);
+            }
+
+            return result;
+        }
+
         /// <summary>
         ///     Switches the user.
         /// </summary>
@@ -65,102 +143,36 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 }
                 else
                 {
-                    var UserInfo = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
+                    var selectedUser = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
 
                     DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
 
-                    // sign current user out
+                    // Sign current user out.
                     var objPortalSecurity = new PortalSecurity();
                     objPortalSecurity.SignOut();
 
-                    // sign new user in
-                    UserController.UserLogin(this.PortalSettings.PortalId, UserInfo, this.PortalSettings.PortalName,
+                    // Sign new user in.
+                    UserController.UserLogin(this.PortalSettings.PortalId, selectedUser, this.PortalSettings.PortalName,
                         HttpContext.Current.Request.UserHostAddress, false);
                 }
                 result = this.Ok();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                result = this.InternalServerError(e);
+                Exceptions.LogException(exception);
+
+                result = this.InternalServerError(exception);
             }
 
             return result;
         }
+        #endregion
 
+        #region Private methods
         /// <summary>
-        ///     Gets the search items.
+        /// Gets all users.
         /// </summary>
         /// <returns></returns>
-        [DnnAuthorize]
-        [HttpGet]
-        public IHttpActionResult GetSearchItems()
-        {
-            var result = default(IHttpActionResult);
-
-            try
-            {
-                var resultData = new List<string>();
-
-                var profileProperties =
-                    ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
-
-                foreach (ProfilePropertyDefinition definition in profileProperties)
-                {
-                    resultData.Add(definition.PropertyName);
-                }
-                resultData.AddRange(new List<string> { "RoleName", "Email", "Username" });
-
-                result = this.Ok(resultData);
-            }
-            catch (Exception e)
-            {
-                result = this.InternalServerError(e);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Gets the users.
-        /// </summary>
-        /// <param name="searchText">The search text.</param>
-        /// <param name="selectedSearchItem">The selected search item.</param>
-        /// <returns></returns>
-        [DnnAuthorize]
-        [HttpGet]
-        public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
-        {
-            var result = default(IHttpActionResult);
-
-            try
-            {
-                var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
-                users = this.SortUsers(users);
-                this.AddDefaultUsers(users);
-
-                var resultData = users.Select(userInfo => new UserDto
-                    {
-                        Id = userInfo.UserID,
-                        UserName = userInfo.Username,
-                        UserAndDisplayName = userInfo.DisplayName != null
-                            ? $"{userInfo.DisplayName} - {userInfo.Username}"
-                            : userInfo.Username
-                    })
-                    .ToList();
-
-                result = this.Ok(resultData);
-            }
-            catch (Exception e)
-            {
-                result = this.InternalServerError(e);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        ///     Loads all users.
-        /// </summary>
         private List<UserInfo> GetAllUsers()
         {
             var users = UserController.GetUsers(this.PortalSettings.PortalId).OfType<UserInfo>().ToList();
@@ -175,7 +187,8 @@ namespace DNN.Modules.IdentitySwitcher.Components
         {
             var repository = new IdentitySwitcherModuleSettingsRepository();
             var settings = repository.GetSettings(this.ActiveModule);
-           
+
+            // If includehost setting is set to true, add host users to the list.
             if (settings.IncludeHost ?? false)
             {
                 var hostUsers = UserController.GetUsers(false, true, Null.NullInteger);
@@ -184,11 +197,11 @@ namespace DNN.Modules.IdentitySwitcher.Components
                 {
                     users.Insert(
                         0,
-                        new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
+                        new UserInfo { Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null });
                 }
             }
 
-            users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
+            users.Insert(0, new UserInfo { Username = "Anonymous", DisplayName = null });
         }
 
         /// <summary>
@@ -224,12 +237,13 @@ namespace DNN.Modules.IdentitySwitcher.Components
 
             var users = default(List<UserInfo>);
 
+            // Sort based on the selected search item.
             switch (selectedSearchItem)
             {
                 case "Email":
-                   users = UserController
-                        .GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
-                        .OfType<UserInfo>().ToList();
+                    users = UserController
+                         .GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
+                         .OfType<UserInfo>().ToList();
                     break;
                 case "Username":
                     users = UserController
@@ -252,4 +266,5 @@ namespace DNN.Modules.IdentitySwitcher.Components
             return users;
         }
     }
+    #endregion
 }
