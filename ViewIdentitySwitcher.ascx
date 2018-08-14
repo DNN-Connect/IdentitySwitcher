@@ -16,7 +16,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <span type="button" class="btn btn default" ng-click="vm.search()">
+                <span type="button" class="btn btn-default" ng-click="vm.search()">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
             </div>
@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div class="form-group" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
-                <span type="button" class="btn btn default" ng-click="vm.switchUser()">
+                <span type="button" class="btn btn-default" ng-click="vm.switchUser()">
                     <i class="glyphicon glyphicon-refresh"></i>
                 </span>
             </div>
