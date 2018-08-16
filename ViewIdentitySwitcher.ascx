@@ -2,6 +2,7 @@
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
 <div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
     <ng-form class="form-inline">
+        <div ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
             <div class="form-group">
                 <p class="form-control-static">Filter:</p>
             </div>
@@ -15,11 +16,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <span type="button" class="btn btn default" ng-click="vm.search()">
+                <span type="button" class="btn btn-default" ng-click="vm.search()">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
             </div>
-            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div>
             <div class="form-group">
                 <p class="form-control-static">Switch to:</p>
             </div>
@@ -29,9 +32,10 @@
                 </select>
             </div>
             <div class="form-group" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
-                <span type="button" class="btn btn default" ng-click="vm.switchUser()">
+                <span type="button" class="btn btn-default" ng-click="vm.switchUser()">
                     <i class="glyphicon glyphicon-refresh"></i>
                 </span>
             </div>
-        </ng-form>
+        </div>
+    </ng-form>
 </div>
