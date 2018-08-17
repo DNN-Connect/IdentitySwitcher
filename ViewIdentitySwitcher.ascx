@@ -9,7 +9,6 @@
             <input type="text" class="NormalTextBox_is_SearchText" ng-model="vm.selectedSearchText">
             <span class="is_SearchSeparator"></span>
             <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedItem">
-                <option value="" disabled selected>Choose type</option>
                 <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
             </select>
             <button class="CommandButton" type="button" ng-click="vm.search()">
@@ -19,13 +18,11 @@
     </div>
     <div class="is_Clear"></div>
     <div class="is_SwitchRow">
-
         <div class="is_SwitchLabel">
             <span class="SubHead">Switch to:</span>
         </div>
         <div class="is_SwitchTask">
             <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">
-                <option value="" disabled selected>Choose User</option>
             </select>
             <button class="CommandButton" type="button" ng-click="vm.switchUser()" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
                 <img src="/images/action_refresh.gif" title="Switch identity" alt="Switch identity" />

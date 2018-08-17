@@ -5,7 +5,7 @@
 
     interface IIdentitySwitcherFactory {
         getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]>;
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]>;
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUser[]>;
         switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void>;
     }
 

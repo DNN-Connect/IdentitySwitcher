@@ -87,28 +87,39 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         /// </summary>
         /// <param name="searchText">The search text.</param>
         /// <param name="selectedSearchItem">The selected search item.</param>
+        /// <param name="onlyDefault">if set to <c>true</c> [only default].</param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
+        public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null,
+            bool onlyDefault = false)
         {
             var result = default(IHttpActionResult);
 
-            // Get all users if no searchtext is provided or filtered users if a searchtext is provided.
             try
             {
-                var users = searchText == null ? this.GetAllUsers() : this.GetFilteredUsers(searchText, selectedSearchItem);
-                users = this.SortUsers(users);
+                var users = new List<UserInfo>();
+
+                // Get only the default users or..
+                if (!onlyDefault)
+                {
+                    // ..get all users if no searchtext is provided or filtered users if a searchtext is provided.
+                    users = searchText == null
+                        ? this.GetAllUsers()
+                        : this.GetFilteredUsers(searchText, selectedSearchItem);
+                    users = this.SortUsers(users);
+                }
+
                 this.AddDefaultUsers(users);
 
                 var resultData = users.Select(userInfo => new UserDto
-                {
-                    Id = userInfo.UserID,
-                    UserName = userInfo.Username,
-                    UserAndDisplayName = userInfo.DisplayName != null
+                    {
+                        Id = userInfo.UserID,
+                        UserName = userInfo.Username,
+                        UserAndDisplayName = userInfo.DisplayName != null
                             ? $"{userInfo.DisplayName} - {userInfo.Username}"
                             : userInfo.Username
-                })
+                    })
                     .ToList();
 
                 result = this.Ok(resultData);
@@ -197,11 +208,12 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 {
                     users.Insert(
                         0,
-                        new UserInfo { Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null });
+                        new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
                 }
             }
 
-            users.Insert(0, new UserInfo { Username = "Anonymous", DisplayName = null });
+            users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
+
         }
 
         /// <summary>
