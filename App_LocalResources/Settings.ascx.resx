@@ -132,7 +132,7 @@
   <data name="plSortBy.Text" xml:space="preserve">
     <value>Sort by</value>
   </data>
-  <data name="SorByUserName.Text" xml:space="preserve">
+  <data name="SortByUserName.Text" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="SortByDisplayName.Text" xml:space="preserve">
@@ -143,5 +143,11 @@
   </data>
   <data name="plSelectingMethod.Text" xml:space="preserve">
     <value>Selecting method</value>
+  </data>
+  <data name="Fast.Text" xml:space="preserve">
+    <value>Fast selecting method</value>
+  </data>
+  <data name="Slow.Text" xml:space="preserve">
+    <value>Slow selecting method</value>
   </data>
 </root>

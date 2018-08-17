@@ -56,7 +56,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
                     var repository = new IdentitySwitcherModuleSettingsRepository();
                     var settings = repository.GetSettings(moduleInfo);
 
-                    return settings.UserSwitchingSpeed == UserSwitchingSpeed.UsingOneClick;
+                    return settings.UserSwitchingSpeed == UserSwitchingSpeed.Fast;
                 }
         }
 

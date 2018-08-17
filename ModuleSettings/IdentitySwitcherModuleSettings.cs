@@ -62,6 +62,6 @@ namespace DNN.Modules.IdentitySwitcher.ModuleSettings
         ///     The user switching speed.
         /// </value>
         [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
-        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.UsingTwoClicks;
+        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.Fast;
     }
 }

@@ -31,7 +31,7 @@ namespace DNN.Modules.IdentitySwitcher.Model
         /// <summary>
         ///     The display name
         /// </summary>
-        DisplayName = 1,
+        DisplayName,
 
         /// <summary>
         ///     The user name

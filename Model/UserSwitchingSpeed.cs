@@ -29,13 +29,13 @@ namespace DNN.Modules.IdentitySwitcher.Model
     public enum UserSwitchingSpeed
     {
         /// <summary>
-        ///     The using two clicks
+        /// The fast
         /// </summary>
-        UsingTwoClicks = 1,
+        Fast,
 
         /// <summary>
-        ///     The using one click
+        /// The slow
         /// </summary>
-        UsingOneClick
+        Slow
     }
 }
