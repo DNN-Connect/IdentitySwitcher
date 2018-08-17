@@ -50,7 +50,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         ///     Gets the search items.
         /// </summary>
         /// <returns></returns>
-        [DnnAuthorize]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult GetSearchItems()
         {
@@ -88,7 +88,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         /// <param name="searchText">The search text.</param>
         /// <param name="selectedSearchItem">The selected search item.</param>
         /// <returns></returns>
-        [DnnAuthorize]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult GetUsers(string searchText = null, string selectedSearchItem = null)
         {
@@ -129,7 +129,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         /// <param name="selectedUserId">The selected user identifier.</param>
         /// <param name="selectedUserName">Name of the selected user user.</param>
         /// <returns></returns>
-        [DnnAuthorize]
+        [AllowAnonymous]
         [HttpPost]
         public IHttpActionResult SwitchUser(int selectedUserId, string selectedUserName)
         {
