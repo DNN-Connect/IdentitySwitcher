@@ -23,6 +23,8 @@
         foundUsers: IUser[] = [];
         selectedUser: IUser;
 
+        showSlowSwitchHtml: boolean = false;
+
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
         /**************************************************************************/
@@ -73,6 +75,8 @@
         init(moduleInstance: IModuleInstance): void {
             this.moduleInstance.value = moduleInstance;
             this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
+
+            this.showSlowSwitchHtml = this.moduleInstance.value.SwitchUserInOneClick;
 
             // This if/else is called here and not in the constructor because it needs the module instance.
             if (this.moduleInstance.value.SwitchUserInOneClick) {
