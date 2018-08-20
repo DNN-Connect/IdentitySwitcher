@@ -33,6 +33,7 @@ namespace DNN.Modules.IdentitySwitcher
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
+    using DotNetNuke.Services.Localization;
     using DotNetNuke.Web.Client.ClientResourceManagement;
 
     /// <summary>
@@ -147,6 +148,8 @@ namespace DNN.Modules.IdentitySwitcher
             if (moduleControl != null)
             {
                 result.ModuleID = moduleControl.ModuleId;
+                result.FilterText = Localization.GetString("FilterText.Text", this.LocalResourceFile);
+                result.SwitchToText = Localization.GetString("SwitchToText.Text", this.LocalResourceFile);
             }
 
             return result;

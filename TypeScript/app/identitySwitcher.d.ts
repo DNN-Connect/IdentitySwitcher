@@ -22,6 +22,8 @@
     export interface IModuleInstance {
         ServicesFramework: any;
         ModuleID: number;
+        FilterText: string;
+        SwitchToText: string;
         SwitchUserInOneClick: boolean;
     }
 }

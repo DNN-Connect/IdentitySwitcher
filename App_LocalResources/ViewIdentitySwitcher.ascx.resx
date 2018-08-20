@@ -204,4 +204,10 @@
   <data name="Website.Text" xml:space="preserve">
     <value>Website</value>
   </data>
+  <data name="FilterText.Text" xml:space="preserve">
+    <value>Filter:</value>
+  </data>
+  <data name="SwitchToText.Text" xml:space="preserve">
+    <value>Switch to:</value>
+  </data>
 </root>

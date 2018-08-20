@@ -3,7 +3,7 @@
 <div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
     <div class="is_SearchRow" ng-show="!vm.showSlowSwitchHtml">
         <div class="is_SearchLabel">
-            <span class="SubHead">Filter:</span>
+            <span class="SubHead">{{vm.moduleInstance.value.FilterText}}</span>
         </div>
         <div class="is_SearchTask">
             <input type="text" class="NormalTextBox_is_SearchText" ng-model="vm.selectedSearchText">
@@ -19,7 +19,7 @@
     <div class="is_Clear"></div>
     <div class="is_SwitchRow">
         <div class="is_SwitchLabel">
-            <span class="SubHead">Switch to:</span>
+            <span class="SubHead">{{vm.moduleInstance.value.SwitchToText}}</span>
         </div>
         <div class="is_SwitchTask">
             <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">

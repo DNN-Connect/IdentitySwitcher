@@ -27,6 +27,7 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DNN.Modules.IdentitySwitcher.Model;
     using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
+    using DotNetNuke.Services.Localization;
 
     /// <summary>
     /// </summary>
@@ -59,6 +60,10 @@ namespace DNN.Modules.IdentitySwitcher.Components
                     return settings.UserSwitchingSpeed == UserSwitchingSpeed.Fast;
                 }
         }
+
+        public string FilterText { get; set; }
+
+        public string SwitchToText { get; set; }
 
         #endregion
     }
