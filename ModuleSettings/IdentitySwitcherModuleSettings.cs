@@ -34,7 +34,7 @@ namespace DNN.Modules.IdentitySwitcher.ModuleSettings
     public class IdentitySwitcherModuleSettings
     {
         // The old version of the module used camelcase for the module settings.
-        // In order to avoid difficulties these properties are kept that way and translated with the paramtwername attribute to
+        // In order to avoid difficulties these properties are kept that way and translated with the parametername attribute to
         // pascalcase.
 
         /// <summary>
