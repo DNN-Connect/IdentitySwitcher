@@ -159,16 +159,6 @@ namespace DNN.Modules.IdentitySwitcher
                 var settings = repository.GetSettings(moduleInfo);
 
                 result.SwitchUserInOneClick = settings.UserSwitchingSpeed == UserSwitchingSpeed.Fast;
-
-                //var user = moduleControl.UserInfo;
-                //result.CurrentUser = new UserDto
-                //{
-                //    Id = user.UserID,
-                //    UserName = user.Username,
-                //    UserAndDisplayName = user.DisplayName != null
-                //        ? $"{user.DisplayName} - {user.Username}"
-                //        : user.Username
-                //};
             }
 
             return result;
