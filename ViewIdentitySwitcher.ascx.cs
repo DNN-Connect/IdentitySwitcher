@@ -29,9 +29,12 @@ namespace DNN.Modules.IdentitySwitcher
     using System.IO;
     using System.Web.UI.HtmlControls;
     using DNN.Modules.IdentitySwitcher.Components;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
+    using DotNetNuke.Entities.Users;
     using DotNetNuke.Services.Exceptions;
     using DotNetNuke.Services.Localization;
     using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -150,6 +153,22 @@ namespace DNN.Modules.IdentitySwitcher
                 result.ModuleID = moduleControl.ModuleId;
                 result.FilterText = Localization.GetString("FilterText.Text", this.LocalResourceFile);
                 result.SwitchToText = Localization.GetString("SwitchToText.Text", this.LocalResourceFile);
+
+                var moduleInfo = new ModuleController().GetModule(moduleControl.ModuleId);
+                var repository = new IdentitySwitcherModuleSettingsRepository();
+                var settings = repository.GetSettings(moduleInfo);
+
+                result.SwitchUserInOneClick = settings.UserSwitchingSpeed == UserSwitchingSpeed.Fast;
+
+                //var user = moduleControl.UserInfo;
+                //result.CurrentUser = new UserDto
+                //{
+                //    Id = user.UserID,
+                //    UserName = user.Username,
+                //    UserAndDisplayName = user.DisplayName != null
+                //        ? $"{user.DisplayName} - {user.Username}"
+                //        : user.Username
+                //};
             }
 
             return result;

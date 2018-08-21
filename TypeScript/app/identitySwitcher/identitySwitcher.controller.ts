@@ -33,8 +33,13 @@
             this.identitySwitcherFactory.getUsers(this.moduleInstance.value,
                 this.selectedSearchText,
                 this.selectedItem, onlyDefault).then((serverData) => {
-                    this.foundUsers = serverData.data;
-                    this.selectedUser = this.foundUsers[0];
+                    this.foundUsers = serverData.data.users;
+                    angular.forEach(this.foundUsers,
+                        (user) => {
+                            if (user.id === serverData.data.selectedUserId) {
+                                this.selectedUser = user;
+                            }
+                        });
                 }
             );
         }

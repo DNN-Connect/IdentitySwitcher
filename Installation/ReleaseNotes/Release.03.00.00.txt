@@ -11,3 +11,8 @@
 	<li>Replace all deprecated DNN API calls by new API calls</li>
 	<li>Replaced UI with new Angular front end construction</li>
 </ul>
+<h3>NOTES<h3>
+<ul>
+	<li>Tested under 9.2.1 and when placing the module on a page user needs to refresh once to make the module work</li>
+	<li>Don't place multiple IdentitySwitcher modules on the same page as the module is not configured for this.</li>
+</ul>

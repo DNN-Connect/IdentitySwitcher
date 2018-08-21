@@ -27,7 +27,6 @@ namespace DNN.Modules.IdentitySwitcher.Components
     using DNN.Modules.IdentitySwitcher.Model;
     using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
-    using DotNetNuke.Services.Localization;
 
     /// <summary>
     /// </summary>
@@ -44,25 +43,27 @@ namespace DNN.Modules.IdentitySwitcher.Components
         public int ModuleID { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether [switch user in one click].
+        /// Gets or sets a value indicating whether [switch user in one click].
         /// </summary>
         /// <value>
         ///   <c>true</c> if [switch user in one click]; otherwise, <c>false</c>.
         /// </value>
-        public bool SwitchUserInOneClick
-        {
-            get
-                {
-                    var moduleInfo = new ModuleController().GetModule(this.ModuleID);
-                    var repository = new IdentitySwitcherModuleSettingsRepository();
-                    var settings = repository.GetSettings(moduleInfo);
+        public bool SwitchUserInOneClick { get; set; }
 
-                    return settings.UserSwitchingSpeed == UserSwitchingSpeed.Fast;
-                }
-        }
-
+        /// <summary>
+        /// Gets or sets the filter text.
+        /// </summary>
+        /// <value>
+        /// The filter text.
+        /// </value>
         public string FilterText { get; set; }
 
+        /// <summary>
+        /// Gets or sets the switch to text.
+        /// </summary>
+        /// <value>
+        /// The switch to text.
+        /// </value>
         public string SwitchToText { get; set; }
 
         #endregion

@@ -98,29 +98,35 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
 
             try
             {
-                var users = new List<UserInfo>();
+                var usersInfo = new List<UserInfo>();
 
                 // Get only the default users or..
                 if (!onlyDefault)
                 {
                     // ..get all users if no searchtext is provided or filtered users if a searchtext is provided.
-                    users = searchText == null
+                    usersInfo = searchText == null
                         ? this.GetAllUsers()
                         : this.GetFilteredUsers(searchText, selectedSearchItem);
-                    users = this.SortUsers(users);
+                    usersInfo = this.SortUsers(usersInfo);
                 }
 
-                this.AddDefaultUsers(users);
+                this.AddDefaultUsers(usersInfo);
 
-                var resultData = users.Select(userInfo => new UserDto
-                    {
-                        Id = userInfo.UserID,
-                        UserName = userInfo.Username,
-                        UserAndDisplayName = userInfo.DisplayName != null
-                            ? $"{userInfo.DisplayName} - {userInfo.Username}"
-                            : userInfo.Username
-                    })
-                    .ToList();
+                var selectedUserId = this.UserInfo.UserID;
+
+                var resultData = new UserCollectionDto
+                {
+                    Users = usersInfo.Select(userInfo => new UserDto
+                        {
+                            Id = userInfo.UserID,
+                            UserName = userInfo.Username,
+                            UserAndDisplayName = userInfo.DisplayName != null
+                                ? $"{userInfo.DisplayName} - {userInfo.Username}"
+                                : userInfo.Username
+                        })
+                        .ToList(),
+                    SelectedUserId = selectedUserId
+                };
 
                 result = this.Ok(resultData);
             }
