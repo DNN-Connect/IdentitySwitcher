@@ -36,7 +36,10 @@
                     this.foundUsers = serverData.data.users;
                     angular.forEach(this.foundUsers,
                         (user) => {
+                            // See if the selected user matches one from the found users and select that one..
                             if (user.id === serverData.data.selectedUserId) {
+                                this.selectedUser = user;
+                            } else if (user.id === -1) { // ..else select anonymous.
                                 this.selectedUser = user;
                             }
                         });
