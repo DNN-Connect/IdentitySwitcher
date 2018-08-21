@@ -83,9 +83,9 @@ namespace DNN.Modules.IdentitySwitcher
                     {
                         this.trHostSettings.Visible = false;
                     }
-
-                    this.rbSortBy.SelectedIndex = (int) settings.SortBy;
-                    this.rbSelectingMethod.SelectedIndex = (int) settings.UserSwitchingSpeed;
+                    
+                    this.rbSortBy.SelectedValue = ((int) settings.SortBy).ToString();
+                    this.rbSelectingMethod.SelectedValue = ((int) settings.UserSwitchingSpeed).ToString();
                 }
             }
             catch (Exception exception) //Module failed to load
