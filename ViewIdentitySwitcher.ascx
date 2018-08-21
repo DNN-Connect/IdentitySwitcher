@@ -1,7 +1,7 @@
 <%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
-<div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
-    <div class="is_SearchRow" ng-show="!vm.showSlowSwitchHtml">
+<div ng-app="dnn.identityswitcher" class="ng-cloak" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
+    <div class="is_SearchRow" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
         <div class="is_SearchLabel">
             <span class="SubHead">{{vm.moduleInstance.value.FilterText}}</span>
         </div>
@@ -24,7 +24,7 @@
         <div class="is_SwitchTask">
             <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">
             </select>
-            <button class="CommandButton" type="button" ng-click="vm.switchUser()" ng-show="!vm.showSlowSwitchHtml">
+            <button class="CommandButton" type="button" ng-click="vm.switchUser()" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
                 <img src="/images/action_refresh.gif" title="Switch identity" alt="Switch identity" />
             </button>
         </div>
