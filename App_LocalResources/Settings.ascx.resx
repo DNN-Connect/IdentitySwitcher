@@ -139,15 +139,15 @@
     <value>Name</value>
   </data>
   <data name="plSelectingMethod.Help" xml:space="preserve">
-    <value>Choose whether you want to directly select the user from the dropdown or if you want to acknowledge with the green button</value>
+    <value>Choose whether you want to directly select the user from the single dropdown or if you want to have filtering on users and/or roles added to the selection</value>
   </data>
   <data name="plSelectingMethod.Text" xml:space="preserve">
     <value>Selecting method</value>
   </data>
   <data name="Fast.Text" xml:space="preserve">
-    <value>Fast selecting method</value>
+    <value>Direct select from userlist</value>
   </data>
   <data name="Slow.Text" xml:space="preserve">
-    <value>Slow selecting method</value>
+    <value>Select after user &amp; role filtering</value>
   </data>
 </root>

@@ -38,9 +38,9 @@
   <!--####################################################################### -->
   <!--Company properties-->
   <PropertyGroup>
-    <CompanyName>DNNCorp</CompanyName>
-    <CompanyUrl>http://www.dnnsoftware.com</CompanyUrl>
-    <CompanyEmail>support@dnnsoftware.com</CompanyEmail>
+    <CompanyName>DNN-Connect</CompanyName>
+    <CompanyUrl>http://www.dnn-connect.org</CompanyUrl>
+    <CompanyEmail>info@dnn-connect.org</CompanyEmail>
   </PropertyGroup>
   <!--You may change these properties when needed-->
   <PropertyGroup>
