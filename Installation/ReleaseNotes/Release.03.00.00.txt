@@ -1,6 +1,6 @@
 <h2>Release notes Identity Switcher 03.00.00</h2>
 <p>Full details on the changes can be found in great detail at <a href="https://github.com/DNN-Connect/IdentitySwitcher" target="_blank">https://github.com/DNN-Connect/IdentitySwitcher</a>.</p>
-<h3>ENHANCEMENTS<h3>
+<h3>ENHANCEMENTS</h3>
 <ul>
 	<li>Two modes of switching defined: direct select from all users, or filter on role/users first before selection</li>
 </ul>
@@ -11,7 +11,7 @@
 	<li>Replace all deprecated DNN API calls by new API calls</li>
 	<li>Replaced UI with new Angular front end construction</li>
 </ul>
-<h3>NOTES<h3>
+<h3>NOTES</h3>
 <ul>
 	<li>Tested on DNN 9.2.1 and when placing the module on a page you need to refresh the page at least once to display the module correctly</li>
 	<li>Don't place multiple IdentitySwitcher modules on the same page as the module is not fit for such a scenario</li>
