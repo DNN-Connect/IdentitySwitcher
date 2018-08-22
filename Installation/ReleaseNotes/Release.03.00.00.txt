@@ -2,17 +2,17 @@
 <p>Full details on the changes can be found in great detail at <a href="https://github.com/DNN-Connect/IdentitySwitcher" target="_blank">https://github.com/DNN-Connect/IdentitySwitcher</a>.</p>
 <h3>ENHANCEMENTS<h3>
 <ul>
-	<li>Two modes of switching defined: select from all users, or select role/users in role</li>
+	<li>Two modes of switching defined: direct select from all users, or filter on role/users first before selection</li>
 </ul>
 <h3>CHANGES</h3>
 <ul>
-	<li>Code module changed from VB to C#.</li>
+	<li>Code module changed from VB to C#</li>
 	<li>DNNtc.MSBuild structure and attributes build in</li>
 	<li>Replace all deprecated DNN API calls by new API calls</li>
 	<li>Replaced UI with new Angular front end construction</li>
 </ul>
 <h3>NOTES<h3>
 <ul>
-	<li>Tested under 9.2.1 and when placing the module on a page user needs to refresh once to make the module work</li>
-	<li>Don't place multiple IdentitySwitcher modules on the same page as the module is not configured for this.</li>
+	<li>Tested on DNN 9.2.1 and when placing the module on a page you need to refresh the page at least once to display the module correctly</li>
+	<li>Don't place multiple IdentitySwitcher modules on the same page as the module is not fit for such a scenario</li>
 </ul>

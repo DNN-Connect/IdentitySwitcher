@@ -136,7 +136,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Installation\CleanUp\Cleanup.03.00.00.txt" />
-    <Content Include="Installation\ReleaseNotes\Release.02.00.00.txt" />
     <Content Include="Installation\ReleaseNotes\Release.03.00.00.txt" />
     <Content Include="node_modules\angular-resource\angular-resource.js" />
     <Content Include="node_modules\angular-resource\angular-resource.min.js" />
