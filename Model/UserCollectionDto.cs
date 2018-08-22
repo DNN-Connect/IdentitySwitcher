@@ -22,46 +22,17 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
-    /// <summary>
-    /// </summary>
-    public class ModuleInstanceBase
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+
+    public class UserCollectionDto
     {
-        #region Properties
+        [JsonProperty("users")]
+        public IList<UserDto> Users { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the module identifier.
-        /// </summary>
-        /// <value>
-        ///     The module identifier.
-        /// </value>
-        public int ModuleID { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [switch user in one click].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [switch user in one click]; otherwise, <c>false</c>.
-        /// </value>
-        public bool SwitchUserInOneClick { get; set; }
-
-        /// <summary>
-        /// Gets or sets the filter text.
-        /// </summary>
-        /// <value>
-        /// The filter text.
-        /// </value>
-        public string FilterText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the switch to text.
-        /// </summary>
-        /// <value>
-        /// The switch to text.
-        /// </value>
-        public string SwitchToText { get; set; }
-
-        #endregion
+        [JsonProperty("selectedUserId")]
+        public int SelectedUserId { get; set; }
     }
 }

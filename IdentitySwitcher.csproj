@@ -101,6 +101,7 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Controllers\IdentitySwitcherController.cs" />
+    <Compile Include="Model\UserCollectionDto.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
     <Compile Include="Model\SortBy.cs" />
