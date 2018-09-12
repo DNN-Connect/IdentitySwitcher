@@ -7,4 +7,4 @@ It is even possible to switch to a host user, when allowed by the host account i
 
 Remove the module before going live?
 
-**Credits**: Original version created by ErikVB
+**Credits**: Original version created by ErikVB, [look here](https://github.com/erikvb/Dnn.IdentitySwitcher)

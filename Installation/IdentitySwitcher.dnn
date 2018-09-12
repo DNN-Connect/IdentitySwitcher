@@ -5,10 +5,10 @@
       <description>The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.</description>
       <iconFile>DesktopModules\IdentitySwitcher\IdentitySwitcher.png</iconFile>
       <owner>
-        <name>DNNCorp</name>
-        <organization>DNNCorp</organization>
-        <url>http://www.dnnsoftware.com</url>
-        <email>support@dnnsoftware.com</email>
+        <name>DNN-Connect</name>
+        <organization>DNN-Connect</organization>
+        <url>http://www.dnn-connect.org</url>
+        <email>info@dnn-connect.org</email>
       </owner>
       <license src="License.txt"></license>
       <releaseNotes src="Release.03.00.00.txt"></releaseNotes>

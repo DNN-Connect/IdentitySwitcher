@@ -1,41 +1,32 @@
 <%@ Control Language="C#" Inherits="DNN.Modules.IdentitySwitcher.ViewIdentitySwitcher"
     AutoEventWireup="true" Explicit="True" CodeBehind="ViewIdentitySwitcher.ascx.cs" %>
-<div ng-app="dnn.identityswitcher" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
-    <ng-form class="form-inline">
-        <div ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
-            <div class="form-group">
-                <p class="form-control-static">Filter:</p>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="searchText" ng-model="vm.selectedSearchText">
-            </div>
-            <div class="form-group">
-                <select class="form-control" ng-model="vm.selectedItem">
-                    <option value="" disabled selected>Choose type</option>
-                    <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <span type="button" class="btn btn-default" ng-click="vm.search()">
-                    <i class="glyphicon glyphicon-search"></i>
-                </span>
-            </div>
+<div ng-app="dnn.identityswitcher" class="ng-cloak" ng-controller="IdentitySwitcherController as vm" runat="server" id="divBaseDiv">
+    <div class="is_SearchRow" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
+        <div class="is_SearchLabel">
+            <span class="SubHead">{{vm.moduleInstance.value.FilterText}}</span>
         </div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="form-group">
-                <p class="form-control-static">Switch to:</p>
-            </div>
-            <div class="form-group">
-                <select class="form-control" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">
-                    <option value="" disabled selected>Choose User</option>
-                </select>
-            </div>
-            <div class="form-group" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
-                <span type="button" class="btn btn-default" ng-click="vm.switchUser()">
-                    <i class="glyphicon glyphicon-refresh"></i>
-                </span>
-            </div>
+        <div class="is_SearchTask">
+            <input type="text" class="NormalTextBox_is_SearchText" ng-model="vm.selectedSearchText">
+            <span class="is_SearchSeparator"></span>
+            <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedItem">
+                <option ng-repeat="option in vm.searchItems" value="{{option}}">{{option}}</option>
+            </select>
+            <button class="CommandButton" type="button" ng-click="vm.search()">
+                <img src="/images/icon_search_16px.gif" title="Filter" alt="Filter" />
+            </button>
         </div>
-    </ng-form>
+    </div>
+    <div class="is_Clear"></div>
+    <div class="is_SwitchRow">
+        <div class="is_SwitchLabel">
+            <span class="SubHead">{{vm.moduleInstance.value.SwitchToText}}</span>
+        </div>
+        <div class="is_SwitchTask">
+            <select class="NormalTextBox_is_SearchMenu" ng-model="vm.selectedUser" ng-options="user as user.userAndDisplayName for user in vm.foundUsers" ng-change="vm.userSelected()">
+            </select>
+            <button class="CommandButton" type="button" ng-click="vm.switchUser()" ng-show="!vm.moduleInstance.value.SwitchUserInOneClick">
+                <img src="/images/action_refresh.gif" title="Switch identity" alt="Switch identity" />
+            </button>
+        </div>
+    </div>
 </div>

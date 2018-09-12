@@ -18,14 +18,15 @@
                 });
         }
 
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]> {
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection> {
             const apiUrl: string = this.config.apiUrl +
                 "identityswitcher/getusers?searchtext=" +
                 selectedSearchText +
                 "&selectedsearchitem=" +
-                selectedSearchItem;
+                selectedSearchItem +
+                "&onlyDefault=" + onlyDefault;
 
-            return this.$http.get<IUser[]>(apiUrl,
+            return this.$http.get<IUserCollection>(apiUrl,
                 {
                     headers: {
                         "ModuleId": moduleInstance.ModuleID,

@@ -26,11 +26,13 @@
 namespace DNN.Modules.IdentitySwitcher
 {
     using System;
+    using System.Resources;
     using System.Web.UI.WebControls;
     using DNN.Modules.IdentitySwitcher.Model;
     using DNN.Modules.IdentitySwitcher.ModuleSettings;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Exceptions;
+    using DotNetNuke.Services.Localization;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -44,17 +46,6 @@ namespace DNN.Modules.IdentitySwitcher
     [DNNtc.ModuleControlProperties("Settings", "IdentitySwitcher Settings", DNNtc.ControlType.Host, "", true, false)]
     public partial class Settings : ModuleSettingsBase
     {
-        private void BindEnumToListControls(Type enumType, ListControl listcontrol)
-        {
-            var countElements = default(int);
-            var names = Enum.GetNames(enumType);
-            var values = Enum.GetValues(enumType);
-            for (countElements = 0; countElements <= names.Length - 1; countElements++)
-            {
-                listcontrol.Items.Add(new ListItem(names[countElements], values.GetValue(countElements).ToString()));
-            }
-        }
-
         #region Base Method Implementations
 
         /// -----------------------------------------------------------------------------
@@ -75,11 +66,11 @@ namespace DNN.Modules.IdentitySwitcher
                     var repository = new IdentitySwitcherModuleSettingsRepository();
                     var settings = repository.GetSettings(this.ModuleConfiguration);
 
-                    this.BindEnumToListControls(typeof(SortBy), this.rbSortBy);
-                    this.rbSortBy.SelectedIndex = 0;
+                    this.rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByDisplayName.Text", this.LocalResourceFile), "0"));
+                    this.rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByUserName.Text", this.LocalResourceFile), "1"));
 
-                    this.BindEnumToListControls(typeof(UserSwitchingSpeed), this.rbSelectingMethod);
-                    this.rbSelectingMethod.SelectedIndex = 0;
+                    this.rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Fast.Text", this.LocalResourceFile), "0"));
+                    this.rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Slow.Text", this.LocalResourceFile), "1"));
 
                     if (this.UserInfo.IsSuperUser)
                     {
@@ -92,10 +83,9 @@ namespace DNN.Modules.IdentitySwitcher
                     {
                         this.trHostSettings.Visible = false;
                     }
-
-                    this.rbSortBy.SelectedValue = settings.SortBy.ToString();
-
-                    this.rbSelectingMethod.SelectedValue = settings.UserSwitchingSpeed.ToString();
+                    
+                    this.rbSortBy.SelectedValue = ((int) settings.SortBy).ToString();
+                    this.rbSelectingMethod.SelectedValue = ((int) settings.UserSwitchingSpeed).ToString();
                 }
             }
             catch (Exception exception) //Module failed to load
