@@ -4,6 +4,8 @@
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
@@ -199,4 +201,14 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets" Condition="Exists('packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets'))" />
+  </Target>
+  <Target Name="BeforeBuild">
+    <NugetContentRestoreTask SolutionDir="$(SolutionDir)" ProjectDir="$(ProjectDir)" />
+  </Target>
 </Project>
