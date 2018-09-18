@@ -1,5 +1,5 @@
 ﻿module IdentitySwitcher {
-    class IdentitySwitcherFactory {
+    class IdentitySwitcherFactory implements IIdentitySwitcherFactory {
         constructor(
             private $q: ng.IQService,
             private $http: ng.IHttpService,
@@ -35,7 +35,7 @@
                 });
         }
 
-        switchUser(moduleInstance: IModuleInstance, selectedUserId: string, selectedUserName: string): angular.IHttpPromise<void> {
+        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
             const apiUrl: string = this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
