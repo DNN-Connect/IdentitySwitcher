@@ -82,11 +82,11 @@
   </ItemGroup>
   <!--MAIN Actions -->
   <Target Name="BeforeBuild">
-    <!--Determine the version info-->
-    <CallTarget Targets="SetVersionInfo" />
   </Target>
   <Target Name="AfterBuild">
     <!--When the buildtype = release the package is created -->
+    <!--Determine the version info-->    
+    <CallTarget Targets="SetVersionInfo" />
     <CallTarget Targets="Release" />
     <CallTarget Targets="CopyDeployFiles" />
   </Target>
@@ -553,7 +553,7 @@
     <!--Copy the files-->
     <!-- Uncomment if you are developing in a running DNN site -->
      
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" /> 
+    <!--<Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" />--> 
     
   </Target>
 </Project>

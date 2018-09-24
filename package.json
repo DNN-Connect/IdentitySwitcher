@@ -7,10 +7,6 @@
     "angular": "^1.7.0",
     "angular-resource": "^1.7.0"
   },
-  "devDependencies": {
-    "@types/angular": "^1.7.0",
-    "@types/angular-resource": "^1.7.0"
-  },
   "scripts": {
     "build": "tsc -p",
     "test": "echo \"Error: no test specified\" && exit 1"

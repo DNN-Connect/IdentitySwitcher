@@ -11,11 +11,10 @@
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types"
+      "./typings"
     ]
   },
   "exclude": [
-    "node_modules",
     "Scripts"
   ],
   "files": [
