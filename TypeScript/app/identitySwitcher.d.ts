@@ -21,8 +21,9 @@
     }
 
     export interface IModuleInstance {
-        ServicesFramework: any;
+        ApplicationPath: string;
         ModuleID: number;
+        ServicesFramework: any;
         SwitchDirectly: boolean;
     }
 }
