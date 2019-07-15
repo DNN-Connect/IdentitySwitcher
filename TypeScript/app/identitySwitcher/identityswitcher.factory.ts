@@ -12,6 +12,7 @@
             return this.$http.get<string[]>(apiUrl,
                 {
                     headers: {
+                        "PortalId": moduleInstance.PortalId,
                         "ModuleId": moduleInstance.ModuleID,
                         "TabId": moduleInstance.ServicesFramework.getTabId()
                     }
@@ -29,6 +30,7 @@
             return this.$http.get<IUserCollection>(apiUrl,
                 {
                     headers: {
+                        "PortalId": moduleInstance.PortalId,
                         "ModuleId": moduleInstance.ModuleID,
                         "TabId": moduleInstance.ServicesFramework.getTabId()
                     }
@@ -45,6 +47,7 @@
             return this.$http.post<void>(apiUrl, null,
                 {
                     headers: {
+                        "PortalId": moduleInstance.PortalId,
                         "ModuleId": moduleInstance.ModuleID,
                         "TabId": moduleInstance.ServicesFramework.getTabId()
                     }
