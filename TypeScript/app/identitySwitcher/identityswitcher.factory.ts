@@ -18,7 +18,7 @@
                 });
         }
 
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]> {
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection> {
             const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/getusers?searchtext=" +
                 selectedSearchText +
@@ -35,7 +35,7 @@
                 });
         }
 
-        switchUser(moduleInstance: IModuleInstance, selectedUserId: string, selectedUserName: string): angular.IHttpPromise<void> {
+        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
             const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
