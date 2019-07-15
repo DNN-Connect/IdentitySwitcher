@@ -3,7 +3,9 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
-    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
@@ -98,24 +100,17 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Installation\ReleaseNotes\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Components\Comparer.cs" />
-    <Compile Include="Components\IdentitySwitcherClient.cs" />
-    <Compile Include="Components\IdentitySwitcherController.cs" />
-    <Compile Include="Components\IdentitySwitcherFileOrder.cs" />
-    <Compile Include="Components\IdentitySwitcherModuleSettings.cs" />
-    <Compile Include="Components\IdentitySwitcherModuleSettingsRepository.cs" />
-    <Compile Include="Components\IdentitySwitcherPortalModuleBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Components\Model\SortBy.cs" />
-    <Compile Include="Components\Model\UserSwitchingSpeed.cs" />
+    <Compile Include="Controllers\IdentitySwitcherController.cs" />
+    <Compile Include="Model\UserCollectionDto.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
+    <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
+    <Compile Include="Model\SortBy.cs" />
+    <Compile Include="Model\UserSwitchingSpeed.cs" />
     <Compile Include="Components\ModuleInstanceBase.cs" />
     <Compile Include="Components\RouteMapper.cs" />
-    <Compile Include="Components\UserDto.cs" />
+    <Compile Include="Model\UserDto.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.ascx.designer.cs">
@@ -138,27 +133,12 @@
     <None Include="App_LocalResources\ViewIdentitySwitcher.ascx.resx">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Installation\03.00.00.SqlDataProvider" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="node_modules\angular-resource\angular-resource.js" />
-    <Content Include="node_modules\angular-resource\angular-resource.min.js" />
-    <Content Include="node_modules\angular-resource\index.js" />
-    <Content Include="node_modules\angular\angular-csp.css" />
-    <Content Include="node_modules\angular\angular.js" />
-    <Content Include="node_modules\angular\angular.min.js" />
-    <Content Include="node_modules\angular\index.js" />
-    <Content Include="node_modules\typescript\CopyrightNotice.txt" />
-    <Content Include="node_modules\typescript\lib\cancellationToken.js" />
-    <Content Include="node_modules\typescript\lib\tsc.js" />
-    <Content Include="node_modules\typescript\lib\tsserver.js" />
-    <Content Include="node_modules\typescript\lib\tsserverlibrary.js" />
-    <Content Include="node_modules\typescript\lib\typescript.js" />
-    <Content Include="node_modules\typescript\lib\typescriptServices.js" />
-    <Content Include="node_modules\typescript\lib\typingsInstaller.js" />
-    <Content Include="node_modules\typescript\lib\watchGuard.js" />
-    <Content Include="node_modules\typescript\LICENSE.txt" />
-    <Content Include="node_modules\typescript\ThirdPartyNoticeText.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.03.00.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.03.00.00.txt" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -166,48 +146,6 @@
     <Content Include="Scripts\resources\angular-resource.min.js" />
     <Content Include="Scripts\resources\angular.min.js" />
     <Content Include="tsconfig.json" />
-    <Content Include="node_modules\%40types\angular-resource\LICENSE" />
-    <Content Include="node_modules\%40types\angular-resource\package.json" />
-    <Content Include="node_modules\%40types\angular-resource\README.md" />
-    <Content Include="node_modules\%40types\angular\LICENSE" />
-    <Content Include="node_modules\%40types\angular\package.json" />
-    <Content Include="node_modules\%40types\angular\README.md" />
-    <Content Include="node_modules\.bin\tsc" />
-    <Content Include="node_modules\.bin\tsc.cmd" />
-    <Content Include="node_modules\.bin\tsserver" />
-    <Content Include="node_modules\.bin\tsserver.cmd" />
-    <Content Include="node_modules\angular-resource\angular-resource.min.js.map" />
-    <Content Include="node_modules\angular-resource\bower.json" />
-    <Content Include="node_modules\angular-resource\LICENSE.md" />
-    <Content Include="node_modules\angular-resource\package.json" />
-    <Content Include="node_modules\angular-resource\README.md" />
-    <Content Include="node_modules\angular\angular.min.js.gzip" />
-    <Content Include="node_modules\angular\angular.min.js.map" />
-    <Content Include="node_modules\angular\bower.json" />
-    <Content Include="node_modules\angular\LICENSE.md" />
-    <Content Include="node_modules\angular\package.json" />
-    <Content Include="node_modules\angular\README.md" />
-    <Content Include="node_modules\typescript\.mailmap" />
-    <Content Include="node_modules\typescript\AUTHORS.md" />
-    <Content Include="node_modules\typescript\bin\tsc" />
-    <Content Include="node_modules\typescript\bin\tsserver" />
-    <Content Include="node_modules\typescript\lib\cs\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\de\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\es\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\fr\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\it\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\ja\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\ko\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\pl\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\pt-br\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\README.md" />
-    <Content Include="node_modules\typescript\lib\ru\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\tr\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\typesMap.json" />
-    <Content Include="node_modules\typescript\lib\zh-cn\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\lib\zh-tw\diagnosticMessages.generated.json" />
-    <Content Include="node_modules\typescript\package.json" />
-    <Content Include="node_modules\typescript\README.md" />
     <SourcePackage Include=".build\MSBuild.Community.Tasks.Targets">
       <SubType>Designer</SubType>
     </SourcePackage>
@@ -224,49 +162,15 @@
     <Content Include="ViewIdentitySwitcher.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="node_modules\%40types\angular-resource\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\angular\index.d.ts" />
-    <TypeScriptCompile Include="node_modules\%40types\angular\jqlite.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.dom.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.dom.iterable.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.collection.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.core.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.generator.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.iterable.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.promise.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.proxy.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.reflect.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.symbol.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2015.symbol.wellknown.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.array.include.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2016.full.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.full.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.intl.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.object.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.sharedmemory.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.string.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2017.typedarrays.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.full.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.intl.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.promise.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es2018.regexp.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es5.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.es6.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.array.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.asynciterable.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.esnext.full.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.scripthost.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\lib.webworker.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\protocol.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\tsserverlibrary.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\typescript.d.ts" />
-    <TypeScriptCompile Include="node_modules\typescript\lib\typescriptServices.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.constants.ts" />
     <TypeScriptCompile Include="TypeScript\app\app.ts" />
     <TypeScriptCompile Include="TypeScript\app\identityswitcher.d.ts" />
@@ -297,4 +201,14 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets" Condition="Exists('packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.NugetContentRestore.0.1.6\build\net40\MSBuild.NugetContentRestore.targets'))" />
+  </Target>
+  <Target Name="BeforeBuild">
+    <NugetContentRestoreTask SolutionDir="$(SolutionDir)" ProjectDir="$(ProjectDir)" />
+  </Target>
 </Project>

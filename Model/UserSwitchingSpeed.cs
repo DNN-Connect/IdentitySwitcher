@@ -22,23 +22,20 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
-    using DotNetNuke.Web.Api;
-
     /// <summary>
     /// </summary>
-    /// <seealso cref="DotNetNuke.Web.Api.IServiceRouteMapper" />
-    public class RouteMapper : IServiceRouteMapper
+    public enum UserSwitchingSpeed
     {
         /// <summary>
-        ///     Registers the routes.
+        /// The fast
         /// </summary>
-        /// <param name="mapRouteManager">The map route manager.</param>
-        public void RegisterRoutes(IMapRoute mapRouteManager)
-        {
-            mapRouteManager.MapHttpRoute("IdentitySwitcher", "default", "{controller}/{action}",
-                                         new[] { "DNN.Modules.IdentitySwitcher.Controllers" });
-        }
+        Fast,
+
+        /// <summary>
+        /// The slow
+        /// </summary>
+        Slow
     }
 }

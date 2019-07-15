@@ -1,5 +1,5 @@
-﻿/// <reference types="angular" />
-/// <reference types="angular-resource" />
+﻿/// <reference path="..\..\Scripts\typings\angularjs\angular.d.ts" />
+/// <reference path="..\..\Scripts\typings\angularjs\angular-resource.d.ts" />
 
 module IdentitySwitcher {
     class ModuleInstanceValue implements IModuleInstanceValue {
@@ -15,5 +15,5 @@ module IdentitySwitcher {
             [
                 "ngResource"
             ])
-        .value("moduleInstance", ModuleInstanceValue);
+        .constant("moduleInstance", ModuleInstanceValue);
 }

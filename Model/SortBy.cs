@@ -22,23 +22,20 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
-    using DotNetNuke.Web.Api;
-
     /// <summary>
     /// </summary>
-    /// <seealso cref="DotNetNuke.Web.Api.IServiceRouteMapper" />
-    public class RouteMapper : IServiceRouteMapper
+    public enum SortBy
     {
         /// <summary>
-        ///     Registers the routes.
+        ///     The display name
         /// </summary>
-        /// <param name="mapRouteManager">The map route manager.</param>
-        public void RegisterRoutes(IMapRoute mapRouteManager)
-        {
-            mapRouteManager.MapHttpRoute("IdentitySwitcher", "default", "{controller}/{action}",
-                                         new[] { "DNN.Modules.IdentitySwitcher.Controllers" });
-        }
+        DisplayName,
+
+        /// <summary>
+        ///     The user name
+        /// </summary>
+        UserName
     }
 }

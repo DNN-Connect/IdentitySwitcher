@@ -1,12 +1,11 @@
 ﻿declare namespace IdentitySwitcher {
     interface IIdentitySwitcherConstants {
-        readonly viewTemplatesFolder: string;
-        readonly restfulApiUrl: string;
+        readonly apiUrl: string;
     }
 
     interface IIdentitySwitcherFactory {
         getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]>;
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string): angular.IHttpPromise<IUser[]>;
+        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection>;
         switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void>;
     }
 
@@ -16,14 +15,21 @@
         userAndDisplayName: string;
     }
 
+    interface IUserCollection {
+        users: IUser[];
+        selectedUserId: number;
+    }
+
     interface IModuleInstanceValue {
         value: IModuleInstance;
     }
 
     export interface IModuleInstance {
         ApplicationPath: string;
-        ModuleID: number;
         ServicesFramework: any;
-        SwitchDirectly: boolean;
+        ModuleID: number;
+        FilterText: string;
+        SwitchToText: string;
+        SwitchUserInOneClick: boolean;
     }
 }

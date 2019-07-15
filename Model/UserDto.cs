@@ -22,23 +22,39 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.Model
 {
-    using DotNetNuke.Web.Api;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// </summary>
-    /// <seealso cref="DotNetNuke.Web.Api.IServiceRouteMapper" />
-    public class RouteMapper : IServiceRouteMapper
+    public class UserDto
     {
         /// <summary>
-        ///     Registers the routes.
+        ///     Gets or sets the identifier.
         /// </summary>
-        /// <param name="mapRouteManager">The map route manager.</param>
-        public void RegisterRoutes(IMapRoute mapRouteManager)
-        {
-            mapRouteManager.MapHttpRoute("IdentitySwitcher", "default", "{controller}/{action}",
-                                         new[] { "DNN.Modules.IdentitySwitcher.Controllers" });
-        }
+        /// <value>
+        ///     The identifier.
+        /// </value>
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the name of the user.
+        /// </summary>
+        /// <value>
+        ///     The name of the user.
+        /// </value>
+        [JsonProperty("userName")]
+        public string UserName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the display name of the user and.
+        /// </summary>
+        /// <value>
+        ///     The display name of the user and.
+        /// </value>
+        [JsonProperty("userAndDisplayName")]
+        public string UserAndDisplayName { get; set; }
     }
 }

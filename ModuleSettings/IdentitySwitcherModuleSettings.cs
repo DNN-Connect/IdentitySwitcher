@@ -22,23 +22,46 @@
 
 #endregion
 
-namespace DNN.Modules.IdentitySwitcher.Components
+namespace DNN.Modules.IdentitySwitcher.ModuleSettings
 {
-    using DotNetNuke.Web.Api;
+    using System;
+    using DNN.Modules.IdentitySwitcher.Model;
+    using DotNetNuke.Entities.Modules.Settings;
 
     /// <summary>
     /// </summary>
-    /// <seealso cref="DotNetNuke.Web.Api.IServiceRouteMapper" />
-    public class RouteMapper : IServiceRouteMapper
+    [Serializable]
+    public class IdentitySwitcherModuleSettings
     {
+        // The old version of the module used camelcase for the module settings.
+        // In order to avoid difficulties these properties are kept that way and translated with the parametername attribute to
+        // pascalcase.
+
         /// <summary>
-        ///     Registers the routes.
+        ///     Gets or sets the include host.
         /// </summary>
-        /// <param name="mapRouteManager">The map route manager.</param>
-        public void RegisterRoutes(IMapRoute mapRouteManager)
-        {
-            mapRouteManager.MapHttpRoute("IdentitySwitcher", "default", "{controller}/{action}",
-                                         new[] { "DNN.Modules.IdentitySwitcher.Controllers" });
-        }
+        /// <value>
+        ///     The include host.
+        /// </value>
+        [TabModuleSetting(ParameterName = "includeHost")]
+        public bool? IncludeHost { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the sort by.
+        /// </summary>
+        /// <value>
+        ///     The sort by.
+        /// </value>
+        [TabModuleSetting(ParameterName = "sortBy")]
+        public SortBy SortBy { get; set; } = SortBy.DisplayName;
+
+        /// <summary>
+        ///     Gets or sets the user switching speed.
+        /// </summary>
+        /// <value>
+        ///     The user switching speed.
+        /// </value>
+        [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
+        public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.Fast;
     }
 }

@@ -8,15 +8,13 @@
         /* ctor                                                                   */
         /**************************************************************************/
         constructor() {
-            this.viewTemplatesFolder = "pages/templates/";
-            this.restfulApiUrl = "/DesktopModules/Identity%20Switcher/API/";
+            this.apiUrl = "/DesktopModules/IdentitySwitcher/API/";
         }
 
         /**************************************************************************/
         /* PUBLIC PROPERTIES                                                      */
         /**************************************************************************/
-        readonly viewTemplatesFolder: string;
-        readonly restfulApiUrl: string;
+        readonly apiUrl: string;
     }
 
     /**************************************************************************/

@@ -185,4 +185,5 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-**/Scripts/dist/**
+**/Scripts/dist**
+**/Scripts/typings**

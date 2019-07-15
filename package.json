@@ -1,16 +1,11 @@
 {
   "name": "dnn.identityswitcher",
-  "version": "1.0.0",
-  "description":
-    "The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.",
+  "version": "3.0.0.0",
+  "description": "The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.",
   "dependencies": {
     "typescript": "^2.9.1",
     "angular": "^1.7.0",
     "angular-resource": "^1.7.0"
-  },
-  "devDependencies": {
-    "@types/angular": "^1.7.0",
-    "@types/angular-resource": "^1.7.0"
   },
   "scripts": {
     "build": "tsc -p",
@@ -18,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mark-89/IdentitySwitcher.git"
+    "url": "git+https://github.com/DNN-Connect/IdentitySwitcher.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mark-89/IdentitySwitcher/issues"
+    "url": "https://github.com/DNN-Connect/IdentitySwitcher/issues"
   },
-  "homepage": "https://github.com/Mark-89/IdentitySwitcher#readme"
+  "homepage": "https://github.com/DNN-Connect/IdentitySwitcher#readme"
 }
