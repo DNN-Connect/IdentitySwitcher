@@ -8,10 +8,12 @@
 
         constructor(
             private identitySwitcherFactory: IIdentitySwitcherFactory,
-            private moduleInstance: IModuleInstanceValue,
+			private moduleInstance: IModuleInstanceValue,
+			private appPath: string,
             private $window: ng.IWindowService
         ) {
         }
+
 
         /**************************************************************************/
         /* PUBLIC PROPERTIES                                                      */
@@ -30,7 +32,7 @@
         * search()
         */
         search(onlyDefault: boolean = false): void {
-            this.identitySwitcherFactory.getUsers(this.moduleInstance.value,
+			this.identitySwitcherFactory.getUsers(this.appPath, this.moduleInstance.value,
                 this.selectedSearchText,
                 this.selectedItem, onlyDefault).then((serverData) => {
                     this.foundUsers = serverData.data.users;
@@ -60,7 +62,7 @@
         * switchUser()
         */
         switchUser(): void {
-            this.identitySwitcherFactory.switchUser(this.moduleInstance.value,
+			this.identitySwitcherFactory.switchUser(this.appPath, this.moduleInstance.value,
                     this.selectedUser.id,
                     this.selectedUser.userName)
                 .then((serverData) => {
@@ -78,9 +80,11 @@
         /*
         * init()
         */
-        init(moduleInstance: IModuleInstance): void {
+        init(moduleInstance: IModuleInstance, appPath: string): void {
             this.moduleInstance.value = moduleInstance;
             this.moduleInstance.value.ServicesFramework = $.ServicesFramework(moduleInstance.ModuleID);
+
+			this.appPath = appPath;
 
             // This if/else is called here and not in the constructor because it needs the module instance.
             if (this.moduleInstance.value.SwitchUserInOneClick) {
@@ -100,7 +104,7 @@
         * getSearchItems()
         */
         private getSearchItems(): void {
-            this.identitySwitcherFactory.getSearchItems(this.moduleInstance.value)
+            this.identitySwitcherFactory.getSearchItems(this.appPath, this.moduleInstance.value)
                 .then((serverData) => {
                         // Success
                         this.searchItems = serverData.data;

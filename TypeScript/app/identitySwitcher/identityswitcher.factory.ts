@@ -3,10 +3,11 @@
         constructor(
             private $q: ng.IQService,
             private $http: ng.IHttpService,
-            private config: IIdentitySwitcherConstants) { }
+			private config: IIdentitySwitcherConstants
+		) { }
 
-        getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]> {
-            const apiUrl: string = this.config.apiUrl +
+		getSearchItems(appPath: string, moduleInstance: IModuleInstance): angular.IHttpPromise<string[]> {
+            const apiUrl: string = appPath + this.config.apiUrl +
                 "identityswitcher/getsearchitems";
 
             return this.$http.get<string[]>(apiUrl,
@@ -18,8 +19,8 @@
                 });
         }
 
-        getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection> {
-            const apiUrl: string = this.config.apiUrl +
+		getUsers(appPath: string, moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection> {
+			const apiUrl: string = appPath + this.config.apiUrl +
                 "identityswitcher/getusers?searchtext=" +
                 selectedSearchText +
                 "&selectedsearchitem=" +
@@ -35,8 +36,8 @@
                 });
         }
 
-        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
-            const apiUrl: string = this.config.apiUrl +
+		switchUser(appPath: string, moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
+			const apiUrl: string = appPath + this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
                 "&selectedusername=" +

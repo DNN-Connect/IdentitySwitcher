@@ -109,8 +109,10 @@ namespace DNN.Modules.IdentitySwitcher
         {
             if (initControl != null)
             {
-                var initScript = string.Format(CultureInfo.InvariantCulture, "vm.init({0})",
-                                               this.GetModuleInstance().ToJson());
+                var initScript = string.Format(CultureInfo.InvariantCulture, "vm.init({0},{1})",
+                                               this.GetModuleInstance().ToJson(),
+											   Json.Serialize(DotNetNuke.Common.Globals.ApplicationPath)
+											   );
 
                 initControl.Attributes.Add("ng-init", initScript);
             }
