@@ -48,6 +48,14 @@ namespace DNN.Modules.IdentitySwitcher.Components
         public int ModuleID { get; set; }
 
         /// <summary>
+        ///     Gets or sets the portal identifier.
+        /// </summary>
+        /// <value>
+        ///     The portal identifier.
+        /// </value>
+        public int PortalId { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether [switch user in one click].
         /// </summary>
         /// <value>

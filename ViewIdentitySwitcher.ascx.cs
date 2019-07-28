@@ -151,6 +151,7 @@ namespace DNN.Modules.IdentitySwitcher
             if (moduleControl != null)
             {
                 result.ModuleID = moduleControl.ModuleId;
+                result.PortalId = moduleControl.PortalId;
                 result.FilterText = Localization.GetString("FilterText.Text", this.LocalResourceFile);
                 result.SwitchToText = Localization.GetString("SwitchToText.Text", this.LocalResourceFile);
 
