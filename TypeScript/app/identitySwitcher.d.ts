@@ -25,6 +25,7 @@
     }
 
     export interface IModuleInstance {
+        ApplicationPath: string;
         ServicesFramework: any;
         ModuleID: number;
         FilterText: string;

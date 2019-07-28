@@ -6,7 +6,7 @@
             private config: IIdentitySwitcherConstants) { }
 
         getSearchItems(moduleInstance: IModuleInstance): angular.IHttpPromise<string[]> {
-            const apiUrl: string = this.config.apiUrl +
+            const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/getsearchitems";
 
             return this.$http.get<string[]>(apiUrl,
@@ -19,7 +19,7 @@
         }
 
         getUsers(moduleInstance: IModuleInstance, selectedSearchText: string, selectedSearchItem: string, onlyDefault: boolean): angular.IHttpPromise<IUserCollection> {
-            const apiUrl: string = this.config.apiUrl +
+            const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/getusers?searchtext=" +
                 selectedSearchText +
                 "&selectedsearchitem=" +
@@ -36,7 +36,7 @@
         }
 
         switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
-            const apiUrl: string = this.config.apiUrl +
+            const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
                 "&selectedusername=" +
