@@ -62,7 +62,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 var resultData = new List<string>();
 
                 var profileProperties =
-                    ProfileController.GetPropertyDefinitionsByPortal(this.PortalSettings.PortalId, false);
+                    ProfileController.GetPropertyDefinitionsByPortal(PortalSettings.PortalId, false);
 
                 foreach (ProfilePropertyDefinition definition in profileProperties)
                 {
@@ -70,13 +70,13 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 }
                 resultData.AddRange(new List<string> { "RoleName", "Email", "Username" });
 
-                result = this.Ok(resultData);
+                result = Ok(resultData);
             }
             catch (Exception exception)
             {
                 Exceptions.LogException(exception);
 
-                result = this.InternalServerError(exception);
+                result = InternalServerError(exception);
             }
 
             return result;
@@ -105,14 +105,14 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 {
                     // ..get all users if no searchtext is provided or filtered users if a searchtext is provided.
                     usersInfo = searchText == null
-                        ? this.GetAllUsers()
-                        : this.GetFilteredUsers(searchText, selectedSearchItem);
-                    usersInfo = this.SortUsers(usersInfo);
+                        ? GetAllUsers()
+                        : GetFilteredUsers(searchText, selectedSearchItem);
+                    usersInfo = SortUsers(usersInfo);
                 }
 
-                this.AddDefaultUsers(usersInfo);
+                AddDefaultUsers(usersInfo);
 
-                var selectedUserId = this.UserInfo.UserID;
+                var selectedUserId = UserInfo.UserID;
 
                 var resultData = new UserCollectionDto
                 {
@@ -128,13 +128,13 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                     SelectedUserId = selectedUserId
                 };
 
-                result = this.Ok(resultData);
+                result = Ok(resultData);
             }
             catch (Exception exception)
             {
                 Exceptions.LogException(exception);
 
-                result = this.InternalServerError(exception);
+                result = InternalServerError(exception);
             }
 
             return result;
@@ -160,25 +160,25 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 }
                 else
                 {
-                    var selectedUser = UserController.GetUserById(this.PortalSettings.PortalId, selectedUserId);
+                    var selectedUser = UserController.GetUserById(PortalSettings.PortalId, selectedUserId);
 
-                    DataCache.ClearUserCache(this.PortalSettings.PortalId, selectedUserName);
+                    DataCache.ClearUserCache(PortalSettings.PortalId, selectedUserName);
 
                     // Sign current user out.
                     var objPortalSecurity = new PortalSecurity();
                     objPortalSecurity.SignOut();
 
                     // Sign new user in.
-                    UserController.UserLogin(this.PortalSettings.PortalId, selectedUser, this.PortalSettings.PortalName,
+                    UserController.UserLogin(PortalSettings.PortalId, selectedUser, PortalSettings.PortalName,
                         HttpContext.Current.Request.UserHostAddress, false);
                 }
-                result = this.Ok();
+                result = Ok();
             }
             catch (Exception exception)
             {
                 Exceptions.LogException(exception);
 
-                result = this.InternalServerError(exception);
+                result = InternalServerError(exception);
             }
 
             return result;
@@ -192,7 +192,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         /// <returns></returns>
         private List<UserInfo> GetAllUsers()
         {
-            var users = UserController.GetUsers(this.PortalSettings.PortalId).OfType<UserInfo>().ToList();
+            var users = UserController.GetUsers(PortalSettings.PortalId).OfType<UserInfo>().ToList();
 
             return users;
         }
@@ -203,7 +203,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         private void AddDefaultUsers(List<UserInfo> users)
         {
             var repository = new IdentitySwitcherModuleSettingsRepository();
-            var settings = repository.GetSettings(this.ActiveModule);
+            var settings = repository.GetSettings(ActiveModule);
 
             // If includehost setting is set to true, add host users to the list.
             if (settings.IncludeHost ?? false)
@@ -228,7 +228,7 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
         private List<UserInfo> SortUsers(List<UserInfo> users)
         {
             var repository = new IdentitySwitcherModuleSettingsRepository();
-            var settings = repository.GetSettings(this.ActiveModule);
+            var settings = repository.GetSettings(ActiveModule);
 
             switch (settings.SortBy)
             {
@@ -260,22 +260,22 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
             {
                 case "Email":
                     users = UserController
-                         .GetUsersByEmail(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
+                         .GetUsersByEmail(PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
                          .OfType<UserInfo>().ToList();
                     break;
                 case "Username":
                     users = UserController
-                        .GetUsersByUserName(this.PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
+                        .GetUsersByUserName(PortalSettings.PortalId, searchText + "%", -1, -1, ref total)
                         .OfType<UserInfo>().ToList();
                     break;
                 case "RoleName":
                     users = RoleController
-                        .Instance.GetUsersByRole(this.PortalSettings.PortalId, searchText).ToList();
+                        .Instance.GetUsersByRole(PortalSettings.PortalId, searchText).ToList();
                     break;
 
                 default:
                     users = UserController
-                        .GetUsersByProfileProperty(this.PortalSettings.PortalId, selectedSearchItem, searchText + "%",
+                        .GetUsersByProfileProperty(PortalSettings.PortalId, selectedSearchItem, searchText + "%",
                                                    0, 1000, ref total)
                         .OfType<UserInfo>().ToList();
                     break;

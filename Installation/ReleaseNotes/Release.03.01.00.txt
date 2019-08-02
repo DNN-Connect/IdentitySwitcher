@@ -1,0 +1,16 @@
+<h2>Release notes Identity Switcher 03.01.00</h2>
+<p>Full details on the changes can be found in great detail at <a href="https://github.com/DNN-Connect/IdentitySwitcher" target="_blank">https://github.com/DNN-Connect/IdentitySwitcher</a>.</p>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Corrected handling of users in multiple portals within 1 DNN installation</li>
+</ul>
+<h3>CHANGES</h3>
+<ul>
+	<li>Code clean-up</li>
+	<li>Improved UI with new Angular front end construction</li>
+</ul>
+<h3>NOTES</h3>
+<ul>
+	<li>Tested on DNN 9.3.2 and when placing the module on a page you need to refresh the page at least once to display the module correctly</li>
+	<li>Don't place multiple IdentitySwitcher modules on the same page as the module is not fit for such a scenario</li>
+</ul>
