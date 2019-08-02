@@ -61,31 +61,31 @@ namespace DNN.Modules.IdentitySwitcher
         {
             try
             {
-                if (this.Page.IsPostBack == false)
+                if (Page.IsPostBack == false)
                 {
                     var repository = new IdentitySwitcherModuleSettingsRepository();
-                    var settings = repository.GetSettings(this.ModuleConfiguration);
+                    var settings = repository.GetSettings(ModuleConfiguration);
 
-                    this.rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByDisplayName.Text", this.LocalResourceFile), "0"));
-                    this.rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByUserName.Text", this.LocalResourceFile), "1"));
+                    rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByDisplayName.Text", LocalResourceFile), "0"));
+                    rbSortBy.Items.Add(new ListItem(Localization.GetString("SortByUserName.Text", LocalResourceFile), "1"));
 
-                    this.rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Fast.Text", this.LocalResourceFile), "0"));
-                    this.rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Slow.Text", this.LocalResourceFile), "1"));
+                    rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Fast.Text", LocalResourceFile), "0"));
+                    rbSelectingMethod.Items.Add(new ListItem(Localization.GetString("Slow.Text", LocalResourceFile), "1"));
 
-                    if (this.UserInfo.IsSuperUser)
+                    if (UserInfo.IsSuperUser)
                     {
                         if (settings.IncludeHost != null)
                         {
-                            this.cbIncludeHostUser.Checked = (bool) settings.IncludeHost;
+                            cbIncludeHostUser.Checked = (bool) settings.IncludeHost;
                         }
                     }
                     else
                     {
-                        this.trHostSettings.Visible = false;
+                        trHostSettings.Visible = false;
                     }
                     
-                    this.rbSortBy.SelectedValue = ((int) settings.SortBy).ToString();
-                    this.rbSelectingMethod.SelectedValue = ((int) settings.UserSwitchingSpeed).ToString();
+                    rbSortBy.SelectedValue = ((int) settings.SortBy).ToString();
+                    rbSelectingMethod.SelectedValue = ((int) settings.UserSwitchingSpeed).ToString();
                 }
             }
             catch (Exception exception) //Module failed to load
@@ -108,20 +108,20 @@ namespace DNN.Modules.IdentitySwitcher
             try
             {
                 var repository = new IdentitySwitcherModuleSettingsRepository();
-                var settings = repository.GetSettings(this.ModuleConfiguration);
+                var settings = repository.GetSettings(ModuleConfiguration);
 
-                if (this.UserInfo.IsSuperUser)
+                if (UserInfo.IsSuperUser)
                 {
-                    settings.IncludeHost = this.cbIncludeHostUser.Checked;
+                    settings.IncludeHost = cbIncludeHostUser.Checked;
                 }
-                settings.SortBy = (SortBy) Enum.Parse(typeof(SortBy), this.rbSortBy.SelectedValue);
+                settings.SortBy = (SortBy) Enum.Parse(typeof(SortBy), rbSortBy.SelectedValue);
                 settings.UserSwitchingSpeed =
-                    (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), this.rbSelectingMethod.SelectedValue);
+                    (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), rbSelectingMethod.SelectedValue);
 
-                repository.SaveSettings(this.ModuleConfiguration, settings);
+                repository.SaveSettings(ModuleConfiguration, settings);
 
                 // refresh cache
-                ModuleController.SynchronizeModule(this.ModuleId);
+                ModuleController.SynchronizeModule(ModuleId);
             }
             catch (Exception exception) //Module failed to load
             {

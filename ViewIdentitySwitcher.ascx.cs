@@ -81,12 +81,12 @@ namespace DNN.Modules.IdentitySwitcher
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this._moduleFolderName))
+                if (string.IsNullOrWhiteSpace(_moduleFolderName))
                 {
-                    this._moduleFolderName =
-                        Path.Combine(Globals.DesktopModulePath, this.ModuleConfiguration.DesktopModule.FolderName);
+                    _moduleFolderName =
+                        Path.Combine(Globals.DesktopModulePath, ModuleConfiguration.DesktopModule.FolderName);
                 }
-                return this._moduleFolderName;
+                return _moduleFolderName;
             }
         }
 
@@ -96,7 +96,7 @@ namespace DNN.Modules.IdentitySwitcher
         /// <value>
         /// The module script folder.
         /// </value>
-        private string ModuleScriptFolder => Path.Combine(this.ModuleFolderName, this.ScriptFolderName);
+        private string ModuleScriptFolder => Path.Combine(ModuleFolderName, ScriptFolderName);
 
         #endregion
 
@@ -110,7 +110,7 @@ namespace DNN.Modules.IdentitySwitcher
             if (initControl != null)
             {
                 var initScript = string.Format(CultureInfo.InvariantCulture, "vm.init({0})",
-                                               this.GetModuleInstance().ToJson());
+                                               GetModuleInstance().ToJson());
 
                 initControl.Attributes.Add("ng-init", initScript);
             }
@@ -125,7 +125,7 @@ namespace DNN.Modules.IdentitySwitcher
         private void RegisterScript(string folder, string fileName, int priority)
         {
             var scriptPath = string.IsNullOrWhiteSpace(folder) ? fileName : Path.Combine(folder, fileName);
-            ClientResourceManager.RegisterScript(this.Page, scriptPath, priority);
+            ClientResourceManager.RegisterScript(Page, scriptPath, priority);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace DNN.Modules.IdentitySwitcher
         /// <returns></returns>
         private ModuleInstanceBase GetModuleInstance()
         {
-            return this.GetModuleInstance<ModuleInstanceBase>(this);
+            return GetModuleInstance<ModuleInstanceBase>(this);
         }
 
         /// <summary>
@@ -152,8 +152,8 @@ namespace DNN.Modules.IdentitySwitcher
             {
                 result.ModuleID = moduleControl.ModuleId;
                 result.PortalId = moduleControl.PortalId;
-                result.FilterText = Localization.GetString("FilterText.Text", this.LocalResourceFile);
-                result.SwitchToText = Localization.GetString("SwitchToText.Text", this.LocalResourceFile);
+                result.FilterText = Localization.GetString("FilterText.Text", LocalResourceFile);
+                result.SwitchToText = Localization.GetString("SwitchToText.Text", LocalResourceFile);
 
                 var moduleInfo = new ModuleController().GetModule(moduleControl.ModuleId);
                 var repository = new IdentitySwitcherModuleSettingsRepository();
@@ -177,13 +177,13 @@ namespace DNN.Modules.IdentitySwitcher
                 var priority = 0;
 
                 //Javascript Resources
-                var jsFolder = Path.Combine(this.ModuleScriptFolder, ResourcesFolderName);
-                this.RegisterScript(jsFolder, "angular.min.js", priority++);
-                this.RegisterScript(jsFolder, "angular-resource.min.js", priority++);
+                var jsFolder = Path.Combine(ModuleScriptFolder, ResourcesFolderName);
+                RegisterScript(jsFolder, "angular.min.js", priority++);
+                RegisterScript(jsFolder, "angular-resource.min.js", priority++);
 
                 //Typescript
-                jsFolder = Path.Combine(this.ModuleScriptFolder, DistributionFolderName);
-                this.RegisterScript(jsFolder, "dnn.identityswitcher.js", priority++);
+                jsFolder = Path.Combine(ModuleScriptFolder, DistributionFolderName);
+                RegisterScript(jsFolder, "dnn.identityswitcher.js", priority++);
 
             }
             catch (Exception exception)
@@ -201,9 +201,9 @@ namespace DNN.Modules.IdentitySwitcher
         {
             try
             {
-                if (!this.Page.IsPostBack)
+                if (!Page.IsPostBack)
                 {
-                    this.InitializeModuleInstanceJson(this.divBaseDiv);
+                    InitializeModuleInstanceJson(divBaseDiv);
                 }
             }
             catch (Exception exception) //Module failed to load
