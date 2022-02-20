@@ -64,11 +64,13 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 var profileProperties =
                     ProfileController.GetPropertyDefinitionsByPortal(PortalSettings.PortalId, false);
 
+                resultData.AddRange(new List<string> { "RoleName", "Email", "Username", "FirstName", "LastName", "DisplayName" });
+
                 foreach (ProfilePropertyDefinition definition in profileProperties)
                 {
-                    resultData.Add(definition.PropertyName);
+                    if (!resultData.Contains(definition.PropertyName))
+                        resultData.Add(definition.PropertyName);
                 }
-                resultData.AddRange(new List<string> { "RoleName", "Email", "Username" });
 
                 result = Ok(resultData);
             }
@@ -117,13 +119,13 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 var resultData = new UserCollectionDto
                 {
                     Users = usersInfo.Select(userInfo => new UserDto
-                        {
-                            Id = userInfo.UserID,
-                            UserName = userInfo.Username,
-                            UserAndDisplayName = userInfo.DisplayName != null
+                    {
+                        Id = userInfo.UserID,
+                        UserName = userInfo.Username,
+                        UserAndDisplayName = userInfo.DisplayName != null
                                 ? $"{userInfo.DisplayName} - {userInfo.Username}"
                                 : userInfo.Username
-                        })
+                    })
                         .ToList(),
                     SelectedUserId = selectedUserId
                 };
@@ -214,11 +216,11 @@ namespace DNN.Modules.IdentitySwitcher.Controllers
                 {
                     users.Insert(
                         0,
-                        new UserInfo {Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null});
+                        new UserInfo { Username = hostUser.Username, UserID = hostUser.UserID, DisplayName = null });
                 }
             }
 
-            users.Insert(0, new UserInfo {Username = "Anonymous", DisplayName = null});
+            users.Insert(0, new UserInfo { Username = "Anonymous", DisplayName = null });
 
         }
 
