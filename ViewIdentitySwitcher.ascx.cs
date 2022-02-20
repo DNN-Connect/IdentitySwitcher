@@ -153,7 +153,9 @@ namespace DNN.Modules.IdentitySwitcher
                 result.ModuleID = moduleControl.ModuleId;
                 result.PortalId = moduleControl.PortalId;
                 result.FilterText = Localization.GetString("FilterText.Text", LocalResourceFile);
+                result.FilterIconText = Localization.GetString("FilterIcon.Text", LocalResourceFile);
                 result.SwitchToText = Localization.GetString("SwitchToText.Text", LocalResourceFile);
+                result.SwitchIconText = Localization.GetString("SwitchIcon.Text", LocalResourceFile);
 
                 var moduleInfo = new ModuleController().GetModule(moduleControl.ModuleId);
                 var repository = new IdentitySwitcherModuleSettingsRepository();

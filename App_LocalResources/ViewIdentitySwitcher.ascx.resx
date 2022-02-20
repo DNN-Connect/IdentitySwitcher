@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Anonymous.Text" xml:space="preserve">
     <value>Anonymous User</value>
@@ -209,5 +209,11 @@
   </data>
   <data name="SwitchToText.Text" xml:space="preserve">
     <value>Switch to:</value>
+  </data>
+  <data name="FilterIcon.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SwitchIcon.Text" xml:space="preserve">
+    <value>Switch</value>
   </data>
 </root>

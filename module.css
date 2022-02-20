@@ -1,14 +1,29 @@
-﻿.is_SearchLabel, .is_SearchTask, .is_SwitchLabel, .is_SwitchTask, .is_progress { float: left }
+﻿.is_SearchRow, .is_SwitchRow {
+    min-height: 35px;
+    clear: both
+}
+
+.is_SearchLabel, .is_SearchTask, .is_SwitchLabel, .is_SwitchTask, .is_progress {
+    float: left
+}
 
 .is_SearchLabel, .is_SwitchLabel {
     vertical-align: middle;
     width: 65px;
 }
 
-.is_SearchText, .is_SearchMenu { width: 125px }
+.is_SearchText {
+    width: 200px
+}
 
-.is_SearchSeperator { width: 3px }
+.is_SearchMenu {
+    width: 200px
+}
 
-.is_SwitchMenu { width: 253px }
+.is_SearchSeperator {
+    width: 3px
+}
 
-.is_Clear { clear: both }
+.is_SwitchMenu {
+    width: 253px
+}
