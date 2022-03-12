@@ -27,7 +27,7 @@
     <OptionInfer>On</OptionInfer>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,21 +51,19 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetNuke.Core.8.0.2.4\lib\net40\DotNetNuke.dll</HintPath>
+    <Reference Include="DotNetNuke, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\DotNetNuke.Core.9.4.0\lib\net45\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetNuke.Web.8.0.2.4\lib\net40\DotNetNuke.Web.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="DotNetNuke.Web, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.9.4.0\lib\net45\DotNetNuke.Web.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=8.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetNuke.Web.Client.8.0.2.4\lib\net40\DotNetNuke.Web.Client.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="DotNetNuke.Web.Client, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetNuke.Web.Client.9.4.0\lib\net45\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DotNetNuke.Web.8.0.2.4\lib\net40\DotNetNuke.WebUtility.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>packages\DotNetNuke.Web.9.4.0\lib\net45\DotNetNuke.WebUtility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DotNetNuke.Core.8.0.2.4\lib\net40\Microsoft.ApplicationBlocks.Data.dll</HintPath>
@@ -73,9 +71,8 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -100,10 +97,15 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\SharedResources.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\IdentitySwitcherController.cs" />
     <Compile Include="Model\UserCollectionDto.cs" />
+    <Compile Include="Model\RequestLog.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
     <Compile Include="Model\SortBy.cs" />
@@ -113,6 +115,9 @@
     <Compile Include="Model\UserDto.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestConfirmation.ashx.cs">
+      <DependentUpon>RequestConfirmation.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
@@ -134,11 +139,14 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Installation\03.00.00.SqlDataProvider" />
+    <None Include="Installation\04.00.00.sqlDataProvider" />
+    <Content Include="Installation\IdentitySwitcher.dnn" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Installation\CleanUp\Cleanup.03.01.00.txt" />
     <Content Include="Installation\CleanUp\Cleanup.03.00.00.txt" />
+    <Content Include="Installation\IdentitySwitcher.png" />
     <Content Include="Installation\ReleaseNotes\Release.03.01.00.txt" />
     <Content Include="Installation\ReleaseNotes\Release.03.00.00.txt" />
     <Content Include="packages.config">
@@ -148,6 +156,8 @@
     <Content Include="Scripts\resources\angular-resource.min.js" />
     <Content Include="Scripts\resources\angular.min.js" />
     <Content Include="tsconfig.json" />
+    <Content Include="web.config" />
+    <Content Include="RequestConfirmation.ashx" />
     <SourcePackage Include=".build\MSBuild.Community.Tasks.Targets">
       <SubType>Designer</SubType>
     </SourcePackage>

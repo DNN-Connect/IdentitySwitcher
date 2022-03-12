@@ -74,18 +74,26 @@ namespace DNN.Modules.IdentitySwitcher
 
                     if (UserInfo.IsSuperUser)
                     {
-                        if (settings.IncludeHost != null)
-                        {
-                            cbIncludeHostUser.Checked = (bool) settings.IncludeHost;
-                        }
+                        cbIncludeHostUser.Checked = settings.IncludeHost.GetValueOrDefault();
                     }
                     else
                     {
                         trHostSettings.Visible = false;
                     }
-                    
-                    rbSortBy.SelectedValue = ((int) settings.SortBy).ToString();
-                    rbSelectingMethod.SelectedValue = ((int) settings.UserSwitchingSpeed).ToString();
+
+                    if (UserInfo.IsSuperUser || UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
+                    {
+                        cbIncludeAdminUser.Checked = settings.IncludeAdmin.GetValueOrDefault();
+                    }
+                    else
+                    {
+                        trAdminSettings.Visible = false;
+                    }
+
+                    rbSortBy.SelectedValue = ((int)settings.SortBy).ToString();
+                    rbSelectingMethod.SelectedValue = ((int)settings.UserSwitchingSpeed).ToString();
+
+                    cbRequestAuthorization.Checked = settings.RequestAuthorization.GetValueOrDefault();
                 }
             }
             catch (Exception exception) //Module failed to load
@@ -114,9 +122,13 @@ namespace DNN.Modules.IdentitySwitcher
                 {
                     settings.IncludeHost = cbIncludeHostUser.Checked;
                 }
-                settings.SortBy = (SortBy) Enum.Parse(typeof(SortBy), rbSortBy.SelectedValue);
-                settings.UserSwitchingSpeed =
-                    (UserSwitchingSpeed) Enum.Parse(typeof(UserSwitchingSpeed), rbSelectingMethod.SelectedValue);
+                if (UserInfo.IsSuperUser || UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
+                {
+                    settings.IncludeAdmin = cbIncludeAdminUser.Checked;
+                }
+                settings.SortBy = (SortBy)Enum.Parse(typeof(SortBy), rbSortBy.SelectedValue);
+                settings.UserSwitchingSpeed = (UserSwitchingSpeed)Enum.Parse(typeof(UserSwitchingSpeed), rbSelectingMethod.SelectedValue);
+                settings.RequestAuthorization = cbRequestAuthorization.Checked;
 
                 repository.SaveSettings(ModuleConfiguration, settings);
 

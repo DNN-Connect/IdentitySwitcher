@@ -150,4 +150,16 @@
   <data name="Slow.Text" xml:space="preserve">
     <value>Select after user &amp; role filtering</value>
   </data>
+  <data name="plRequestAuthorization.Help" xml:space="preserve">
+    <value>When this option is enabled, the user being impersonated will receive an email with the details of the user doing the impersonation. The request will have to be approved before the impersonation is effective.</value>
+  </data>
+  <data name="plRequestAuthorization.Text" xml:space="preserve">
+    <value>Request authorization</value>
+  </data>
+  <data name="plIncludeAdminUser.Help" xml:space="preserve">
+    <value>Include the Administrator users in the dropdown list. Caution: doing so will give non Administrator users the option to log on as an administrator</value>
+  </data>
+  <data name="plIncludeAdminUser.Text" xml:space="preserve">
+    <value>Include Administrator users</value>
+  </data>
 </root>
