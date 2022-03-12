@@ -3,13 +3,27 @@
     clear: both
 }
 
+.is_WaitRow {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+    border: solid 1px #888;
+    background-color: #dcdcdc;
+}
+
+    .is_WaitRow img {
+        padding-top: 10px
+    }
+
+
 .is_SearchLabel, .is_SearchTask, .is_SwitchLabel, .is_SwitchTask, .is_progress {
     float: left
 }
 
 .is_SearchLabel, .is_SwitchLabel {
     vertical-align: middle;
-    width: 65px;
+    width: 100px;
 }
 
 .is_SearchText {

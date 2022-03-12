@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="IdentitySwitcher" type="Module" version="3.1.0">
+    <package name="IdentitySwitcher" type="Module" version="4.0.0">
       <friendlyName>IdentitySwitcher</friendlyName>
       <description>The IdentitySwitcher is a simple and useful tool to allow you to switch between users, without knowing their passwords.</description>
       <iconFile>DesktopModules\IdentitySwitcher\IdentitySwitcher.png</iconFile>
@@ -11,7 +11,7 @@
         <email>info@dnn-connect.org</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.03.01.00.txt"></releaseNotes>
+      <releaseNotes></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies></dependencies>
       <components>
@@ -22,6 +22,11 @@
               <path>Installation</path>
               <name>03.00.00.SqlDataProvider</name>
               <version>03.00.00</version>
+            </script>
+            <script type="Install">
+              <path>Installation</path>
+              <name>04.00.00.sqlDataProvider</name>
+              <version>04.00.00</version>
             </script>
           </scripts>
         </component>

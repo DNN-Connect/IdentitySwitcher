@@ -37,14 +37,14 @@
                 });
         }
 
-        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<void> {
+        switchUser(moduleInstance: IModuleInstance, selectedUserId: number, selectedUserName: string): angular.IHttpPromise<ISwitchRequest> {
             const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
                 "identityswitcher/switchuser?selecteduserid=" +
                 selectedUserId +
                 "&selectedusername=" +
                 selectedUserName;
 
-            return this.$http.post<void>(apiUrl, null,
+            return this.$http.post<ISwitchRequest>(apiUrl, null,
                 {
                     headers: {
                         "PortalId": moduleInstance.PortalId,
@@ -53,6 +53,21 @@
                     }
                 });
         }
+
+        checkStatus(moduleInstance: IModuleInstance, id: number): angular.IHttpPromise<boolean> {
+            const apiUrl: string = moduleInstance.ApplicationPath + this.config.apiUrl +
+                "identityswitcher/checkstatus?id=" + id;
+
+            return this.$http.get<boolean>(apiUrl,
+                {
+                    headers: {
+                        "PortalId": moduleInstance.PortalId,
+                        "ModuleId": moduleInstance.ModuleID,
+                        "TabId": moduleInstance.ServicesFramework.getTabId()
+                    }
+                });
+        }
+
     }
     angular.module(IdentitySwitcher.appName)
         .factory("IdentitySwitcherFactory", ["$q", "$http", "IdentitySwitcherConstants", ($q, $http, identitySwitcherConstants) => new IdentitySwitcherFactory($q, $http, identitySwitcherConstants)]);

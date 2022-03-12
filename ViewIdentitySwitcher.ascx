@@ -29,4 +29,9 @@
             </button>
         </div>
     </div>
+    <div class="is_WaitRow" ng-show="vm.request.requestAuthorization">
+        <span class="SubHead">{{vm.moduleInstance.value.WaitingForConfirmation}}</span>
+        <br />
+        <img src="/images/loading.gif" />
+    </div>
 </div>

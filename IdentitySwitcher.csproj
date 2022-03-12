@@ -97,10 +97,15 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\SharedResources.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\IdentitySwitcherController.cs" />
     <Compile Include="Model\UserCollectionDto.cs" />
+    <Compile Include="Model\RequestLog.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettings.cs" />
     <Compile Include="ModuleSettings\IdentitySwitcherModuleSettingsRepository.cs" />
     <Compile Include="Model\SortBy.cs" />
@@ -110,6 +115,9 @@
     <Compile Include="Model\UserDto.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestConfirmation.ashx.cs">
+      <DependentUpon>RequestConfirmation.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
@@ -131,11 +139,14 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Installation\03.00.00.SqlDataProvider" />
+    <None Include="Installation\04.00.00.sqlDataProvider" />
+    <Content Include="Installation\IdentitySwitcher.dnn" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Installation\CleanUp\Cleanup.03.01.00.txt" />
     <Content Include="Installation\CleanUp\Cleanup.03.00.00.txt" />
+    <Content Include="Installation\IdentitySwitcher.png" />
     <Content Include="Installation\ReleaseNotes\Release.03.01.00.txt" />
     <Content Include="Installation\ReleaseNotes\Release.03.00.00.txt" />
     <Content Include="packages.config">
@@ -146,6 +157,7 @@
     <Content Include="Scripts\resources\angular.min.js" />
     <Content Include="tsconfig.json" />
     <Content Include="web.config" />
+    <Content Include="RequestConfirmation.ashx" />
     <SourcePackage Include=".build\MSBuild.Community.Tasks.Targets">
       <SubType>Designer</SubType>
     </SourcePackage>

@@ -22,6 +22,8 @@
 
         foundUsers: IUser[] = [];
         selectedUser: IUser;
+        request: ISwitchRequest;
+        timerId;
 
         /**************************************************************************/
         /* PUBLIC METHODS                                                         */
@@ -30,9 +32,14 @@
         * search()
         */
         search(onlyDefault: boolean = false): void {
+            this.request = null;
+            if (this.timerId)
+                clearInterval(this.timerId);
+
             this.identitySwitcherFactory.getUsers(this.moduleInstance.value,
                 this.selectedSearchText,
-                this.selectedItem, onlyDefault).then((serverData) => {
+                this.selectedItem,
+                onlyDefault).then((serverData) => {
                     this.foundUsers = serverData.data.users;
                     angular.forEach(this.foundUsers,
                         (user) => {
@@ -44,7 +51,7 @@
                             }
                         });
                 }
-            );
+                );
         }
 
         /*
@@ -61,17 +68,20 @@
         */
         switchUser(): void {
             this.identitySwitcherFactory.switchUser(this.moduleInstance.value,
-                    this.selectedUser.id,
-                    this.selectedUser.userName)
+                this.selectedUser.id,
+                this.selectedUser.userName)
                 .then((serverData) => {
-                        // Success
-                    },
+                    // Success
+                    this.request = serverData.data;
+                    this.timerId = setInterval(() => this.checkRequestStatus(this.request.requestId), 2000);
+                },
                     (serverData) => {
                         // Error
                         alert('Something went wrong whilst switching users.');
                     }
                 ).then(() => {
-                    this.$window.location.reload();
+                    if (!this.request.requestAuthorization)
+                        this.$window.location.reload();
                 });
         }
 
@@ -102,12 +112,27 @@
         private getSearchItems(): void {
             this.identitySwitcherFactory.getSearchItems(this.moduleInstance.value)
                 .then((serverData) => {
-                        // Success
-                        this.searchItems = serverData.data;
-                        this.selectedItem = this.searchItems[0];
-                    },
+                    // Success
+                    this.searchItems = serverData.data;
+                    this.selectedItem = this.searchItems[0];
+                },
                     (serverData) => {
                         // Error
+                    }
+                );
+        }
+
+        private checkRequestStatus(id) {
+            this.identitySwitcherFactory.checkStatus(this.moduleInstance.value, id)
+                .then((serverData) => {
+                    // Success
+                    if (serverData.data) {
+                        this.$window.location.reload();
+                    }
+                },
+                    (serverData) => {
+                        // Error
+                        alert('Something went wrong whilst switching users.');
                     }
                 );
         }

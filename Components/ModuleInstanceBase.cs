@@ -94,6 +94,15 @@ namespace DNN.Modules.IdentitySwitcher.Components
         /// The switch to text.
         /// </value>
         public string SwitchIconText { get; set; }
+
+        /// <summary>
+        /// Message displayed while waiting for the user to confirm the request
+        /// </summary>
+        /// <value>
+        /// The switch to text.
+        /// </value>
+        public string WaitingForConfirmation { get; set; }
+
         #endregion
     }
 }

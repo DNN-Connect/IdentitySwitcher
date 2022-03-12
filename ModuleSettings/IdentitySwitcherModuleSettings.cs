@@ -47,6 +47,16 @@ namespace DNN.Modules.IdentitySwitcher.ModuleSettings
         public bool? IncludeHost { get; set; }
 
         /// <summary>
+        ///     Gets or sets the include admin.
+        /// </summary>
+        /// <value>
+        ///     The include admin.
+        /// </value>
+        [TabModuleSetting(ParameterName = "includeAdmin")]
+        public bool? IncludeAdmin { get; set; }
+
+
+        /// <summary>
         ///     Gets or sets the sort by.
         /// </summary>
         /// <value>
@@ -63,5 +73,14 @@ namespace DNN.Modules.IdentitySwitcher.ModuleSettings
         /// </value>
         [TabModuleSetting(ParameterName = "userSwitchingSpeed")]
         public UserSwitchingSpeed UserSwitchingSpeed { get; set; } = UserSwitchingSpeed.Fast;
+
+        /// <summary>
+        ///     Enables the option to request authorization for the impersonation.
+        /// </summary>
+        /// <value>
+        ///     Request Authorization.
+        /// </value>
+        [TabModuleSetting(ParameterName = "requestAuthorization")]
+        public bool? RequestAuthorization { get; set; }
     }
 }
